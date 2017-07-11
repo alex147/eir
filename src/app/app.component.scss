@@ -2,7 +2,13 @@
 // This software is released under MIT license.
 // The full license information can be found in LICENSE in the root directory of this project.
 .clr-icon {
-  &.clr-clarity-logo {
-    background-image: url(../images/clarity_logo.svg);
+  &.clr-eir-logo {
+    background-image: url(../images/eir_logo.svg);
   }
+}
+.header-title {
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 0.12em;
+    font-size: 24px;
 }
