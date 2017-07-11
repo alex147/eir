@@ -8,12 +8,16 @@ import { AppComponent } from './app.component';
 import { ROUTING } from "./app.routing";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
+import { TrialCardComponent } from './trials/trial-card/trial-card.component';
+import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         AboutComponent,
-        HomeComponent
+        HomeComponent,
+        TrialCardComponent,
+        TrialSummaryComponent
     ],
     imports: [
         BrowserAnimationsModule,
