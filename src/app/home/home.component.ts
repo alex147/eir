@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Trial } from "../trials/trial";
+import { Trial } from "../common/model/trial";
 
 @Component({
     styleUrls: ['./home.component.scss'],
@@ -7,9 +7,11 @@ import { Trial } from "../trials/trial";
 })
 export class HomeComponent {
 
+    public filterString: string;
+
     trials: Trial[] = [
-        new Trial(1, "Novo Nordisk", "Novo Nordisk Trial"),
-        new Trial(2, "Berlinchemie", "Berlin Chemie Trial")
+        new Trial("1", "Novo Nordisk", "Novo Nordisk Trial"),
+        new Trial("2", "Berlinchemie", "Berlin Chemie Trial")
     ];
 
 }

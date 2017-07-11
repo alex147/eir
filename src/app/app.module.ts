@@ -10,6 +10,7 @@ import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { TrialCardComponent } from './trials/trial-card/trial-card.component';
 import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.component';
+import { FilterTrialsPipe } from './common/pipes/filter-trials.pipe';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.comp
         AboutComponent,
         HomeComponent,
         TrialCardComponent,
-        TrialSummaryComponent
+        TrialSummaryComponent,
+        FilterTrialsPipe
     ],
     imports: [
         BrowserAnimationsModule,

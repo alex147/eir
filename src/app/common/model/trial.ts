@@ -1,5 +1,5 @@
 export class Trial {
-    constructor(public id: number,
+    constructor(public id: string,
         public name: string,
         public description: string) { }
 }

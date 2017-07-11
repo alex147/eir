@@ -1,4 +1,6 @@
 <h1>My Trials</h1>
+<input type="text" placeholder="Filter" [(ngModel)]="filterString">
 <div class="column">
-    <trial-card *ngFor='let trial of trials' [trial]='trial'></trial-card>
+    <trial-card *ngFor='let trial of (trials | filterTrials: filterString)' [trial]='trial'>
+    </trial-card>
 </div>
