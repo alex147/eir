@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-    selector: 'trial-summary',
-    templateUrl: './trial-summary.component.html',
-    styleUrls: ['./trial-summary.component.scss']
+    selector: 'trial-summary-view',
+    templateUrl: './trial-summary-view.component.html',
+    styleUrls: ['./trial-summary-view.component.scss']
 })
-export class TrialSummaryComponent implements OnInit {
+export class TrialSummaryViewComponent implements OnInit {
 
     public trialId: number;
 

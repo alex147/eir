@@ -1,0 +1,13 @@
+<section class="sidenav-content">
+    <section class="nav-group">
+        <label>Centers</label>
+        <ul class="nav-list">
+            <li *ngFor='let center of centers' class="nav-item">
+                <a class="nav-link" href="#"
+                [routerLink]="['./']"
+                [queryParams]="{center: center.id}"
+                routerLinkActive="active">{{center.name}}</a>
+            </li>
+        </ul>
+    </section>
+</section>

@@ -9,8 +9,12 @@ import { ROUTING } from "./app.routing";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { TrialCardComponent } from './trials/trial-card/trial-card.component';
-import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.component';
+import { TrialSummaryViewComponent } from './trials/trial-summary-view/trial-summary-view.component';
 import { FilterTrialsPipe } from './common/pipes/filter-trials.pipe';
+import { TrialComponent } from './trials/trial/trial.component';
+import { TrialSubjectsViewComponent } from './trials/trial-subjects-view/trial-subjects-view.component';
+import { TrialCentersComponent } from './trials/trial-centers/trial-centers.component';
+import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-subjects-grid.component';
 
 @NgModule({
     declarations: [
@@ -18,8 +22,12 @@ import { FilterTrialsPipe } from './common/pipes/filter-trials.pipe';
         AboutComponent,
         HomeComponent,
         TrialCardComponent,
-        TrialSummaryComponent,
-        FilterTrialsPipe
+        TrialSummaryViewComponent,
+        FilterTrialsPipe,
+        TrialComponent,
+        TrialSubjectsViewComponent,
+        TrialCentersComponent,
+        TrialSubjectsGridComponent
     ],
     imports: [
         BrowserAnimationsModule,

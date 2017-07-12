@@ -1,0 +1,45 @@
+<clr-datagrid>
+    <clr-dg-placeholder>We couldn't find any subjects!</clr-dg-placeholder>
+
+    <clr-dg-column>Subject ID</clr-dg-column>
+    <clr-dg-column>Consent Date</clr-dg-column>
+    <clr-dg-column>Gender</clr-dg-column>
+    <clr-dg-column>Active</clr-dg-column>
+    <clr-dg-column>Status</clr-dg-column>
+    <clr-dg-column>Status Date</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let subject of subjects" [clrDgItem]="subject">
+        <clr-dg-action-overflow>
+            <button class="action-item" (click)="onEdit(subject)">
+                Edit
+            </button>
+            <button class="action-item" (click)="onDelete(subject)">
+                Delete
+            </button>
+        </clr-dg-action-overflow>
+
+        <clr-dg-cell>{{subject.id}}</clr-dg-cell>
+        <clr-dg-cell>{{subject.consentDate | date}}</clr-dg-cell>
+        <clr-dg-cell>{{subject.gender}}</clr-dg-cell>
+        <clr-dg-cell>{{subject.isActive}}</clr-dg-cell>
+        <clr-dg-cell>{{subject.status}}</clr-dg-cell>
+        <clr-dg-cell>{{subject.statusDate | date}}</clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer>{{subjects.length}} subjects</clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="isModalOpen">
+  <h3 class="modal-title">I have a nice title</h3>
+  <div class="modal-body">
+    <p>But not much to say...</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="isModalOpen = false">
+        Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="onModalSubmitted()">
+        Ok
+    </button>
+  </div>
+</clr-modal>
+
