@@ -11,7 +11,10 @@ export class HomeComponent {
 
     public trials: Trial[] = [
         new Trial("1", "Novo Nordisk", "Novo Nordisk Trial"),
-        new Trial("2", "Berlinchemie", "Berlin Chemie Trial")
+        new Trial("2", "Berlin-Chemie", "Berlin-Chemie Trial"),
+        new Trial("3", "GlaxoSmithKline", "GlaxoSmithKline Trial"),
+        new Trial("4", "Astra Zeneka", "Astra Zeneka Trial"),
+        new Trial("5", "Actavis", "Actavis Trial")
     ];
 
 }
