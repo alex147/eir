@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Center } from '../../common/model/center';
 
 @Component({
@@ -8,6 +8,9 @@ import { Center } from '../../common/model/center';
 })
 export class TrialCentersComponent implements OnInit {
 
+    @Input() trialId: string;
+    public filterString: string;
+
     public centers: Center[] = [
         new Center('BGR001', 'BGR001', 'BGR'),
         new Center('BGR002', 'BGR002', 'BGR')
@@ -16,6 +19,10 @@ export class TrialCentersComponent implements OnInit {
     constructor() { }
 
     ngOnInit () {
+    }
+
+    clearFilter () {
+        this.filterString = '';
     }
 
 }

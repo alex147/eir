@@ -13,7 +13,7 @@ export class TrialSummaryViewComponent implements OnInit {
     constructor(private route: ActivatedRoute) { }
 
     ngOnInit () {
-        this.route.params.forEach((params: Params) => {
+        this.route.parent.params.forEach((params: Params) => {
             this.trialId = params['id'];
         });
     }

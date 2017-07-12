@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'trial-subjects-view',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrialSubjectsViewComponent implements OnInit {
 
-    constructor() { }
+    public trialId: number;
+
+    constructor(private route: ActivatedRoute) { }
 
     ngOnInit () {
+        this.route.parent.params.forEach((params: Params) => {
+            this.trialId = params['id'];
+        });
     }
 
 }

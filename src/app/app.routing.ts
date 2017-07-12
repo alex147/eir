@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { TrialComponent } from './trials/trial/trial.component';
 import { TrialSummaryViewComponent } from './trials/trial-summary-view/trial-summary-view.component';
 import { TrialSubjectsViewComponent } from './trials/trial-subjects-view/trial-subjects-view.component';
+import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-subjects-grid.component';
+import { SelectionRequiredComponent } from './common/components/selection-required/selection-required.component';
 
 
 export const ROUTES: Routes = [
@@ -16,7 +18,14 @@ export const ROUTES: Routes = [
         children: [
             { path: '', redirectTo: 'summary', pathMatch: 'full' },
             { path: 'summary', component: TrialSummaryViewComponent },
-            { path: 'subjects', component: TrialSubjectsViewComponent }
+            { path: 'subjects', component: TrialSubjectsViewComponent,
+                children: [
+                    { path: ':center', component: TrialSubjectsGridComponent },
+                    { path: '', component: SelectionRequiredComponent,
+                        data: { required: 'center' }
+                    }
+                ]
+            }
         ]
     }
 ];

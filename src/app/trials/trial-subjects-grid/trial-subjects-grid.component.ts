@@ -5,7 +5,8 @@ import { Subject } from '../../common/model/subject';
 @Component({
     selector: 'trial-subjects-grid',
     templateUrl: './trial-subjects-grid.component.html',
-    styleUrls: ['./trial-subjects-grid.component.scss']
+    styleUrls: ['./trial-subjects-grid.component.scss'],
+    host: { class: 'content-area' }
 })
 export class TrialSubjectsGridComponent implements OnInit {
 
