@@ -7,7 +7,8 @@
         <input id="cat1" type="checkbox">
         <label for="cat1">Users &amp; Privileges</label>
         <ul class="nav-list">
-            <li *ngFor='let option of (options | filterCenters: filterString)' class="nav-item" (click)='clearFilter()'>
+            <li *ngFor='let option of (options | filterOptions: filterString)'
+                class="nav-item" (click)='clearFilter()'>
                 <a class="nav-link" href="#"
                     [routerLink]="['./', option.route]"
                     routerLinkActive="active">
