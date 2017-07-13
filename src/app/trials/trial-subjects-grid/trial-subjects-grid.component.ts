@@ -41,6 +41,10 @@ export class TrialSubjectsGridComponent implements OnInit {
         });
     }
 
+    onAdd () {
+
+    }
+
     onEdit (subject: Subject) {
         this.isModalOpen = true;
     }

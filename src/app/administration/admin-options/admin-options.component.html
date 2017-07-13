@@ -1,13 +1,23 @@
 <section class="sidenav-content">
-    <input type="text"
-        placeholder="Filter"
-        [(ngModel)]="filterString"
-        class='admin-filter'>
     <section class="nav-group collapsible">
         <input id="cat1" type="checkbox">
         <label for="cat1">Users &amp; Privileges</label>
         <ul class="nav-list">
-            <li *ngFor='let option of (options | filterOptions: filterString)'
+            <li *ngFor='let option of userOptions'
+                class="nav-item" (click)='clearFilter()'>
+                <a class="nav-link" href="#"
+                    [routerLink]="['./', option.route]"
+                    routerLinkActive="active">
+                    {{option.name}}
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section class="nav-group collapsible">
+        <input id="cat2" type="checkbox">
+        <label for="cat2">Trial Registry</label>
+        <ul class="nav-list">
+            <li *ngFor='let option of trialOptions'
                 class="nav-item" (click)='clearFilter()'>
                 <a class="nav-link" href="#"
                     [routerLink]="['./', option.route]"

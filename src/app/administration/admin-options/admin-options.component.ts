@@ -8,18 +8,18 @@ import { AdminOption } from '../../common/model/admin-option';
 })
 export class AdminOptionsComponent implements OnInit {
 
-    public filterString: string;
-    public options: AdminOption[] = [
+    public userOptions: AdminOption[] = [
         new AdminOption("Users", "users")
+    ];
+
+    public trialOptions: AdminOption[] = [
+        new AdminOption("Ongoing Trials", "trials"),
+        new AdminOption("Archived Trials", "archive")
     ];
 
     constructor() { }
 
     ngOnInit () {
-    }
-
-    clearFilter () {
-        this.filterString = '';
     }
 
 }

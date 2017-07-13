@@ -21,6 +21,8 @@ import { SelectionRequiredComponent } from './common/components/selection-requir
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
 import { AdminUsersComponent } from './administration/admin-users/admin-users.component';
 import { AdminOptionsComponent } from './administration/admin-options/admin-options.component';
+import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';
+import { AdminArchivedTrialsComponent } from './administration/admin-archived-trials/admin-archived-trials.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +41,9 @@ import { AdminOptionsComponent } from './administration/admin-options/admin-opti
         SelectionRequiredComponent,
         AdminViewComponent,
         AdminUsersComponent,
-        AdminOptionsComponent
+        AdminOptionsComponent,
+        AdminActiveTrialsComponent,
+        AdminArchivedTrialsComponent
     ],
     imports: [
         BrowserAnimationsModule,

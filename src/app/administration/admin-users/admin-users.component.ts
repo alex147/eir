@@ -23,6 +23,10 @@ export class AdminUsersComponent implements OnInit {
     ngOnInit () {
     }
 
+    onAdd () {
+
+    }
+
     onEdit (user: User) {
         this.isModalOpen = true;
     }

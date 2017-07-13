@@ -10,6 +10,8 @@ import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-s
 import { SelectionRequiredComponent } from './common/components/selection-required/selection-required.component';
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
 import { AdminUsersComponent } from './administration/admin-users/admin-users.component';
+import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';
+import { AdminArchivedTrialsComponent } from './administration/admin-archived-trials/admin-archived-trials.component';
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,7 +20,9 @@ export const ROUTES: Routes = [
     { path: 'admin', component: AdminViewComponent,
         children: [
             { path: '', redirectTo: 'users', pathMatch: 'full' },
-            { path: 'users', component: AdminUsersComponent }
+            { path: 'users', component: AdminUsersComponent },
+            { path: 'trials', component: AdminActiveTrialsComponent },
+            { path: 'archive', component: AdminArchivedTrialsComponent }
         ]
     },
     { path: 'trials/:id', component: TrialComponent,

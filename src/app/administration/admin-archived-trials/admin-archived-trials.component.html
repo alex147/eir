@@ -1,0 +1,16 @@
+<clr-datagrid>
+    <clr-dg-placeholder>We couldn't find any trials!</clr-dg-placeholder>
+
+    <clr-dg-column>Trial ID</clr-dg-column>
+    <clr-dg-column>Name</clr-dg-column>
+    <clr-dg-column>Description</clr-dg-column>
+    <clr-dg-column>Centers</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let trial of trials" [clrDgItem]="trial">
+        <clr-dg-cell>{{trial.id}}</clr-dg-cell>
+        <clr-dg-cell>{{trial.name}}</clr-dg-cell>
+        <clr-dg-cell>{{trial.description}}</clr-dg-cell>
+        <clr-dg-cell>{{trial.centers}}</clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer>{{trials.length}} trials</clr-dg-footer>
+</clr-datagrid>
