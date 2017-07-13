@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'app-selection-required',
     templateUrl: './selection-required.component.html',
-    styleUrls: ['./selection-required.component.scss'],
-    host: { class: 'content-area' }
+    styleUrls: ['./selection-required.component.scss']
 })
 export class SelectionRequiredComponent implements OnInit {
+
+    @HostBinding('class') classes = 'content-area';
 
     public requireSelectionName: string;
 

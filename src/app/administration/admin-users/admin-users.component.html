@@ -1,0 +1,42 @@
+<clr-datagrid>
+    <clr-dg-placeholder>We couldn't find any users!</clr-dg-placeholder>
+
+    <clr-dg-column>Username</clr-dg-column>
+    <clr-dg-column>Full Name</clr-dg-column>
+    <clr-dg-column>Role</clr-dg-column>
+    <clr-dg-column>Centers</clr-dg-column>
+    <clr-dg-column>Trials</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
+        <clr-dg-action-overflow>
+            <button class="action-item" (click)="onEdit(user)">
+                Edit
+            </button>
+            <button class="action-item" (click)="onDelete(user)">
+                Delete
+            </button>
+        </clr-dg-action-overflow>
+
+        <clr-dg-cell>{{user.username}}</clr-dg-cell>
+        <clr-dg-cell>{{user.fullName}}</clr-dg-cell>
+        <clr-dg-cell>{{user.role}}</clr-dg-cell>
+        <clr-dg-cell>{{user.centers}}</clr-dg-cell>
+        <clr-dg-cell>{{user.trials}}</clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer>{{users.length}} users</clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="isModalOpen">
+  <h3 class="modal-title">I have a nice title</h3>
+  <div class="modal-body">
+    <p>But not much to say...</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="isModalOpen = false">
+        Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="onModalSubmitted()">
+        Ok
+    </button>
+  </div>
+</clr-modal>
