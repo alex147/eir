@@ -1,12 +1,10 @@
-<div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
-    <a class="card clickable" href="#" [routerLink]="['/trials', trial.id]" routerLinkActive="active">
-        <div class="card-header">
-            {{trial.name}}
+<a class="card clickable" href="#" [routerLink]="['/trials', trial.id]" routerLinkActive="active">
+    <div class="card-header">
+        {{trial.name}}
+    </div>
+    <div class="card-block">
+        <div class="card-text">
+            {{trial.description}}
         </div>
-        <div class="card-block">
-            <div class="card-text">
-                {{trial.description}}
-            </div>
-        </div>
-    </a>
-</div>
+    </div>
+</a>
