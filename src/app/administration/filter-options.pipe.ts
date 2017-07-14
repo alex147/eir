@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AdminOption } from '../model/admin-option';
+import { AdminOption } from './admin-option';
 
 @Pipe({ name: 'filterOptions' })
 export class FilterOptionsPipe implements PipeTransform {

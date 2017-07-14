@@ -7,7 +7,7 @@ import { TrialContainerComponent } from './trials/trial-container/trial-containe
 import { TrialSummaryViewComponent } from './trials/trial-summary-view/trial-summary-view.component';
 import { TrialSubjectsViewComponent } from './trials/trial-subjects-view/trial-subjects-view.component';
 import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-subjects-grid.component';
-import { SelectionRequiredComponent } from './common/components/selection-required/selection-required.component';
+import { SelectionRequiredComponent } from './trials/selection-required/selection-required.component';
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
 import { AdminUsersComponent } from './administration/admin-users/admin-users.component';
 import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Center } from '../model/center';
+import { Center } from './center';
 
 @Pipe({ name: 'filterCenters' })
 export class FilterCentersPipe implements PipeTransform {

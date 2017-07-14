@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Trial } from '../model/trial';
+import { Trial } from './trial';
 
 @Pipe({ name: 'filterTrials' })
 export class FilterTrialsPipe implements PipeTransform {
