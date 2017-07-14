@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { Trial } from '../../common/model/trial';
+import { Trial } from '../../trials/trial';
+import { TrialService } from '../../trials/trial.service';
 
 @Component({
     selector: 'app-admin-active-trials',
@@ -10,19 +11,14 @@ export class AdminActiveTrialsComponent implements OnInit {
 
     @HostBinding('class') classes = 'content-area';
 
-    public trials: Trial[] = [
-        new Trial("1", "Novo Nordisk", "Novo Nordisk Trial", ['BGR001', 'BGR002']),
-        new Trial("2", "Berlin-Chemie", "Berlin-Chemie Trial", ['BGR001', 'BGR002']),
-        new Trial("3", "GlaxoSmithKline", "GlaxoSmithKline Trial", ['BGR001', 'BGR002']),
-        new Trial("4", "Astra Zeneka", "Astra Zeneka Trial", ['BGR001', 'BGR002']),
-        new Trial("5", "Actavis", "Actavis Trial", ['BGR001', 'BGR002'])
-    ];
-
+    public activeTrials: Trial[];
     public isModalOpen: boolean;
 
-    constructor() { }
+    constructor(private trialService: TrialService) { }
 
     ngOnInit () {
+        this.trialService.getActiveTrials()
+            .subscribe(data => this.activeTrials = data);
     }
 
     onAdd () {
@@ -34,7 +30,7 @@ export class AdminActiveTrialsComponent implements OnInit {
     }
 
     onDelete (trial: Trial) {
-        this.trials = this.trials.filter((toCompare: Trial) => {
+        this.activeTrials = this.activeTrials.filter((toCompare: Trial) => {
             return trial.id !== toCompare.id;
         });
     }
@@ -44,3 +40,4 @@ export class AdminActiveTrialsComponent implements OnInit {
     }
 
 }
+

@@ -3,8 +3,7 @@
         <input id="cat1" type="checkbox">
         <label for="cat1">Users &amp; Privileges</label>
         <ul class="nav-list">
-            <li *ngFor='let option of userOptions'
-                class="nav-item" (click)='clearFilter()'>
+            <li *ngFor='let option of userOptions' class="nav-item">
                 <a class="nav-link" href="#"
                     [routerLink]="['./', option.route]"
                     routerLinkActive="active">
@@ -17,8 +16,7 @@
         <input id="cat2" type="checkbox">
         <label for="cat2">Trial Registry</label>
         <ul class="nav-list">
-            <li *ngFor='let option of trialOptions'
-                class="nav-item" (click)='clearFilter()'>
+            <li *ngFor='let option of trialOptions' class="nav-item">
                 <a class="nav-link" href="#"
                     [routerLink]="['./', option.route]"
                     routerLinkActive="active">

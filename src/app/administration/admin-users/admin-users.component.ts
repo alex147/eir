@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { User } from '../../common/model/user';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
     selector: 'admin-users',
@@ -10,17 +11,15 @@ export class AdminUsersComponent implements OnInit {
 
     @HostBinding('class') classes = 'content-area';
 
-    public users: User[] = [
-        new User('jdoe', 'John Doe', 'Project Manager', [], []),
-        new User('ikanchev', 'Ivan Kanchev', 'CRA', ['BGR001', 'BGR002'], ['LT1580_301', 'PM1331']),
-        new User('givanov', 'Georgi Ivanov', 'Investigator', ['BGR002'], ['LT1580_301'])
-    ];
+    public users: User[];
 
     public isModalOpen: boolean;
 
-    constructor() { }
+    constructor(private userService: UserService) { }
 
     ngOnInit () {
+        this.userService.getUsers()
+            .subscribe(data => this.users = data);
     }
 
     onAdd () {

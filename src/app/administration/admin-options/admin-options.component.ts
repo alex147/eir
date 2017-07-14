@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminOption } from '../../common/model/admin-option';
+import { AdminOption } from '../admin-option';
 
 @Component({
     selector: '[admin-options]',

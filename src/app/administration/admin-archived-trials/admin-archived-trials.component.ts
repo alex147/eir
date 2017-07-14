@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { Trial } from '../../common/model/trial';
+import { Trial } from '../../trials/trial';
+import { TrialService } from '../../trials/trial.service';
 
 @Component({
     selector: 'app-admin-archived-trials',
@@ -9,14 +10,13 @@ import { Trial } from '../../common/model/trial';
 export class AdminArchivedTrialsComponent implements OnInit {
 
     @HostBinding('class') classes = 'content-area';
+    public archivedTrials: Trial[];
 
-    public trials: Trial[] = [
-        new Trial('1', 'Tchaikapharma', 'Old and forgotten trial', ['BGR001']),
-        new Trial('2', 'Made-Up Pharmaceutical', 'Another old trial', ['BGR001', 'BGR002'])
-    ];
-    constructor() { }
+    constructor(private trialService: TrialService) { }
 
     ngOnInit () {
+        this.trialService.getActiveTrials()
+            .subscribe(data => this.archivedTrials = data);
     }
 
 }

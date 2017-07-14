@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
-import { TrialComponent } from './trials/trial/trial.component';
+import { TrialContainerComponent } from './trials/trial-container/trial-container.component';
 import { TrialSummaryViewComponent } from './trials/trial-summary-view/trial-summary-view.component';
 import { TrialSubjectsViewComponent } from './trials/trial-subjects-view/trial-subjects-view.component';
 import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-subjects-grid.component';
@@ -25,7 +25,7 @@ export const ROUTES: Routes = [
             { path: 'archive', component: AdminArchivedTrialsComponent }
         ]
     },
-    { path: 'trials/:id', component: TrialComponent,
+    { path: 'trials/:id', component: TrialContainerComponent,
         children: [
             { path: '', redirectTo: 'summary', pathMatch: 'full' },
             { path: 'summary', component: TrialSummaryViewComponent },

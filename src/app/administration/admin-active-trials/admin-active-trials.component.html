@@ -14,7 +14,7 @@
     <clr-dg-column>Description</clr-dg-column>
     <clr-dg-column>Centers</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let trial of trials" [clrDgItem]="trial">
+    <clr-dg-row *clrDgItems="let trial of activeTrials" [clrDgItem]="trial">
         <clr-dg-action-overflow>
             <button class="action-item" (click)="onEdit(trial)">
                 Edit
@@ -29,7 +29,7 @@
         <clr-dg-cell>{{trial.description}}</clr-dg-cell>
         <clr-dg-cell>{{trial.centers}}</clr-dg-cell>
     </clr-dg-row>
-    <clr-dg-footer>{{trials.length}} trials</clr-dg-footer>
+    <clr-dg-footer>{{activeTrials.length}} trials</clr-dg-footer>
 </clr-datagrid>
 
 <clr-modal [(clrModalOpen)]="isModalOpen">

@@ -13,9 +13,9 @@ import { TrialSummaryViewComponent } from './trials/trial-summary-view/trial-sum
 import { FilterTrialsPipe } from './common/pipes/filter-trials.pipe';
 import { FilterCentersPipe } from './common/pipes/filter-centers.pipe';
 import { FilterOptionsPipe } from './common/pipes/filter-options.pipe';
-import { TrialComponent } from './trials/trial/trial.component';
+import { TrialContainerComponent } from './trials/trial-container/trial-container.component';
 import { TrialSubjectsViewComponent } from './trials/trial-subjects-view/trial-subjects-view.component';
-import { TrialCentersComponent } from './trials/trial-centers/trial-centers.component';
+import { TrialCentersNavComponent } from './trials/trial-centers-nav/trial-centers-nav.component';
 import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-subjects-grid.component';
 import { SelectionRequiredComponent } from './common/components/selection-required/selection-required.component';
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
@@ -23,6 +23,10 @@ import { AdminUsersComponent } from './administration/admin-users/admin-users.co
 import { AdminOptionsComponent } from './administration/admin-options/admin-options.component';
 import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';
 import { AdminArchivedTrialsComponent } from './administration/admin-archived-trials/admin-archived-trials.component';
+import { CenterService } from './trials/center.service';
+import { SubjectService } from './trials/subject.service';
+import { TrialService } from './trials/trial.service';
+import { UserService } from './administration/user.service';
 
 @NgModule({
     declarations: [
@@ -34,9 +38,9 @@ import { AdminArchivedTrialsComponent } from './administration/admin-archived-tr
         FilterTrialsPipe,
         FilterCentersPipe,
         FilterOptionsPipe,
-        TrialComponent,
+        TrialContainerComponent,
         TrialSubjectsViewComponent,
-        TrialCentersComponent,
+        TrialCentersNavComponent,
         TrialSubjectsGridComponent,
         SelectionRequiredComponent,
         AdminViewComponent,
@@ -53,7 +57,7 @@ import { AdminArchivedTrialsComponent } from './administration/admin-archived-tr
         ClarityModule.forRoot(),
         ROUTING
     ],
-    providers: [],
+    providers: [ CenterService, SubjectService, TrialService, UserService ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,20 +1,20 @@
-import { Component } from "@angular/core";
-import { Trial } from "../common/model/trial";
+import { Component, OnInit } from "@angular/core";
+import { TrialService } from "../trials/trial.service";
 
 @Component({
     styleUrls: ['./home.component.scss'],
     templateUrl: './home.component.html',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
     public filterString: string;
+    public myTrials;
 
-    public trials: Trial[] = [
-        new Trial("1", "Novo Nordisk", "Novo Nordisk Trial"),
-        new Trial("2", "Berlin-Chemie", "Berlin-Chemie Trial"),
-        new Trial("3", "GlaxoSmithKline", "GlaxoSmithKline Trial"),
-        new Trial("4", "Astra Zeneka", "Astra Zeneka Trial"),
-        new Trial("5", "Actavis", "Actavis Trial")
-    ];
+    constructor(private trialService: TrialService) { }
+
+    ngOnInit() {
+        this.trialService.getMyTrials()
+            .subscribe(data => this.myTrials = data);
+    }
 
 }

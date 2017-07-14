@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subject } from '../../common/model/subject';
+import { Subject } from '../subject';
+import { SubjectService } from '../subject.service';
 
 @Component({
     selector: 'trial-subjects-grid',
@@ -11,33 +12,21 @@ export class TrialSubjectsGridComponent implements OnInit {
 
     @HostBinding('class') classes = 'content-area';
 
-    public subjects: Subject[] = [
-        new Subject('BGR001-001', new Date(), 'Male', true, 'Declared', new Date()),
-        new Subject('BGR001-002', new Date(), 'Female', false, 'Withdrawn', new Date()),
-        new Subject('BGR001-003', new Date(), 'Female', true, 'Declared', new Date())
-    ];
+    public subjects: Subject[];
 
-    // public subjects: { [key:string]: Subject[]; } = {
-    //     'BGR001': [
-    //         new Subject("BGR001-001", new Date(), Gender.Male, true, 'Declared', new Date()),
-    //         new Subject("BGR001-002", new Date(), Gender.Female, false, 'Withdrawn', new Date()),
-    //         new Subject("BGR001-003", new Date(), Gender.Female, true, 'Declared', new Date())
-    //     ],
-    //     'BGR002': [
-    //         new Subject("BGR002-001", new Date(), Gender.Female, true, 'Declared', new Date()),
-    //         new Subject("BGR002-002", new Date(), Gender.Male, false, 'Withdrawn', new Date()),
-    //         new Subject("BGR002-003", new Date(), Gender.Female, false, 'Deceased', new Date())
-    //     ]
-    // };
-
-    private centerId: string;
     public isModalOpen: boolean;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute,
+                private subjectService: SubjectService) { }
 
     ngOnInit () {
         this.route.params.forEach((params: Params) => {
-            this.centerId = params['center'];
+            let centerId = params['center'];
+            let trialId = this.route.snapshot.parent.parent.paramMap.get('id');
+
+            this.subjectService
+                .getSubjectsByTrialIdAndCenterId(trialId, centerId)
+                    .subscribe(data => this.subjects = data);
         });
     }
 
