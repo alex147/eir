@@ -9,12 +9,12 @@
 
     <clr-dg-placeholder>We couldn't find any subjects!</clr-dg-placeholder>
 
-    <clr-dg-column>Subject ID</clr-dg-column>
-    <clr-dg-column>Consent Date</clr-dg-column>
-    <clr-dg-column>Gender</clr-dg-column>
-    <clr-dg-column>Active</clr-dg-column>
-    <clr-dg-column>Status</clr-dg-column>
-    <clr-dg-column>Status Date</clr-dg-column>
+    <clr-dg-column [clrDgField]="'id'">Subject ID</clr-dg-column>
+    <clr-dg-column [clrDgField]="'consentDate'">Consent Date</clr-dg-column>
+    <clr-dg-column [clrDgField]="'gender'">Gender</clr-dg-column>
+    <clr-dg-column [clrDgField]="'isActive'">Active</clr-dg-column>
+    <clr-dg-column [clrDgField]="'status'">Status</clr-dg-column>
+    <clr-dg-column [clrDgField]="'statusDate'">Status Date</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let subject of subjects" [clrDgItem]="subject">
         <clr-dg-action-overflow>

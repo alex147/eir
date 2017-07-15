@@ -9,11 +9,11 @@
 
     <clr-dg-placeholder>We couldn't find any users!</clr-dg-placeholder>
 
-    <clr-dg-column>Username</clr-dg-column>
-    <clr-dg-column>Full Name</clr-dg-column>
-    <clr-dg-column>Role</clr-dg-column>
-    <clr-dg-column>Centers</clr-dg-column>
-    <clr-dg-column>Trials</clr-dg-column>
+    <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>
+    <clr-dg-column [clrDgField]="'fullName'">Full Name</clr-dg-column>
+    <clr-dg-column [clrDgField]="'role'">Role</clr-dg-column>
+    <clr-dg-column [clrDgField]="'centers'">Centers</clr-dg-column>
+    <clr-dg-column [clrDgField]="'trials'">Trials</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
         <clr-dg-action-overflow>
