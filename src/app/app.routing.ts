@@ -30,7 +30,7 @@ export const ROUTES: Routes = [
     },
     { path: 'trials/:id', component: TrialContainerComponent,
         children: [
-            { path: '', redirectTo: 'summary', pathMatch: 'full' },
+            { path: '', redirectTo: 'subjects', pathMatch: 'full' },
             { path: 'summary', component: TrialSummaryViewComponent },
             { path: 'subjects', component: TrialSubjectsViewComponent,
                 children: [
