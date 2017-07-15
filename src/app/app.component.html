@@ -1,10 +1,11 @@
 <clr-main-container>
     <clr-header>
         <div class="branding">
-            <div class="nav-link">
+            <a href="#" [routerLink]="['/']"
+                routerLinkActive="active"  class="nav-link">
                 <span class="clr-icon clr-eir-logo"></span>
                 <span class="header-title">Eir</span>
-            </div>
+            </a>
         </div>
         <div class="header-nav" [clr-nav-level]="1">
             <a href="#" [routerLink]="['/home']" routerLinkActive="active" class="active nav-link nav-text">Home</a>
