@@ -1,4 +1,7 @@
 <div class="content-container">
-    <nav class="sidenav" trial-centers-nav [trialId]='trialId'></nav>
+    <button (click)="toggleNavCollapsedState()">
+        <clr-icon shape="caret" [dir]="iconDir"></clr-icon>
+    </button>
+    <nav [hidden]="isNavCollapsed" class="sidenav" trial-centers-nav [trialId]="trialId"></nav>
     <router-outlet></router-outlet>
 </div>

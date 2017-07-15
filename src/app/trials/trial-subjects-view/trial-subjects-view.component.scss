@@ -1,3 +1,24 @@
 .content-container {
     height: 100vh;
 }
+nav {
+    border: 0px;
+}
+clr-icon {
+    height: 100%;
+    width: 100%;
+}
+button {
+    width: 1%;
+    max-width: 10px;
+    padding: 0px;
+    cursor: pointer;
+    border: none;
+    background-color: #CCCCCC;
+}
+button:focus {
+    outline:0;
+}
+button:hover {
+    background-color: #BBBBBB;
+}
