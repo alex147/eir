@@ -25,6 +25,9 @@ export const ROUTES: Routes = [
             { path: 'archive', component: AdminArchivedTrialsComponent }
         ]
     },
+    { path: 'trials', component: SelectionRequiredComponent,
+        data: { required: 'valid trial' }
+    },
     { path: 'trials/:id', component: TrialContainerComponent,
         children: [
             { path: '', redirectTo: 'summary', pathMatch: 'full' },

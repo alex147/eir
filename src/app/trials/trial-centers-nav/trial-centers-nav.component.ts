@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Center } from '../center';
 import { CenterService } from '../center.service';
 
@@ -10,19 +11,21 @@ import { CenterService } from '../center.service';
 export class TrialCentersNavComponent implements OnInit {
 
     @Input() trialId: string;
-    public filterString: string;
 
     public centers: Center[];
 
-    constructor(private centerService: CenterService) { }
+    constructor(private centerService: CenterService,
+                private router: Router,
+                private route: ActivatedRoute) { }
 
     ngOnInit () {
         this.centerService.getCentersByTrialId(this.trialId)
-            .subscribe(data => this.centers = data);
-    }
-
-    clearFilter () {
-        this.filterString = '';
+            .subscribe((data) => {
+                this.centers = data;
+                this.router.navigate(['./', this.centers[0].id],
+                    { relativeTo: this.route }
+                );
+            });
     }
 
 }
