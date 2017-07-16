@@ -14,7 +14,7 @@ export class AdminArchivedTrialsComponent implements OnInit {
     constructor(private trialService: TrialService) { }
 
     ngOnInit () {
-        this.trialService.getActiveTrials()
+        this.trialService.getArchivedTrials()
             .subscribe(data => this.archivedTrials = data);
     }
 
