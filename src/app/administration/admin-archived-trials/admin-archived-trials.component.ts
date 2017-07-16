@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Trial } from '../../trials/trial';
 import { TrialService } from '../../trials/trial.service';
 
@@ -9,7 +9,6 @@ import { TrialService } from '../../trials/trial.service';
 })
 export class AdminArchivedTrialsComponent implements OnInit {
 
-    @HostBinding('class') classes = 'content-area';
     public archivedTrials: Trial[];
 
     constructor(private trialService: TrialService) { }

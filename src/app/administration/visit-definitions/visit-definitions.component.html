@@ -4,54 +4,48 @@
         Loading...
     </span>
 </div>
-<div *ngIf="trials.length">
-    <form>
-        <section class="form-block">
-            <div class="form-group row">
-                <div class="col-sm-12 col-md-8 col-lg-4 row">
-                    <div class="col-md-4 col-lg-4">
-                        <label for="selects_1">Trial ID</label>
-                    </div>
-                    <div class="col-md-8 col-lg-6">
-                        <div class="select">
-                            <select id="selects_1" [(ngModel)]="trialId"
-                                (change)="fetchVisitDefinitions()" name="trial">
-                            <option *ngFor="let trial of trials; let i = index"
-                                [selected]="i === 0"
+<form *ngIf="trials">
+    <section class="form-block">
+        <div class="form-group row">
+            <div class="col-sm-12 col-md-8 col-lg-4 row">
+                <div class="col-md-4 col-lg-4">
+                    <label for="selects_1">Trial ID</label>
+                </div>
+                <div class="col-md-8 col-lg-6">
+                    <div class="select">
+                        <select id="selects_1" [(ngModel)]="trialId" (change)="fetchVisitDefinitions()" name="trial">
+                            <option *ngFor="let trial of trials"
                                 [ngValue]="trial.id">
                                 {{trial.id}}
                             </option>
                         </select>
-                        </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-8 col-lg-4 row">
-                    <div class="col-md-4 col-lg-3">
-                        <label for="selects_2">Visit</label>
-                    </div>
-                    <div class="col-md-8 col-lg-6">
-                        <div class="select">
-                            <select id="selects_2" [(ngModel)]="visitId"
-                                name="visit">
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-4 row">
+                <div class="col-md-4 col-lg-3">
+                    <label for="selects_2">Visit</label>
+                </div>
+                <div class="col-md-8 col-lg-6">
+                    <div class="select">
+                        <select id="selects_2" [(ngModel)]="visitId" name="visit">
                             <option *ngFor="let visit of visits"
                                 [ngValue]="visit">
                                 {{visit}}
                             </option>
                         </select>
-                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </form>
-</div>
+        </div>
+    </section>
+</form>
 <div *ngIf="definitions">
     <p>{{definitions[visitId-1].description}}</p>
     <clr-datagrid>
         <clr-dg-action-bar>
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-secondary"
-                (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add Metric Definition
+                <button type="button" class="btn btn-sm btn-secondary" (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add Metric Definition
                 </button>
             </div>
         </clr-dg-action-bar>

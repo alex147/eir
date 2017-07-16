@@ -9,14 +9,12 @@ import { ROUTING } from "./app.routing";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { TrialCardComponent } from './trials/trial-card/trial-card.component';
-import { TrialSummaryViewComponent } from './trials/trial-summary-view/trial-summary-view.component';
+import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.component';
 import { FilterTrialsPipe } from './trials/filter-trials.pipe';
 import { FilterCentersPipe } from './trials/filter-centers.pipe';
 import { FilterOptionsPipe } from './administration/filter-options.pipe';
 import { TrialContainerComponent } from './trials/trial-container/trial-container.component';
-import { TrialSubjectsViewComponent } from './trials/trial-subjects-view/trial-subjects-view.component';
-import { TrialCentersNavComponent } from './trials/trial-centers-nav/trial-centers-nav.component';
-import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-subjects-grid.component';
+import { TrialSubjectsComponent } from './trials/trial-subjects/trial-subjects.component';
 import { SelectionRequiredComponent } from './trials/selection-required/selection-required.component';
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
 import { AdminUsersComponent } from './administration/admin-users/admin-users.component';
@@ -36,14 +34,12 @@ import { VisitDefinitionsComponent } from './administration/visit-definitions/vi
         AboutComponent,
         HomeComponent,
         TrialCardComponent,
-        TrialSummaryViewComponent,
+        TrialSummaryComponent,
         FilterTrialsPipe,
         FilterCentersPipe,
         FilterOptionsPipe,
         TrialContainerComponent,
-        TrialSubjectsViewComponent,
-        TrialCentersNavComponent,
-        TrialSubjectsGridComponent,
+        TrialSubjectsComponent,
         SelectionRequiredComponent,
         AdminViewComponent,
         AdminUsersComponent,

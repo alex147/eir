@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TrialService } from '../../trials/trial.service';
 import { Trial } from '../../trials/trial';
 import { VisitDefinitionsService } from '../../trials/visit-definitions.service';
@@ -12,8 +12,6 @@ import { MetricType } from '../../trials/metric-type';
     styleUrls: ['./visit-definitions.component.scss']
 })
 export class VisitDefinitionsComponent implements OnInit {
-
-    @HostBinding('class') classes = 'content-area';
 
     public trialId: string = "";
     public visitId: number = 1;

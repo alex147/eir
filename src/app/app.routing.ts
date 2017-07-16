@@ -4,9 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { TrialContainerComponent } from './trials/trial-container/trial-container.component';
-import { TrialSummaryViewComponent } from './trials/trial-summary-view/trial-summary-view.component';
-import { TrialSubjectsViewComponent } from './trials/trial-subjects-view/trial-subjects-view.component';
-import { TrialSubjectsGridComponent } from './trials/trial-subjects-grid/trial-subjects-grid.component';
+import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.component';
+import { TrialSubjectsComponent } from './trials/trial-subjects/trial-subjects.component';
 import { SelectionRequiredComponent } from './trials/selection-required/selection-required.component';
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
 import { AdminUsersComponent } from './administration/admin-users/admin-users.component';
@@ -33,15 +32,8 @@ export const ROUTES: Routes = [
     { path: 'trials/:id', component: TrialContainerComponent,
         children: [
             { path: '', redirectTo: 'subjects', pathMatch: 'full' },
-            { path: 'summary', component: TrialSummaryViewComponent },
-            { path: 'subjects', component: TrialSubjectsViewComponent,
-                children: [
-                    { path: ':center', component: TrialSubjectsGridComponent },
-                    { path: '', component: SelectionRequiredComponent,
-                        data: { required: 'center' }
-                    }
-                ]
-            }
+            { path: 'summary', component: TrialSummaryComponent },
+            { path: 'subjects', component: TrialSubjectsComponent }
         ]
     }
 ];

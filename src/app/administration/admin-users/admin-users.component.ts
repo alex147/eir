@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { Role } from '../role';
@@ -9,8 +9,6 @@ import { Role } from '../role';
     styleUrls: ['./admin-users.component.scss']
 })
 export class AdminUsersComponent implements OnInit {
-
-    @HostBinding('class') classes = 'content-area';
 
     public users: User[];
     public role: any = Role;

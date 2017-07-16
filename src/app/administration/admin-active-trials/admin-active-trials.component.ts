@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Trial } from '../../trials/trial';
 import { TrialService } from '../../trials/trial.service';
 
@@ -8,8 +8,6 @@ import { TrialService } from '../../trials/trial.service';
     styleUrls: ['./admin-active-trials.component.scss']
 })
 export class AdminActiveTrialsComponent implements OnInit {
-
-    @HostBinding('class') classes = 'content-area';
 
     public activeTrials: Trial[];
     public isModalOpen: boolean;
