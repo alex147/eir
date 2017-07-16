@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { Role } from '../role';
 
 @Component({
     selector: 'admin-users',
@@ -12,6 +13,7 @@ export class AdminUsersComponent implements OnInit {
     @HostBinding('class') classes = 'content-area';
 
     public users: User[];
+    public role: any = Role;
 
     public isModalOpen: boolean;
 
