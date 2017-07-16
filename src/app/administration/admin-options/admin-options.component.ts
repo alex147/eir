@@ -17,6 +17,10 @@ export class AdminOptionsComponent implements OnInit {
         new AdminOption("Archived Trials", "archive")
     ];
 
+    public visitOptions: AdminOption[] = [
+        new AdminOption("Visit Definitions", "visits")
+    ]
+
     constructor() { }
 
     ngOnInit () {

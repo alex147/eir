@@ -27,6 +27,8 @@ import { CenterService } from './trials/center.service';
 import { SubjectService } from './trials/subject.service';
 import { TrialService } from './trials/trial.service';
 import { UserService } from './administration/user.service';
+import { VisitDefinitionsService } from './trials/visit-definitions.service';
+import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +49,8 @@ import { UserService } from './administration/user.service';
         AdminUsersComponent,
         AdminOptionsComponent,
         AdminActiveTrialsComponent,
-        AdminArchivedTrialsComponent
+        AdminArchivedTrialsComponent,
+        VisitDefinitionsComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -57,7 +60,13 @@ import { UserService } from './administration/user.service';
         ClarityModule.forRoot(),
         ROUTING
     ],
-    providers: [ CenterService, SubjectService, TrialService, UserService ],
+    providers: [
+        CenterService,
+        SubjectService,
+        TrialService,
+        UserService,
+        VisitDefinitionsService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

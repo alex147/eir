@@ -1,0 +1,81 @@
+<h1>Visit Definitions</h1>
+<div class="spinner-container" *ngIf="!trials">
+    <span class="spinner">
+        Loading...
+    </span>
+</div>
+<div *ngIf="trials.length">
+    <form>
+        <section class="form-block">
+            <div class="form-group row">
+                <div class="col-sm-12 col-md-6 col-lg-4 row">
+                    <div class="col-md-3 col-lg-2">
+                        <label for="selects_1">Trial</label>
+                    </div>
+                    <div class="col-md-8 col-lg-6">
+                        <div class="select">
+                            <select id="selects_1" [(ngModel)]="trialId"
+                                (change)="fetchVisitDefinitions()" name="trial">
+                            <option *ngFor="let trial of trials; let i = index"
+                                [selected]="i === 0"
+                                [ngValue]="trial.id">
+                                {{trial.id}}
+                            </option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 row">
+                    <div class="col-md-3 col-lg-2">
+                        <label for="selects_2">Visit</label>
+                    </div>
+                    <div class="col-md-8 col-lg-6">
+                        <div class="select">
+                            <select id="selects_2" [(ngModel)]="visitId"
+                                name="visit">
+                            <option *ngFor="let visit of visits"
+                                [ngValue]="visit">
+                                {{visit}}
+                            </option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+<div *ngIf="definitions">
+    <p>{{definitions[visitId-1].description}}</p>
+    <clr-datagrid>
+        <clr-dg-action-bar>
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-secondary"
+                (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add Metric Definition
+                </button>
+            </div>
+        </clr-dg-action-bar>
+
+        <clr-dg-placeholder>We couldn't find any metric definitions!</clr-dg-placeholder>
+
+        <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+        <clr-dg-column [clrDgField]="'type'">Type</clr-dg-column>
+        <clr-dg-column [clrDgField]="'notes'">Notes</clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let metric of definitions[visitId-1].metricDefinitions" [clrDgItem]="metric">
+            <clr-dg-action-overflow>
+                <button class="action-item" (click)="onEdit(metric)">
+                    Edit
+                </button>
+                <button class="action-item" (click)="onDelete(metric)">
+                    Delete
+                </button>
+            </clr-dg-action-overflow>
+
+            <clr-dg-cell>{{metric.name}}</clr-dg-cell>
+            <clr-dg-cell>{{mType[metric.type]}}</clr-dg-cell>
+            <clr-dg-cell>{{metric.notes}}</clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer>{{definitions[visitId-1].metricDefinitions.length}} metrics</clr-dg-footer>
+    </clr-datagrid>
+</div>

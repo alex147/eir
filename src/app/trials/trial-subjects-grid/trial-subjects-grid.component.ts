@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subject } from '../subject';
 import { SubjectService } from '../subject.service';
+import { Gender } from '../gender';
 
 @Component({
     selector: 'trial-subjects-grid',
@@ -13,7 +14,7 @@ export class TrialSubjectsGridComponent implements OnInit {
     @HostBinding('class') classes = 'content-area';
 
     public subjects: Subject[];
-
+    public gender: any = Gender;
     public isModalOpen: boolean;
 
     constructor(private route: ActivatedRoute,

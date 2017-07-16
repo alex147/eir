@@ -26,4 +26,17 @@
             </li>
         </ul>
     </section>
+    <section class="nav-group collapsible">
+        <input id="cat3" type="checkbox">
+        <label for="cat3">Visits</label>
+        <ul class="nav-list">
+            <li *ngFor='let option of visitOptions' class="nav-item">
+                <a class="nav-link" href="#"
+                    [routerLink]="['./', option.route]"
+                    routerLinkActive="active">
+                    {{option.name}}
+                </a>
+            </li>
+        </ul>
+    </section>
 </section>
