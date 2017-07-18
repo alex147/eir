@@ -14,6 +14,7 @@
     <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
     <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
     <clr-dg-column [clrDgField]="'centers'">Centers</clr-dg-column>
+    <clr-dg-column [clrDgField]="'numOfVisits'">Visits</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let trial of activeTrials" [clrDgItem]="trial">
         <clr-dg-action-overflow>
@@ -29,6 +30,7 @@
         <clr-dg-cell>{{trial.name}}</clr-dg-cell>
         <clr-dg-cell>{{trial.description}}</clr-dg-cell>
         <clr-dg-cell>{{trial.centers}}</clr-dg-cell>
+        <clr-dg-cell>{{trial.numOfVisits}}</clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>{{activeTrials.length}} trials</clr-dg-footer>
 </clr-datagrid>
