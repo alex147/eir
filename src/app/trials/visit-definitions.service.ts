@@ -5,6 +5,7 @@ import { TrialVisitDefinitions } from './trial-visit-definitions';
 import { VisitDefinition } from './visit-definition';
 import { Metric } from './metric';
 import { MetricType } from './metric-type';
+import { MetricSection } from './metric-section';
 
 @Injectable()
 export class VisitDefinitionsService {
@@ -14,10 +15,16 @@ export class VisitDefinitionsService {
         new Metric("Height", MetricType.Number, "Measured with the shoes taken off."),
         new Metric("Age", MetricType.Number, "Age at start of trial.")
     ];
+    private sections: MetricSection[] = [
+        new MetricSection("Vital Signs", "", this.metrics),
+        new MetricSection("Habits Information", "", this.metrics),
+        new MetricSection("Demographic Information", "", this.metrics),
+    ];
+
     private visits: VisitDefinition[] = [
-        new VisitDefinition("First Visit", this.metrics),
-        new VisitDefinition("Second Visit", this.metrics),
-        new VisitDefinition("Third Visit", this.metrics)
+        new VisitDefinition("First Visit", this.sections),
+        new VisitDefinition("Second Visit", this.sections),
+        new VisitDefinition("Third Visit", this.sections)
     ];
     private definitions: TrialVisitDefinitions[] = [
         new TrialVisitDefinitions("1", this.visits),

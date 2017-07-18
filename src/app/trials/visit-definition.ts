@@ -1,6 +1,6 @@
-import { Metric } from './metric';
+import { MetricSection } from './metric-section';
 
 export class VisitDefinition {
     constructor(public description: string,
-        public metricDefinitions: Metric[] = []) { }
+        public sections: MetricSection[] = []) { }
 }

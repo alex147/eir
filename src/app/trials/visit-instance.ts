@@ -1,3 +1,3 @@
 export class VisitInstance {
-    constructor(public capturedData: any[] = []) { }
+    constructor(public capturedData: { [key: string]: any; }) { }
 }

@@ -13,8 +13,7 @@
                 </div>
                 <div class="col-md-8 col-lg-6">
                     <div class="select">
-                        <select id="selects_1" [(ngModel)]="selectedTrial"
-                            (change)="fetchVisitDefinitions()" name="trial">
+                        <select id="selects_1" [(ngModel)]="selectedTrial" (change)="fetchVisitDefinitions()" name="trial">
                             <option *ngFor="let trial of trials"
                                 [ngValue]="trial">
                                 {{trial.id}}
@@ -49,31 +48,39 @@
     <clr-datagrid>
         <clr-dg-action-bar>
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-secondary" (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add Metric Definition
+                <button type="button" class="btn btn-sm btn-secondary" (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add Section
                 </button>
             </div>
         </clr-dg-action-bar>
 
-        <clr-dg-placeholder>We couldn't find any metric definitions!</clr-dg-placeholder>
+        <clr-dg-placeholder>We couldn't find any sections!</clr-dg-placeholder>
 
         <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
-        <clr-dg-column [clrDgField]="'type'">Type</clr-dg-column>
-        <clr-dg-column [clrDgField]="'notes'">Notes</clr-dg-column>
+        <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
+        <clr-dg-column [clrDgField]="'section.metricDefinitions.length'">Number of Metrics</clr-dg-column>
 
-        <clr-dg-row *clrDgItems="let metric of definitions[visitId-1].metricDefinitions" [clrDgItem]="metric">
+        <clr-dg-row *clrDgItems="let section of definitions[visitId-1].sections" [clrDgItem]="section">
             <clr-dg-action-overflow>
-                <button class="action-item" (click)="onEdit(metric)">
+                <button class="action-item" (click)="onEdit(section)">
                     Edit
                 </button>
-                <button class="action-item" (click)="onDelete(metric)">
+                <button class="action-item" (click)="onDelete(section)">
                     Delete
                 </button>
             </clr-dg-action-overflow>
 
-            <clr-dg-cell>{{metric.name}}</clr-dg-cell>
-            <clr-dg-cell>{{mType[metric.type]}}</clr-dg-cell>
-            <clr-dg-cell>{{metric.notes}}</clr-dg-cell>
+            <clr-dg-cell>{{section.name}}</clr-dg-cell>
+            <clr-dg-cell>{{section.description}}</clr-dg-cell>
+            <clr-dg-cell>{{section.metricDefinitions.length}}</clr-dg-cell>
+
+            <clr-dg-row-detail *clrIfExpanded>
+                <div class="metrics-container">
+                    <div *ngFor="let metric of section.metricDefinitions; let i = index">
+                        {{i+1}}. <b>{{metric.name}}</b> | <b>{{mType[metric.type]}}</b> | <b>{{metric.notes}}</b>
+                    </div>
+                </div>
+            </clr-dg-row-detail>
         </clr-dg-row>
-        <clr-dg-footer>{{definitions[visitId-1].metricDefinitions.length}} metrics</clr-dg-footer>
+        <clr-dg-footer>{{definitions[visitId-1].sections.length}} sections</clr-dg-footer>
     </clr-datagrid>
 </div>
