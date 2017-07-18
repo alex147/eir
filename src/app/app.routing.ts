@@ -12,6 +12,7 @@ import { AdminUsersComponent } from './administration/admin-users/admin-users.co
 import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';
 import { AdminArchivedTrialsComponent } from './administration/admin-archived-trials/admin-archived-trials.component';
 import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
+import { EnrolledCentersComponent } from './administration/enrolled-centers/enrolled-centers.component';
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,7 +24,8 @@ export const ROUTES: Routes = [
             { path: 'users', component: AdminUsersComponent },
             { path: 'trials', component: AdminActiveTrialsComponent },
             { path: 'archive', component: AdminArchivedTrialsComponent },
-            { path: 'visits', component: VisitDefinitionsComponent }
+            { path: 'visits', component: VisitDefinitionsComponent },
+            { path: 'centers', component: EnrolledCentersComponent }
         ]
     },
     { path: 'trials', component: SelectionRequiredComponent,

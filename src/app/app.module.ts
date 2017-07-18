@@ -27,6 +27,7 @@ import { TrialService } from './trials/trial.service';
 import { UserService } from './administration/user.service';
 import { VisitDefinitionsService } from './trials/visit-definitions.service';
 import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
+import { EnrolledCentersComponent } from './administration/enrolled-centers/enrolled-centers.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { VisitDefinitionsComponent } from './administration/visit-definitions/vi
         AdminOptionsComponent,
         AdminActiveTrialsComponent,
         AdminArchivedTrialsComponent,
-        VisitDefinitionsComponent
+        VisitDefinitionsComponent,
+        EnrolledCentersComponent
     ],
     imports: [
         BrowserAnimationsModule,

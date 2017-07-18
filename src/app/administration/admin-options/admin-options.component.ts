@@ -9,7 +9,7 @@ import { AdminOption } from '../admin-option';
 export class AdminOptionsComponent implements OnInit {
 
     public userOptions: AdminOption[] = [
-        new AdminOption("Users", "users")
+        new AdminOption("Users & Privileges", "users")
     ];
 
     public trialOptions: AdminOption[] = [
@@ -17,9 +17,13 @@ export class AdminOptionsComponent implements OnInit {
         new AdminOption("Archived Trials", "archive")
     ];
 
+    public centerOptions: AdminOption[] = [
+        new AdminOption("Enrolled Centers", "centers"),
+    ];
+
     public visitOptions: AdminOption[] = [
         new AdminOption("Visit Definitions", "visits")
-    ]
+    ];
 
     constructor() { }
 

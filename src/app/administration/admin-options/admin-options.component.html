@@ -2,7 +2,7 @@
     <div class="settings-header">Admin Panel</div>
     <section class="nav-group collapsible">
         <input id="cat1" type="checkbox">
-        <label for="cat1">Users &amp; Privileges</label>
+        <label for="cat1">Users</label>
         <ul class="nav-list">
             <li *ngFor='let option of userOptions' class="nav-item">
                 <a class="nav-link" href="#"
@@ -15,7 +15,7 @@
     </section>
     <section class="nav-group collapsible">
         <input id="cat2" type="checkbox">
-        <label for="cat2">Trial Registry</label>
+        <label for="cat2">Trials</label>
         <ul class="nav-list">
             <li *ngFor='let option of trialOptions' class="nav-item">
                 <a class="nav-link" href="#"
@@ -28,7 +28,20 @@
     </section>
     <section class="nav-group collapsible">
         <input id="cat3" type="checkbox">
-        <label for="cat3">Visits</label>
+        <label for="cat3">Centers</label>
+        <ul class="nav-list">
+            <li *ngFor='let option of centerOptions' class="nav-item">
+                <a class="nav-link" href="#"
+                    [routerLink]="['./', option.route]"
+                    routerLinkActive="active">
+                    {{option.name}}
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section class="nav-group collapsible">
+        <input id="cat4" type="checkbox">
+        <label for="cat4">Visits</label>
         <ul class="nav-list">
             <li *ngFor='let option of visitOptions' class="nav-item">
                 <a class="nav-link" href="#"
