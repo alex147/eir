@@ -13,7 +13,7 @@ import { MetricType } from '../../trials/metric-type';
 })
 export class VisitDefinitionsComponent implements OnInit {
 
-    public trialId: string = "";
+    public selectedTrial: Trial;
     public visitId: number = 1;
     public visits: number[] = [1];
     public trials: Trial[];
@@ -27,17 +27,19 @@ export class VisitDefinitionsComponent implements OnInit {
         this.trialService.getActiveTrials()
             .subscribe((data) => {
                 this.trials = data;
-                this.trialId = this.trials[0].id;
+                this.selectedTrial = this.trials[0];
                 this.fetchVisitDefinitions();
             });
     }
 
     fetchVisitDefinitions () {
-        this.visitDefinitionsService.getTrialDefinitionsByTrialId(this.trialId)
+        this.visits = Array.apply(null, Array(this.selectedTrial
+            .numOfVisits)).map(function (_, i) { return i + 1; });
+
+        this.visitDefinitionsService
+            .getTrialDefinitionsByTrialId(this.selectedTrial.id)
             .subscribe((data) => {
                 this.definitions = data.visitDefinitions;
-                this.visits = Array.apply(null, Array(this.definitions.length))
-                    .map(function (_, i) { return i + 1; });
             });
     }
 

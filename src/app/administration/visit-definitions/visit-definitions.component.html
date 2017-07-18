@@ -13,9 +13,10 @@
                 </div>
                 <div class="col-md-8 col-lg-6">
                     <div class="select">
-                        <select id="selects_1" [(ngModel)]="trialId" (change)="fetchVisitDefinitions()" name="trial">
+                        <select id="selects_1" [(ngModel)]="selectedTrial"
+                            (change)="fetchVisitDefinitions()" name="trial">
                             <option *ngFor="let trial of trials"
-                                [ngValue]="trial.id">
+                                [ngValue]="trial">
                                 {{trial.id}}
                             </option>
                         </select>
@@ -40,6 +41,9 @@
         </div>
     </section>
 </form>
+<span class="spinner spinner-inline" *ngIf="!definitions">
+    Loading...
+</span>
 <div *ngIf="definitions">
     <p>{{definitions[visitId-1].description}}</p>
     <clr-datagrid>
