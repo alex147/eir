@@ -6,5 +6,6 @@ export class Subject {
         public gender: Gender,
         public isActive: boolean,
         public status: string,
-        public statusDate: Date) { }
+        public statusDate: Date,
+        public completedVisits: number = 0) { }
 }

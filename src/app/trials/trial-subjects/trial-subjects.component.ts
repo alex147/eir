@@ -5,6 +5,7 @@ import { CenterService } from '../center.service';
 import { Subject } from '../subject';
 import { SubjectService } from '../subject.service';
 import { Gender } from '../gender';
+import { VisitDefinitionsService } from '../visit-definitions.service';
 
 @Component({
     selector: 'trial-subjects',
@@ -18,21 +19,27 @@ export class TrialSubjectsComponent implements OnInit {
     public centers: Center[];
     public subjects: Subject[];
     public gender: any = Gender;
+    public trialNumOfVisits: number = 0;
     public isModalOpen: boolean;
 
     constructor(private route: ActivatedRoute,
         private centerService: CenterService,
-        private subjectService: SubjectService) {
+        private subjectService: SubjectService,
+        private visitDefinitionsService: VisitDefinitionsService) {
     }
 
     ngOnInit () {
-        this.trialId = this.route.snapshot.queryParamMap.get("id");
+        this.trialId = this.route.snapshot.parent.params["id"];
         this.centerService.getCentersByTrialId(this.trialId)
             .subscribe((data) => {
                 this.centers = data;
                 this.centerId = this.centers[0].id;
                 this.fetchSubjects();
             });
+        this.visitDefinitionsService.getNumOfVisitsByTrialId(this.trialId)
+        .subscribe((data) => {
+            this.trialNumOfVisits = data;
+        });
     }
 
     fetchSubjects () {

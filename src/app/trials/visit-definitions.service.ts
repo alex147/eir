@@ -42,4 +42,9 @@ export class VisitDefinitionsService {
             .filter(definition => definition.trialId === trialId)[0]);
     }
 
+    getNumOfVisitsByTrialId (trialId: string): Observable<number> {
+        return Observable.of(this.definitions
+            .filter(definition => definition.trialId === trialId)[0].visitDefinitions.length);
+    }
+
 }

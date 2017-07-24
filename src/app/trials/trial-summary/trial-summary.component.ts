@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'trial-summary',
@@ -13,9 +13,7 @@ export class TrialSummaryComponent implements OnInit {
     constructor(private route: ActivatedRoute) { }
 
     ngOnInit () {
-        this.route.parent.params.forEach((params: Params) => {
-            this.trialId = params['id'];
-        });
+        this.trialId = this.route.snapshot.parent.params["id"];
     }
 
 }

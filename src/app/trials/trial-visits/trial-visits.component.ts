@@ -23,7 +23,7 @@ export class TrialVisitsComponent implements OnInit {
         private visitDataService: VisitDataService) { }
 
     ngOnInit () {
-        this.trialId = this.route.snapshot.queryParamMap.get("id");
+        this.trialId = this.route.snapshot.parent.params["id"];
         this.centerService.getCentersByTrialId(this.trialId)
             .subscribe((data) => {
                 this.centers = data;

@@ -33,6 +33,7 @@
     <clr-dg-placeholder>We couldn't find any subjects!</clr-dg-placeholder>
 
     <clr-dg-column [clrDgField]="'id'">Subject ID</clr-dg-column>
+    <clr-dg-column [clrDgField]="'id'">Visits Progress</clr-dg-column>
     <clr-dg-column [clrDgField]="'consentDate'">Consent Date</clr-dg-column>
     <clr-dg-column [clrDgField]="'gender'">Gender</clr-dg-column>
     <clr-dg-column [clrDgField]="'isActive'">Active</clr-dg-column>
@@ -50,6 +51,7 @@
         </clr-dg-action-overflow>
 
         <clr-dg-cell><a href="#" [routerLink]="['../visits']" routerLinkActive="active" class="nav-link nav-text">{{subject.id}}</a></clr-dg-cell>
+        <clr-dg-cell><a href="#" [routerLink]="['../visits']" routerLinkActive="active" class="nav-link nav-text">{{subject.completedVisits}}/{{trialNumOfVisits}}</a></clr-dg-cell>
         <clr-dg-cell>{{subject.consentDate | date}}</clr-dg-cell>
         <clr-dg-cell>{{gender[subject.gender]}}</clr-dg-cell>
         <clr-dg-cell>{{subject.isActive}}</clr-dg-cell>
