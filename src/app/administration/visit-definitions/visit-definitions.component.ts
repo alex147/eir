@@ -7,7 +7,7 @@ import { Metric } from '../../trials/metric';
 import { MetricType } from '../../trials/metric-type';
 
 @Component({
-    selector: 'app-visit-definitions',
+    selector: 'admin-visit-definitions',
     templateUrl: './visit-definitions.component.html',
     styleUrls: ['./visit-definitions.component.scss']
 })
@@ -48,6 +48,10 @@ export class VisitDefinitionsComponent implements OnInit {
     }
 
     onEdit (metric: Metric) {
+
+    }
+
+    onSave (metric: Metric) {
 
     }
 

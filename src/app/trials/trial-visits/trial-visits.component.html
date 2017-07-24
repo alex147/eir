@@ -1,0 +1,55 @@
+<div class="spinner-container" *ngIf="!centers">
+    <span class="spinner">
+        Loading...
+    </span>
+</div>
+<form *ngIf="centers">
+    <section class="form-block">
+        <div class="form-group row">
+            <div class="col-sm-12 col-md-8 col-lg-4 row">
+                <div class="col-md-4 col-lg-4">
+                    <label for="selects_1"><b>Center ID</b></label>
+                </div>
+                <div class="col-md-8 col-lg-6">
+                    <div class="select">
+                        <select id="selects_1" [(ngModel)]="selectedCenterId" (change)="fetchVisitData()" name="center">
+                        <option *ngFor="let center of centers"
+                            [ngValue]="center.id">
+                            {{center.id}}
+                        </option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-4 row">
+                <div class="col-md-4 col-lg-3">
+                    <label for="selects_2"><b>Subject ID</b></label>
+                </div>
+                <div class="col-md-8 col-lg-6">
+                    <div class="select">
+                        <select id="selects_2" [(ngModel)]="selectedSubjectEntry" name="subject">
+                            <option *ngFor="let subjectEntry of visitData"
+                                [ngValue]="subjectEntry">
+                                {{subjectEntry.subjectId}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<table class="table" *ngIf="visitData">
+    <thead>
+        <tr>
+            <th>Visit ID</th>
+            <th>Sections</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let visit of selectedSubjectEntry.visits">
+            <td>{{visit.id}}</td>
+            <td><div><a *ngFor="let section of visit.capturedData">{{section.sectionId}}</a></div></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,5 +1,5 @@
 export enum MetricType {
     Text,
     Number,
-    YesNo
+    YesNo = "Yes/No"
 }

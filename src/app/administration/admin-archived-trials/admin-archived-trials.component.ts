@@ -3,7 +3,7 @@ import { Trial } from '../../trials/trial';
 import { TrialService } from '../../trials/trial.service';
 
 @Component({
-    selector: 'app-admin-archived-trials',
+    selector: 'admin-archived-trials',
     templateUrl: './admin-archived-trials.component.html',
     styleUrls: ['./admin-archived-trials.component.scss']
 })

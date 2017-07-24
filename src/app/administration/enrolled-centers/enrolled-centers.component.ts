@@ -3,7 +3,7 @@ import { Center } from '../../trials/center';
 import { CenterService } from '../../trials/center.service';
 
 @Component({
-    selector: 'app-enrolled-centers',
+    selector: 'admin-enrolled-centers',
     templateUrl: './enrolled-centers.component.html',
     styleUrls: ['./enrolled-centers.component.scss']
 })

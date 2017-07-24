@@ -20,7 +20,6 @@ export class TrialSubjectsComponent implements OnInit {
     public gender: any = Gender;
     public isModalOpen: boolean;
 
-
     constructor(private route: ActivatedRoute,
         private centerService: CenterService,
         private subjectService: SubjectService) {

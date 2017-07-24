@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { TrialContainerComponent } from './trials/trial-container/trial-container.component';
 import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.component';
 import { TrialSubjectsComponent } from './trials/trial-subjects/trial-subjects.component';
+import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.component';
 import { SelectionRequiredComponent } from './trials/selection-required/selection-required.component';
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
 import { AdminUsersComponent } from './administration/admin-users/admin-users.component';
@@ -35,7 +36,8 @@ export const ROUTES: Routes = [
         children: [
             { path: '', redirectTo: 'subjects', pathMatch: 'full' },
             { path: 'summary', component: TrialSummaryComponent },
-            { path: 'subjects', component: TrialSubjectsComponent }
+            { path: 'subjects', component: TrialSubjectsComponent },
+            { path: 'visits', component: TrialVisitsComponent }
         ]
     }
 ];

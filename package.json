@@ -39,7 +39,7 @@
     "enhanced-resolve": "^3.0.0",
     "ts-node": "1.2.1",
     "tslint": "^4.1.1",
-    "typescript": "~2.2.0",
+    "typescript": "^2.2.0",
     "typings": "^1.4.0",
     "webdriver-manager": "10.2.5"
   }

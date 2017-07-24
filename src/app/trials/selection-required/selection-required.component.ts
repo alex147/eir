@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-selection-required',
+    selector: 'selection-required',
     templateUrl: './selection-required.component.html',
     styleUrls: ['./selection-required.component.scss']
 })

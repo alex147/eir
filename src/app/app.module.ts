@@ -24,10 +24,12 @@ import { AdminArchivedTrialsComponent } from './administration/admin-archived-tr
 import { CenterService } from './trials/center.service';
 import { SubjectService } from './trials/subject.service';
 import { TrialService } from './trials/trial.service';
+import { VisitDataService } from './trials/visit-data.service';
 import { UserService } from './administration/user.service';
 import { VisitDefinitionsService } from './trials/visit-definitions.service';
 import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
 import { EnrolledCentersComponent } from './administration/enrolled-centers/enrolled-centers.component';
+import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,8 @@ import { EnrolledCentersComponent } from './administration/enrolled-centers/enro
         AdminActiveTrialsComponent,
         AdminArchivedTrialsComponent,
         VisitDefinitionsComponent,
-        EnrolledCentersComponent
+        EnrolledCentersComponent,
+        TrialVisitsComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -63,7 +66,8 @@ import { EnrolledCentersComponent } from './administration/enrolled-centers/enro
         SubjectService,
         TrialService,
         UserService,
-        VisitDefinitionsService
+        VisitDefinitionsService,
+        VisitDataService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,3 +1,6 @@
+import { SectionData } from './section-data';
+
 export class VisitInstance {
-    constructor(public capturedData: { [key: string]: any; }) { }
+    constructor(public id: number,
+        public capturedData: SectionData[]) { }
 }
