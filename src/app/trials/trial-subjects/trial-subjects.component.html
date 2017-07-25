@@ -53,7 +53,7 @@
         </clr-dg-action-overflow>
 
         <clr-dg-cell>{{subject.id}}</clr-dg-cell>
-        <clr-dg-cell><a href="#" [routerLink]="['../visits']" routerLinkActive="active" class="nav-link nav-text">{{subject.completedVisits}}/{{trialNumOfVisits}}</a></clr-dg-cell>
+        <clr-dg-cell><a href="#" [routerLink]="['../visits']" [queryParams]="{id: subject.id}" routerLinkActive="active" class="nav-link nav-text">{{subject.completedVisits}}/{{trialNumOfVisits}}</a></clr-dg-cell>
         <clr-dg-cell>{{subject.consentDate | date}}</clr-dg-cell>
         <clr-dg-cell>{{gender[subject.gender]}}</clr-dg-cell>
         <clr-dg-cell>{{subject.isActive}}</clr-dg-cell>

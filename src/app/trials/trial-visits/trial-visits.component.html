@@ -49,7 +49,14 @@
     <tbody>
         <tr *ngFor="let visit of selectedSubjectEntry.visits">
             <td>{{visit.id}}</td>
-            <td><div><a *ngFor="let section of visit.capturedData">{{section.sectionId}}</a></div></td>
+            <td>
+                <div *ngFor="let section of visit.capturedData">
+                    <a href="#" [routerLink]="['../visits']" routerLinkActive="active" class="nav-link nav-text">
+                    {{section.sectionId}}
+                    <clr-icon shape="clipboard" [ngClass]="getIconClass(section.status)"></clr-icon>
+                    </a>
+                </div>
+            </td>
         </tr>
     </tbody>
 </table>

@@ -4,6 +4,7 @@ import { Center } from '../center';
 import { CenterService } from '../center.service';
 import { VisitData } from '../visit-data';
 import { VisitDataService } from '../visit-data.service';
+import { SectionStatus } from '../section-status';
 
 @Component({
     selector: 'trial-visits',
@@ -12,7 +13,7 @@ import { VisitDataService } from '../visit-data.service';
 })
 export class TrialVisitsComponent implements OnInit {
 
-    public trialId: string;
+    private trialId: string;
     public selectedCenterId: string = "";
     public selectedSubjectEntry: VisitData;
     public centers: Center[];
@@ -24,11 +25,16 @@ export class TrialVisitsComponent implements OnInit {
 
     ngOnInit () {
         this.trialId = this.route.snapshot.parent.params["id"];
+        let subjectIdQueryParam: string = this.route.snapshot.queryParams['id']
+            || "";
         this.centerService.getCentersByTrialId(this.trialId)
             .subscribe((data) => {
                 this.centers = data;
-                this.selectedCenterId = this.centers[0].id;
+                this.selectedCenterId =
+                    this.extractCenterIdFromSubjectId(subjectIdQueryParam);
                 this.fetchVisitData();
+                this.selectedSubjectEntry =
+                    this.findSubjectWithId(subjectIdQueryParam);
             });
     }
 
@@ -37,8 +43,47 @@ export class TrialVisitsComponent implements OnInit {
             .getVisitDataByCenterId(this.selectedCenterId)
             .subscribe((data) => {
                 this.visitData = data;
-                this.selectedSubjectEntry = this.visitData[0];
             });
+    }
+
+    getIconClass (status: SectionStatus): string {
+        switch (status) {
+            case SectionStatus.NotStarted:
+                return "is-error";
+            case SectionStatus.InProgress:
+                return "is-warning";
+            case SectionStatus.Completed:
+                return "is-success";
+            default:
+                return "";
+        }
+    }
+
+    extractCenterIdFromSubjectId (subjectId: string): string {
+        let hyphenIdx = subjectId.lastIndexOf("-");
+        if (hyphenIdx > 0) {
+            let centerId = subjectId.substring(0, hyphenIdx);
+            let matching: Array<Center> = this.centers
+                .filter(entry => entry.id === centerId);
+            if (matching.length) {
+                return matching[0].id;
+            }
+        }
+
+        return this.centers[0].id;
+    }
+
+    findSubjectWithId (subjectId: string): VisitData {
+        if (!subjectId) {
+            return this.visitData[0];
+        }
+        let matching: Array<VisitData> = this.visitData
+            .filter(entry => entry.subjectId === subjectId);
+        if (matching.length) {
+            return matching[0];
+        } else {
+            return this.visitData[0];
+        }
     }
 
 }

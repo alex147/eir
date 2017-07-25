@@ -10,8 +10,8 @@ import { SectionStatus } from './section-status';
 export class VisitDataService {
 
     private sectionData: SectionData[] = [
-        new SectionData("Vital Signs", SectionStatus.NotStarted, []),
-        new SectionData("Habits Information", SectionStatus.NotStarted, []),
+        new SectionData("Vital Signs", SectionStatus.Completed, []),
+        new SectionData("Habits Information", SectionStatus.InProgress, []),
         new SectionData("Demographic Information", SectionStatus.NotStarted, [])
     ];
 
@@ -26,7 +26,7 @@ export class VisitDataService {
         new VisitData("BGR001-003", this.visits),
         new VisitData("BGR002-001", this.visits),
         new VisitData("BGR002-002", this.visits),
-        new VisitData("BGR002-002", this.visits)
+        new VisitData("BGR002-003", this.visits)
     ];
 
     constructor() { }
