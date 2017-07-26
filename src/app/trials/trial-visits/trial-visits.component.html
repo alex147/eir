@@ -59,9 +59,8 @@
             <div>
                 <div *ngFor="let section of visit.capturedData">
                     <a href="#" [routerLink]="['../visits']" routerLinkActive="active" class="nav-link nav-text">
-                    {{section.sectionId}}
-                        <clr-icon shape="clipboard"
-                            [ngClass]="getSectionIconClass(section.status)"></clr-icon>
+                        <clr-icon shape="clipboard" [ngClass]="getSectionIconClass(section.status)"></clr-icon>
+                        {{section.sectionId}}
                     </a>
                 </div>
             </div>
