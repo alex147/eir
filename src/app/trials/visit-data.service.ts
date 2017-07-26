@@ -16,8 +16,9 @@ export class VisitDataService {
     ];
 
     private visits: VisitInstance[] = [
-        new VisitInstance(1, this.sectionData),
-        new VisitInstance(2, this.sectionData)
+        new VisitInstance(1, this.sectionData, "First Visit"),
+        new VisitInstance(2, this.sectionData, "Second Visit"),
+        new VisitInstance(3, this.sectionData, "Third Visit")
     ];
 
     private data: VisitData[] = [

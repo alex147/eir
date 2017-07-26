@@ -46,7 +46,7 @@ export class TrialVisitsComponent implements OnInit {
             });
     }
 
-    getIconClass (status: SectionStatus): string {
+    getSectionIconClass (status: SectionStatus): string {
         switch (status) {
             case SectionStatus.NotStarted:
                 return "is-error";
@@ -57,6 +57,17 @@ export class TrialVisitsComponent implements OnInit {
             default:
                 return "";
         }
+    }
+
+    getVisitBadgeClass (numOfCompletedSections: number,
+        totalNumOfSections: number): string {
+        if (numOfCompletedSections === 0) {
+            return "badge-danger";
+        }
+        if (numOfCompletedSections === totalNumOfSections) {
+            return "badge-success";
+        }
+        return "badge-warning";
     }
 
     extractCenterIdFromSubjectId (subjectId: string): string {

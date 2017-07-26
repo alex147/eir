@@ -37,7 +37,8 @@ export class VisitDefinitionsService {
     constructor() {
     }
 
-    getTrialDefinitionsByTrialId (trialId: string): Observable<TrialVisitDefinitions> {
+    getTrialDefinitionsByTrialId (trialId: string):
+        Observable<TrialVisitDefinitions> {
         return Observable.of(this.definitions
             .filter(definition => definition.trialId === trialId)[0]);
     }

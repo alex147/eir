@@ -6,7 +6,7 @@
 <form *ngIf="centers">
     <section class="form-block">
         <div class="form-group row">
-            <div class="col-sm-12 col-md-8 col-lg-4 row">
+            <div class="col-sm-12 col-md-6 col-lg-4 row">
                 <div class="col-md-4 col-lg-4">
                     <label for="selects_1"><b>Center ID</b></label>
                 </div>
@@ -21,8 +21,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-8 col-lg-4 row">
-                <div class="col-md-4 col-lg-3">
+            <div class="col-sm-12 col-md-6 col-lg-4 row">
+                <div class="col-md-4 col-lg-4">
                     <label for="selects_2"><b>Subject ID</b></label>
                 </div>
                 <div class="col-md-8 col-lg-6">
@@ -39,24 +39,33 @@
         </div>
     </section>
 </form>
-<table class="table" *ngIf="visitData">
-    <thead>
-        <tr>
-            <th>Visit ID</th>
-            <th>Sections</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let visit of selectedSubjectEntry.visits">
-            <td>{{visit.id}}</td>
-            <td>
+<clr-datagrid *ngIf="visitData">
+    <clr-dg-placeholder>We couldn't find any visits!</clr-dg-placeholder>
+
+    <clr-dg-column [clrDgField]="'id'">Visit ID</clr-dg-column>
+    <clr-dg-column [clrDgField]="'description'">Visit Description</clr-dg-column>
+    <clr-dg-column>Sections Completed</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let visit of selectedSubjectEntry.visits" [clrDgItem]="visit">
+        <clr-dg-cell>{{visit.id}}</clr-dg-cell>
+        <clr-dg-cell>{{visit.description}}</clr-dg-cell>
+        <clr-dg-cell>
+            <span class="badge" [ngClass]="getVisitBadgeClass(visit.getCompletedSectionCount(), visit.getTotalSectionCount())">
+                {{visit.getCompletedSectionCount()}}/{{visit.getTotalSectionCount()}}
+            </span>
+        </clr-dg-cell>
+
+        <clr-dg-row-detail *clrIfExpanded>
+            <div>
                 <div *ngFor="let section of visit.capturedData">
                     <a href="#" [routerLink]="['../visits']" routerLinkActive="active" class="nav-link nav-text">
                     {{section.sectionId}}
-                    <clr-icon shape="clipboard" [ngClass]="getIconClass(section.status)"></clr-icon>
+                        <clr-icon shape="clipboard"
+                            [ngClass]="getSectionIconClass(section.status)"></clr-icon>
                     </a>
                 </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+            </div>
+        </clr-dg-row-detail>
+    </clr-dg-row>
+    <clr-dg-footer>{{selectedSubjectEntry.visits.length}} visits</clr-dg-footer>
+</clr-datagrid>
