@@ -37,15 +37,26 @@ export class TrialSubjectsComponent implements OnInit {
                 this.fetchSubjects();
             });
         this.visitDefinitionsService.getNumOfVisitsByTrialId(this.trialId)
-        .subscribe((data) => {
-            this.trialNumOfVisits = data;
-        });
+            .subscribe((data) => {
+                this.trialNumOfVisits = data;
+            });
     }
 
     fetchSubjects () {
         this.subjectService
             .getSubjectsByTrialIdAndCenterId(this.trialId, this.centerId)
             .subscribe(data => this.subjects = data);
+    }
+
+    getVisitBadgeClass (numOfCompletedVisits: number,
+        totalNumOfVisits: number): string {
+        if (numOfCompletedVisits === 0) {
+            return "badge-danger";
+        }
+        if (numOfCompletedVisits === totalNumOfVisits) {
+            return "badge-success";
+        }
+        return "badge-warning";
     }
 
     onAdd () {
