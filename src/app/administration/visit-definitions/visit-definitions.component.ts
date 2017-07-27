@@ -3,8 +3,8 @@ import { TrialService } from '../../trials/trial.service';
 import { Trial } from '../../trials/trial';
 import { VisitDefinitionsService } from '../../trials/visit-definitions.service';
 import { VisitDefinition } from '../../trials/visit-definition';
-import { MetricDefinition } from '../../trials/metric-definition';
-import { MetricType } from '../../trials/metric-type';
+import { Question } from '../../trials/question';
+import { QuestionType } from '../../trials/question-type';
 
 @Component({
     selector: 'admin-visit-definitions',
@@ -18,7 +18,7 @@ export class VisitDefinitionsComponent implements OnInit {
     public visits: number[] = [1];
     public trials: Trial[];
     public definitions: VisitDefinition[];
-    public mType: any = MetricType;
+    public qType: any = QuestionType;
 
     constructor(private trialService: TrialService,
         private visitDefinitionsService: VisitDefinitionsService) { }
@@ -47,15 +47,15 @@ export class VisitDefinitionsComponent implements OnInit {
 
     }
 
-    onEdit (metric: MetricDefinition) {
+    onEdit (question: Question) {
 
     }
 
-    onSave (metric: MetricDefinition) {
+    onSave (question: Question) {
 
     }
 
-    onDelete (metric: MetricDefinition) {
+    onDelete (question: Question) {
 
     }
 

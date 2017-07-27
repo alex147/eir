@@ -8,6 +8,7 @@ import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.comp
 import { TrialSubjectsComponent } from './trials/trial-subjects/trial-subjects.component';
 import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.component';
 import { SelectionRequiredComponent } from './trials/selection-required/selection-required.component';
+import { SectionFormComponent } from './trials/section-form/section-form.component';
 import { AdminViewComponent } from './administration/admin-view/admin-view.component';
 import { AdminUsersComponent } from './administration/admin-users/admin-users.component';
 import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';
@@ -37,7 +38,8 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'subjects', pathMatch: 'full' },
             { path: 'summary', component: TrialSummaryComponent },
             { path: 'subjects', component: TrialSubjectsComponent },
-            { path: 'visits', component: TrialVisitsComponent }
+            { path: 'visits', component: TrialVisitsComponent },
+            { path: 'sections', component: SectionFormComponent }
         ]
     }
 ];

@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
@@ -30,6 +30,8 @@ import { VisitDefinitionsService } from './trials/visit-definitions.service';
 import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
 import { EnrolledCentersComponent } from './administration/enrolled-centers/enrolled-centers.component';
 import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.component';
+import { SectionFormComponent } from './trials/section-form/section-form.component';
+import { DynamicFormQuestionComponent } from './trials/dynamic-form-question/dynamic-form-question.component';
 
 @NgModule({
     declarations: [
@@ -51,12 +53,15 @@ import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.compone
         AdminArchivedTrialsComponent,
         VisitDefinitionsComponent,
         EnrolledCentersComponent,
-        TrialVisitsComponent
+        TrialVisitsComponent,
+        SectionFormComponent,
+        DynamicFormQuestionComponent
     ],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         ClarityModule.forRoot(),
         ROUTING

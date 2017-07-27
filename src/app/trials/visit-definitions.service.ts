@@ -3,22 +3,28 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { TrialDefinition } from './trial-definition';
 import { VisitDefinition } from './visit-definition';
-import { MetricDefinition } from './metric-definition';
-import { MetricType } from './metric-type';
+import { Question } from './question';
+import { QuestionType } from './question-type';
 import { SectionDefinition } from './section-definition';
 
 @Injectable()
 export class VisitDefinitionsService {
 
-    private metrics: MetricDefinition[] = [
-        new MetricDefinition("Weight", MetricType.Number, "Measured on an empty stomach."),
-        new MetricDefinition("Height", MetricType.Number, "Measured with the shoes taken off."),
-        new MetricDefinition("Age", MetricType.Number, "Age at start of trial.")
+    private questions: Question[] = [
+        new Question("weight", "Weight", QuestionType.PDecimal, 1, true, "Measured on an empty stomach."),
+        new Question("height", "Height", QuestionType.PDecimal, 2, true, "Measured with the shoes taken off."),
+        new Question("age", "Age", QuestionType.PNumber, 3, true, "Age at start of trial.")
     ];
     private sections: SectionDefinition[] = [
-        new SectionDefinition("vitals", "Vital Signs", "", this.metrics),
-        new SectionDefinition("habits", "Habits Information", "", this.metrics),
-        new SectionDefinition("demographics", "Demographic Information", "", this.metrics)
+        new SectionDefinition("vitals", "Vital Signs", `
+            This section aims at capturing the Vital Signs for the subject in question.
+        `, this.questions),
+        new SectionDefinition("habits", "Habits Information", `
+            This section aims at capturing the Habits for the subject in question.
+        `, this.questions),
+        new SectionDefinition("demographics", "Demographic Information", `
+            This section aims at capturing the Demographic Information for the subject in question.
+        `, this.questions)
     ];
 
     private visits: VisitDefinition[] = [
@@ -52,7 +58,7 @@ export class VisitDefinitionsService {
         Observable<SectionDefinition> {
         let matchedTrial: TrialDefinition = this.definitions
             .filter(definition => definition.trialId === trialId)[0];
-        let matchedSections: SectionDefinition[] = matchedTrial.visitDefinitions[visitId].sections;
+        let matchedSections: SectionDefinition[] = matchedTrial.visitDefinitions[visitId - 1].sections;
         return Observable.of(matchedSections
             .filter(section => section.id === sectionId)[0]);
     }

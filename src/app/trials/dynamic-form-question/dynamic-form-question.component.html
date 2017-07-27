@@ -1,0 +1,57 @@
+<div [formGroup]="form" class="form-group">
+    <label [attr.for]="question.id" [class.required]="question.isRequired">
+        <a *ngIf="question.notes" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md">
+            {{question.label}}
+            <span class="tooltip-content">{{question.notes}}</span>
+        </a>
+        <span *ngIf="!question.notes">{{question.label}}</span>
+    </label>
+
+    <div [ngSwitch]="question.type">
+
+        <input *ngSwitchCase="qType['Text']" [formControlName]="question.id" [id]="question.id" type="text" [required]="question.isRequired">
+
+        <textarea *ngSwitchCase="qType['FText']" [formControlName]="question.id" [id]="question.id" cols="50" rows="3" [required]="question.isRequired"></textarea>
+
+        <input *ngSwitchCase="qType['Number']" [formControlName]="question.id" [id]="question.id" type="number" [required]="question.isRequired">
+
+        <input *ngSwitchCase="qType['PNumber']" [formControlName]="question.id" [id]="question.id" type="number" min="0" [required]="question.isRequired">
+
+        <input *ngSwitchCase="qType['Decimal']" [formControlName]="question.id" [id]="question.id" type="number" [step]="0.01" [required]="question.isRequired">
+
+        <input *ngSwitchCase="qType['PDecimal']" [formControlName]="question.id" [id]="question.id" type="number" [step]="0.01" min="0"
+            [required]="question.isRequired">
+
+        <input *ngSwitchCase="qType['Date']" [formControlName]="question.id" [id]="question.id" type="date" [required]="question.isRequired">
+
+        <input *ngSwitchCase="qType['File']" [formControlName]="question.id" [id]="question.id" type="file" [required]="question.isRequired">
+
+        <input *ngSwitchCase="qType['Time']" [formControlName]="question.id" [id]="question.id" type="time" [required]="question.isRequired">
+
+        <div *ngSwitchCase="qType['YesNo']" class="radio-inline">
+            <input type="radio" [name]="question.id" id="radio_1" checked="checked" [required]="question.isRequired">
+            <label for="radio_1">Yes</label>
+        </div>
+        <div *ngSwitchCase="qType['YesNo']" class="radio-inline">
+            <input type="radio" [name]="question.id" id="radio_2" [required]="question.isRequired">
+            <label for="radio_2">No</label>
+        </div>
+
+        <div class="select" *ngSwitchCase="qType['Select']">
+            <select [id]="question.id" [formControlName]="question.id" [required]="question.isRequired">
+                <option *ngFor="let opt of question.options" [value]="opt.key">
+                    {{opt.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="select" *ngSwitchCase="qType['Multi']">
+            <select [id]="question.id" [formControlName]="question.id" multiple [required]="question.isRequired">
+                <option *ngFor="let opt of question.options" [value]="opt.key">
+                    {{opt.value}}
+                </option>
+            </select>
+        </div>
+
+    </div>
+</div>

@@ -79,7 +79,7 @@
             <clr-dg-row-detail *clrIfExpanded>
                 <div class="metrics-container">
                     <div *ngFor="let metric of section.metricDefinitions; let i = index">
-                        {{i+1}}. <b>{{metric.name}}</b> | <b>{{mType[metric.type]}}</b> | <b>{{metric.notes}}</b>
+                        {{i+1}}. <b>{{metric.name}}</b> | <b>{{qType[metric.type]}}</b> | <b>{{metric.notes}}</b>
                     </div>
                 </div>
             </clr-dg-row-detail>

@@ -1,0 +1,9 @@
+<h1>{{section.name}}</h1>
+<p>{{section.description}}</p>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <section class="form-block">
+        <df-question *ngFor="let question of section.questions" [question]="question" [form]="form"></df-question>
+
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save</button>
+    </section>
+</form>
