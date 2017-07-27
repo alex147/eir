@@ -1,6 +1,6 @@
 import { VisitDefinition } from './visit-definition';
 
-export class TrialVisitDefinitions {
+export class TrialDefinition {
     constructor(public trialId: string,
         public visitDefinitions: VisitDefinition[] = []) { }
 }

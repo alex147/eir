@@ -3,7 +3,7 @@ import { TrialService } from '../../trials/trial.service';
 import { Trial } from '../../trials/trial';
 import { VisitDefinitionsService } from '../../trials/visit-definitions.service';
 import { VisitDefinition } from '../../trials/visit-definition';
-import { Metric } from '../../trials/metric';
+import { MetricDefinition } from '../../trials/metric-definition';
 import { MetricType } from '../../trials/metric-type';
 
 @Component({
@@ -37,7 +37,7 @@ export class VisitDefinitionsComponent implements OnInit {
             .numOfVisits)).map(function (_, i) { return i + 1; });
 
         this.visitDefinitionsService
-            .getTrialDefinitionsByTrialId(this.selectedTrial.id)
+            .getTrialDefinitionsById(this.selectedTrial.id)
             .subscribe((data) => {
                 this.definitions = data.visitDefinitions;
             });
@@ -47,15 +47,15 @@ export class VisitDefinitionsComponent implements OnInit {
 
     }
 
-    onEdit (metric: Metric) {
+    onEdit (metric: MetricDefinition) {
 
     }
 
-    onSave (metric: Metric) {
+    onSave (metric: MetricDefinition) {
 
     }
 
-    onDelete (metric: Metric) {
+    onDelete (metric: MetricDefinition) {
 
     }
 

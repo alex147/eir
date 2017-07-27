@@ -1,6 +1,6 @@
 import { MetricType } from './metric-type';
 
-export class Metric {
+export class MetricDefinition {
     constructor(public name: string,
         public type: MetricType,
         public notes: string = "No notes.") { }

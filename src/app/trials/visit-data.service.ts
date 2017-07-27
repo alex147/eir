@@ -10,9 +10,9 @@ import { SectionStatus } from './section-status';
 export class VisitDataService {
 
     private sectionData: SectionData[] = [
-        new SectionData("Vital Signs", SectionStatus.Completed, []),
-        new SectionData("Habits Information", SectionStatus.InProgress, []),
-        new SectionData("Demographic Information", SectionStatus.NotStarted, [])
+        new SectionData("vitals", "Vital Signs", SectionStatus.Completed, []),
+        new SectionData("habits", "Habits Information", SectionStatus.InProgress, []),
+        new SectionData("demographics", "Demographic Information", SectionStatus.NotStarted, [])
     ];
 
     private visits: VisitInstance[] = [
