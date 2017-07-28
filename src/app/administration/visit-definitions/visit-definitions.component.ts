@@ -4,7 +4,6 @@ import { Trial } from '../../trials/trial';
 import { VisitDefinitionsService } from '../../trials/visit-definitions.service';
 import { VisitDefinition } from '../../trials/visit-definition';
 import { Question } from '../../trials/question';
-import { QuestionType } from '../../trials/question-type';
 
 @Component({
     selector: 'admin-visit-definitions',
@@ -18,7 +17,6 @@ export class VisitDefinitionsComponent implements OnInit {
     public visits: number[] = [1];
     public trials: Trial[];
     public definitions: VisitDefinition[];
-    public qType: any = QuestionType;
 
     constructor(private trialService: TrialService,
         private visitDefinitionsService: VisitDefinitionsService) { }

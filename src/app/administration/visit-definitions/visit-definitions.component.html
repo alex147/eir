@@ -57,7 +57,7 @@
 
         <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
         <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
-        <clr-dg-column [clrDgField]="'section.metricDefinitions.length'">Number of Metrics</clr-dg-column>
+        <clr-dg-column [clrDgField]="'section.questions.length'">Number of Metrics</clr-dg-column>
 
         <clr-dg-row *clrDgItems="let section of definitions[visitId-1].sections" [clrDgItem]="section">
             <clr-dg-action-overflow>
@@ -74,12 +74,12 @@
 
             <clr-dg-cell>{{section.name}}</clr-dg-cell>
             <clr-dg-cell>{{section.description}}</clr-dg-cell>
-            <clr-dg-cell>{{section.metricDefinitions.length}}</clr-dg-cell>
+            <clr-dg-cell>{{section.questions.length}}</clr-dg-cell>
 
             <clr-dg-row-detail *clrIfExpanded>
                 <div class="metrics-container">
-                    <div *ngFor="let metric of section.metricDefinitions; let i = index">
-                        {{i+1}}. <b>{{metric.name}}</b> | <b>{{qType[metric.type]}}</b> | <b>{{metric.notes}}</b>
+                    <div *ngFor="let question of section.questions; let i = index">
+                        {{i+1}}. <b>{{question.label}}</b> | <b>{{question.type}}</b> | <b>{{question.notes}}</b>
                     </div>
                 </div>
             </clr-dg-row-detail>
