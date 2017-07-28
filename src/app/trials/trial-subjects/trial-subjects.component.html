@@ -52,7 +52,11 @@
             </button>
         </clr-dg-action-overflow>
 
-        <clr-dg-cell>{{subject.id}}</clr-dg-cell>
+        <clr-dg-cell>
+            <a href="#" [routerLink]="['../visits']" [queryParams]="{id: subject.id}" routerLinkActive="active" class="nav-link nav-text">
+                {{subject.id}}
+            </a>
+        </clr-dg-cell>
         <clr-dg-cell>
             <a href="#" [routerLink]="['../visits']" [queryParams]="{id: subject.id}" routerLinkActive="active" class="nav-link nav-text">
                 <span class="badge" [ngClass]="getVisitBadgeClass(subject.completedVisits, trialNumOfVisits)">
