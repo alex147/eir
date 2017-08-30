@@ -33,6 +33,14 @@ import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.compone
 import { SectionFormComponent } from './trials/section-form/section-form.component';
 import { DynamicFormQuestionComponent } from './trials/dynamic-form-question/dynamic-form-question.component';
 
+import 'mutationobserver-shim';
+import '@webcomponents/custom-elements';
+import 'web-animations-js';
+import 'clarity-icons/clarity-icons.min.js';
+require('clarity-icons/clarity-icons.min.css');
+require('clarity-ui/clarity-ui.min.css');
+
+
 @NgModule({
     declarations: [
         AppComponent,

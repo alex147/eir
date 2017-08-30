@@ -5,5 +5,7 @@ node_modules/
 typings/
 **/*npm-debug.log.*
 yarn-error.log
+*.log
 .idea/
 .DS_Store
+/.awcache

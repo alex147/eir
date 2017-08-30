@@ -1,14 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Eir</title>
-    <base href="/">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
+
+    <% if (webpackConfig.htmlElements.headTags) { %>
+        <!-- Configured Head Tags  -->
+        <%= webpackConfig.htmlElements.headTags %>
+            <% } %>
+
+                <!-- base url -->
+                <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+
+                <%= htmlWebpackPlugin.files.webpackManifest %>
+
+                    <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
+                        <!-- Webpack Dev Server reload -->
+                        <script src="/webpack-dev-server.js"></script>
+                        <% } %>
 </head>
 <body>
-    <my-app>Loading...</my-app>
+    <my-app>
+        Loading...
+    </my-app>
 </body>
 </html>
