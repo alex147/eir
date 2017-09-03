@@ -36,8 +36,9 @@ import { DynamicFormQuestionComponent } from './trials/dynamic-form-question/dyn
 import 'mutationobserver-shim';
 import '@webcomponents/custom-elements';
 import 'web-animations-js';
-import 'clarity-icons/clarity-icons.min.js';
 require('clarity-icons/clarity-icons.min.css');
+import "clarity-icons";
+import "clarity-icons/shapes/all-shapes";
 require('clarity-ui/clarity-ui.min.css');
 
 
