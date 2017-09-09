@@ -18,8 +18,7 @@ export class AdminUsersComponent implements OnInit {
     constructor(private userService: UserService) { }
 
     ngOnInit () {
-        this.userService.getUsers()
-            .subscribe(data => this.users = data);
+        this.users = this.userService.getUsers();
     }
 
     onAdd () {

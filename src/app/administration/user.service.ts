@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { Http } from '@angular/http';
 import { User } from './user';
 import { Role } from './role';
 
@@ -13,10 +12,16 @@ export class UserService {
         new User('givanov', 'Georgi Ivanov', Role.Investigator, ['BGR002'], ['LT1580_301'])
     ];
 
-    constructor() { }
+    constructor(private http: Http) { }
 
-    getUsers() {
-        return Observable.of(this.users);
+    getUsers(): Array<User> {
+        console.log("hey");
+        this.http.get('/api/users').subscribe(data => {
+            console.log("data", data);
+            // this.results = data['results'];
+        });
+
+        return this.users;
     }
 
 }
