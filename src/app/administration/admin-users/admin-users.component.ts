@@ -10,33 +10,50 @@ import { Role } from '../role';
 })
 export class AdminUsersComponent implements OnInit {
 
-    public users: User[];
+    public users: User[] = [];
     public role: any = Role;
-
-    public isModalOpen: boolean;
+    public selectedUser: User;
+    public isAddModalOpen: boolean;
+    public isUpdateModalOpen: boolean;
+    public isDeleteModalOpen: boolean;
 
     constructor(private userService: UserService) { }
 
     ngOnInit () {
-        this.users = this.userService.getUsers();
+        this.selectedUser = new User("", "", Role.Investigator, [], []);
+        this.userService.getUsers()
+            .subscribe(data => this.users = data);
     }
 
     onAdd () {
+        this.isAddModalOpen = true;
+    }
 
+    onAddModalSubmitted () {
+        this.userService.addUser(this.selectedUser);
+        this.onAddModalDismissed();
+    }
+
+    onAddModalDismissed () {
+        this.isAddModalOpen = false;
     }
 
     onEdit (user: User) {
-        this.isModalOpen = true;
+        this.isAddModalOpen = true;
     }
 
     onDelete (user: User) {
-        this.users = this.users.filter((toCompare: User) => {
-            return user.username !== toCompare.username;
-        });
+        this.isDeleteModalOpen = true;
+        this.selectedUser = user;
     }
 
-    onModalSubmitted () {
-        this.isModalOpen = false;
+    onDeleteModalSubmitted () {
+        this.userService.removeUser(this.selectedUser.username);
+        this.onDeleteModalDismissed();
+    }
+
+    onDeleteModalDismissed () {
+        this.isDeleteModalOpen = false;
     }
 
 }

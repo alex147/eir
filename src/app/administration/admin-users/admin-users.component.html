@@ -2,8 +2,7 @@
 <clr-datagrid>
     <clr-dg-action-bar>
         <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-secondary"
-            (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add User
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add User
             </button>
         </div>
     </clr-dg-action-bar>
@@ -35,17 +34,51 @@
     <clr-dg-footer>{{users.length}} users</clr-dg-footer>
 </clr-datagrid>
 
-<clr-modal [(clrModalOpen)]="isModalOpen">
-  <h3 class="modal-title">I have a nice title</h3>
-  <div class="modal-body">
-    <p>But not much to say...</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="isModalOpen = false">
-        Cancel
-    </button>
-    <button type="button" class="btn btn-primary" (click)="onModalSubmitted()">
-        Ok
-    </button>
-  </div>
+<clr-modal [(clrModalOpen)]="isAddModalOpen" class="modal-lg">
+    <h3 class="modal-title">Add User</h3>
+    <div class="modal-body">
+        <form #addUserForm="ngForm" (ngSubmit)="onAddModalSubmitted()">
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="input_1">Username</label>
+                    <input type="text" id="input_1">
+                </div>
+                <div class="form-group">
+                    <label for="input_2">Full Name</label>
+                    <input type="text" id="input_2">
+                </div>
+                <div class="form-group">
+                    <label for="input_3">Role</label>
+                    <input type="text" id="input_3">
+                </div>
+                <div class="form-group">
+                    <label for="input_4">Centers</label>
+                    <input type="text" id="input_4">
+                </div>
+                <div class="form-group">
+                    <label for="input_5">Trials</label>
+                    <input type="text" id="input_5">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" (click)="onAddModalDismissed()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Ok
+                    </button>
+                </div>
+            </section>
+        </form>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="isDeleteModalOpen">
+    <h3 class="modal-title">Delete User</h3>
+    <div class="modal-body">
+        <p>Are you sure you want to permanently delete user {{selectedUser.username}}?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onDeleteModalDismissed()">No</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteModalSubmitted()">Yes</button>
+    </div>
 </clr-modal>

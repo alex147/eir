@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import { User } from './user';
 import { Role } from './role';
 
@@ -12,16 +13,18 @@ export class UserService {
         new User('givanov', 'Georgi Ivanov', Role.Investigator, ['BGR002'], ['LT1580_301'])
     ];
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
-    getUsers(): Array<User> {
-        console.log("hey");
-        this.http.get('/api/users').subscribe(data => {
-            console.log("data", data);
-            // this.results = data['results'];
-        });
+    getUsers (): Observable<Array<User>> {
+        return this.http.get<Array<User>>('/api/users');
+    }
 
-        return this.users;
+    addUser (user: User): Observable<User> {
+        return this.http.post<User>('/api/users', user);
+    }
+
+    removeUser (username: string): Observable<User> {
+        return this.http.delete<User>('/api/users/' + username);
     }
 
 }
