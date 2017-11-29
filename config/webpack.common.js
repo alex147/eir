@@ -320,7 +320,6 @@ module.exports = function (options) {
       new ScriptExtHtmlWebpackPlugin({
         sync: /polyfill|vendor/,
         defaultAttribute: 'async',
-        preload: [/polyfill|vendor|main/],
         prefetch: [/chunk/]
       }),
 

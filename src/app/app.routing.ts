@@ -15,33 +15,41 @@ import { AdminActiveTrialsComponent } from './administration/admin-active-trials
 import { AdminArchivedTrialsComponent } from './administration/admin-archived-trials/admin-archived-trials.component';
 import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
 import { EnrolledCentersComponent } from './administration/enrolled-centers/enrolled-centers.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { ContainerComponent } from './container/container.component';
 
 export const ROUTES: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'admin', component: AdminViewComponent,
-        children: [
-            { path: '', redirectTo: 'users', pathMatch: 'full' },
-            { path: 'users', component: AdminUsersComponent },
-            { path: 'trials', component: AdminActiveTrialsComponent },
-            { path: 'archive', component: AdminArchivedTrialsComponent },
-            { path: 'visits', component: VisitDefinitionsComponent },
-            { path: 'centers', component: EnrolledCentersComponent }
-        ]
-    },
-    { path: 'trials', component: SelectionRequiredComponent,
-        data: { required: 'valid trial' }
-    },
-    { path: 'trials/:id', component: TrialContainerComponent,
-        children: [
-            { path: '', redirectTo: 'subjects', pathMatch: 'full' },
-            { path: 'summary', component: TrialSummaryComponent },
-            { path: 'subjects', component: TrialSubjectsComponent },
-            { path: 'visits', component: TrialVisitsComponent },
-            { path: 'sections', component: SectionFormComponent }
-        ]
-    }
+    { path: '', canActivate: [ AuthGuard ], children: [
+        { path: '', component: ContainerComponent, children: [
+            { path: '', redirectTo: 'home', pathMatch: 'full'},
+            { path: 'home', component: HomeComponent },
+            { path: 'about', component: AboutComponent },
+            { path: 'admin', component: AdminViewComponent,
+                children: [
+                    { path: '', redirectTo: 'users', pathMatch: 'full' },
+                    { path: 'users', component: AdminUsersComponent },
+                    { path: 'trials', component: AdminActiveTrialsComponent },
+                    { path: 'archive', component: AdminArchivedTrialsComponent },
+                    { path: 'visits', component: VisitDefinitionsComponent },
+                    { path: 'centers', component: EnrolledCentersComponent }
+                ]
+            },
+            { path: 'trials', component: SelectionRequiredComponent,
+                data: { required: 'valid trial' }
+            },
+            { path: 'trials/:id', component: TrialContainerComponent,
+                children: [
+                    { path: '', redirectTo: 'subjects', pathMatch: 'full' },
+                    { path: 'summary', component: TrialSummaryComponent },
+                    { path: 'subjects', component: TrialSubjectsComponent },
+                    { path: 'visits', component: TrialVisitsComponent },
+                    { path: 'sections', component: SectionFormComponent }
+                ]
+            }
+        ]}
+    ]},
+    { path: 'login', component: LoginComponent }
 ];
 
 export const ROUTING: ModuleWithProviders = RouterModule.forRoot(ROUTES);

@@ -213,7 +213,7 @@ module.exports = function (options) {
                 // });
             },
             proxy: {
-                '/api': `http://localhost:${process.env.SERVER_PORT || '4040'}`
+                '/api': `http://localhost:${process.env.SERVER_PORT || '3000'}`
             }
         },
 

@@ -37,7 +37,9 @@ export class VisitDefinitionsComponent implements OnInit {
         this.visitDefinitionsService
             .getTrialDefinitionsById(this.selectedTrial.id)
             .subscribe((data) => {
-                this.definitions = data.visitDefinitions;
+                if (data) {
+                    this.definitions = data.visitDefinitions;
+                }
             });
     }
 

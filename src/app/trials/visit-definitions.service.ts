@@ -33,11 +33,11 @@ export class VisitDefinitionsService {
         new VisitDefinition("Third Visit", this.sections)
     ];
     private definitions: TrialDefinition[] = [
-        new TrialDefinition("1", this.visits),
-        new TrialDefinition("2", this.visits),
-        new TrialDefinition("3", this.visits),
-        new TrialDefinition("4", this.visits),
-        new TrialDefinition("5", this.visits)
+        new TrialDefinition("ABC1", this.visits),
+        new TrialDefinition("ABC2", this.visits),
+        new TrialDefinition("ABC3", this.visits),
+        new TrialDefinition("ABC4", this.visits),
+        new TrialDefinition("ABC5", this.visits)
     ];
 
     constructor() {

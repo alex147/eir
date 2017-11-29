@@ -49,15 +49,36 @@
                 </div>
                 <div class="form-group">
                     <label for="input_3">Role</label>
-                    <input type="text" id="input_3">
+                    <div class="select">
+                        <select id="input_3">
+                            <option *ngFor="let r of roles"
+                                [ngValue]="r">
+                                {{r}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="input_4">Centers</label>
-                    <input type="text" id="input_4">
+                    <div class="select multiple">
+                        <select id="input_4" multiple>
+                            <option *ngFor="let center of centers"
+                                [ngValue]="center.id">
+                                {{center.id}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="input_5">Trials</label>
-                    <input type="text" id="input_5">
+                    <div class="select multiple">
+                        <select id="input_5" multiple>
+                            <option *ngFor="let trial of trials"
+                                [ngValue]="trial.id">
+                                {{trial.id}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline" (click)="onAddModalDismissed()">

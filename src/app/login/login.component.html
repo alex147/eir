@@ -1,0 +1,17 @@
+<div class="login-wrapper">
+    <form class="login" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm">
+        <label class="title">
+            <h3 class="welcome">Welcome to</h3>
+            Eir
+            <h5 class="hint">Enter your username and password to sign in</h5>
+        </label>
+        <div class="login-group">
+            <input class="username" type="text" id="login_username" placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" required>
+            <input class="password" type="password" id="login_password" placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+            <div class="error" [ngClass]="{ 'active': f.submitted && (!password.valid || !username.valid || hasLoginError ) }">
+                Invalid user name or password
+            </div>
+            <button type="submit" class="btn btn-primary">SIGN IN</button>
+        </div>
+    </form>
+</div>

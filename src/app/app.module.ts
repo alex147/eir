@@ -33,6 +33,10 @@ import { EnrolledCentersComponent } from './administration/enrolled-centers/enro
 import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.component';
 import { SectionFormComponent } from './trials/section-form/section-form.component';
 import { DynamicFormQuestionComponent } from './trials/dynamic-form-question/dynamic-form-question.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthenticationService } from './login/authentication.service';
+import { ContainerComponent } from './container/container.component';
 
 import 'mutationobserver-shim';
 import '@webcomponents/custom-elements';
@@ -65,7 +69,9 @@ require('clarity-ui/clarity-ui.min.css');
         EnrolledCentersComponent,
         TrialVisitsComponent,
         SectionFormComponent,
-        DynamicFormQuestionComponent
+        DynamicFormQuestionComponent,
+        LoginComponent,
+        ContainerComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -77,6 +83,8 @@ require('clarity-ui/clarity-ui.min.css');
         ROUTING
     ],
     providers: [
+        AuthenticationService,
+        AuthGuard,
         CenterService,
         SubjectService,
         TrialService,

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import { User } from './user';
 import { Role } from './role';
 
@@ -20,7 +22,10 @@ export class UserService {
     }
 
     addUser (user: User): Observable<User> {
-        return this.http.post<User>('/api/users', user);
+        console.log(user);
+        return this.http.post('/api/users/', user)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     removeUser (username: string): Observable<User> {
