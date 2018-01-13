@@ -27,8 +27,8 @@ function get (req, res) {
  * @property {string} req.body.password - The password of user.
  * @property {string} req.body.fullName - The fullName of user.
  * @property {string} req.body.role - The role of user.
- * @property {string} req.body.centers - The centers of user.
- * @property {string} req.body.trials - The trials of user.
+ * @property {string[]} req.body.centers - The centers of user.
+ * @property {string[]} req.body.trials - The trials of user.
  * @returns {User}
  */
 function create (req, res, next) {
@@ -53,8 +53,8 @@ function create (req, res, next) {
  * @property {string} req.body.password - The password of user.
  * @property {string} req.body.fullName - The fullName of user.
  * @property {string} req.body.role - The role of user.
- * @property {string} req.body.centers - The centers of user.
- * @property {string} req.body.trials - The trials of user.
+ * @property {string[]} req.body.centers - The centers of user.
+ * @property {string[]} req.body.trials - The trials of user.
  * @returns {User}
  */
 function update (req, res, next) {

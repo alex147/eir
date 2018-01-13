@@ -21,7 +21,6 @@ export class UserService {
     }
 
     updateUser (user: User): Observable<User> {
-        console.log(user);
         return this.http.put<User>('/api/users/' + user.username, user)
             .map((data: any) => console.log(data))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

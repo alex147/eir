@@ -1,28 +1,28 @@
 import express from 'express';
 import validate from 'express-validation';
 import paramValidation from '../config/param-validation';
-import postCtrl from '../controllers/post.controller';
+import trialCtrl from '../controllers/trial.controller';
 
 const router = express.Router();
 
 router.route('/')
-  /** GET /api/posts - Get list of posts */
-  .get(postCtrl.list)
+  /** GET /api/trials - Get list of trials */
+  .get(trialCtrl.list)
 
-  /** POST /api/posts - Create new post */
-  .post(validate(paramValidation.createPost), postCtrl.create);
+  /** POST /api/trials - Create new trial */
+  .post(validate(paramValidation.createTrial), trialCtrl.create);
 
-router.route('/:postId')
-  /** GET /api/post/:postId - Get post */
-  .get(postCtrl.get)
+router.route('/:trialId')
+  /** GET /api/trials/:trialId - Get trial */
+  .get(trialCtrl.get)
 
-  /** PUT /api/posts/:postId - Update post */
-  .put(validate(paramValidation.updatePost), postCtrl.update)
+  /** PUT /api/trials/:trialId - Update trial */
+  .put(validate(paramValidation.updateTrial), trialCtrl.update)
 
-  /** DELETE /api/posts/:postId - Delete post */
-  .delete(postCtrl.remove);
+  /** DELETE /api/trials/:trialId - Delete trial */
+  .delete(trialCtrl.remove);
 
-/** Load post when API with postId route parameter is hit */
-router.param('postId', postCtrl.load);
+/** Load trial when API with trialId route parameter is hit */
+router.param('trialId', trialCtrl.load);
 
 export default router;
