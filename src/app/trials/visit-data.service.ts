@@ -32,9 +32,8 @@ export class VisitDataService {
 
     constructor() { }
 
-    getVisitDataByCenterId (centerId: string): Observable<VisitData[]> {
-        // SELECT * FROM visitdata WHERE ID LIKE $centerid%
+    getVisitDataBySiteId (siteId: string): Observable<VisitData[]> {
         return Observable.of(this.data
-            .filter(data => data.subjectId.indexOf(centerId) >= 0 ));
+            .filter(data => data.subjectId.indexOf(siteId) >= 0 ));
     }
 }

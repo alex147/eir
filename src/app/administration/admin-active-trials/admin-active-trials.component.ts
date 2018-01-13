@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Trial } from '../../trials/trial';
-import { Center } from '../../trials/center';
+import { Site } from '../../trials/site';
 import { TrialService } from '../../trials/trial.service';
-import { CenterService } from '../../trials/center.service';
+import { SiteService } from '../../trials/site.service';
 
 @Component({
     selector: 'admin-active-trials',
@@ -13,20 +13,20 @@ export class AdminActiveTrialsComponent implements OnInit {
 
     public activeTrials: Trial[] = [];
     public selectedTrial: Trial;
-    public centers: Center[] = [];
+    public sites: Site[] = [];
     public isAddModalOpen: boolean;
     public isUpdateModalOpen: boolean;
     public isDeleteModalOpen: boolean;
 
     constructor(private trialService: TrialService,
-                private centerService: CenterService) { }
+                private siteService: SiteService) { }
 
     ngOnInit () {
         this.selectedTrial = new Trial("", "", "", [], 0);
         this.trialService.getActiveTrials()
             .subscribe(data => this.activeTrials = data);
-        this.centerService.getAllCenters()
-            .subscribe(data => this.centers = data);
+        this.siteService.getAllSites()
+            .subscribe(data => this.sites = data);
     }
 
     onAdd () {

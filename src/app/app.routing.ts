@@ -14,7 +14,7 @@ import { AdminUsersComponent } from './administration/admin-users/admin-users.co
 import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';
 import { AdminArchivedTrialsComponent } from './administration/admin-archived-trials/admin-archived-trials.component';
 import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
-import { EnrolledCentersComponent } from './administration/enrolled-centers/enrolled-centers.component';
+import { EnrolledSitesComponent } from './administration/enrolled-sites/enrolled-sites.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ContainerComponent } from './container/container.component';
@@ -32,7 +32,7 @@ export const ROUTES: Routes = [
                     { path: 'trials', component: AdminActiveTrialsComponent },
                     { path: 'archive', component: AdminArchivedTrialsComponent },
                     { path: 'visits', component: VisitDefinitionsComponent },
-                    { path: 'centers', component: EnrolledCentersComponent }
+                    { path: 'sites', component: EnrolledSitesComponent }
                 ]
             },
             { path: 'trials', component: SelectionRequiredComponent,

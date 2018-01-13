@@ -12,7 +12,7 @@ import { AboutComponent } from "./about/about.component";
 import { TrialCardComponent } from './trials/trial-card/trial-card.component';
 import { TrialSummaryComponent } from './trials/trial-summary/trial-summary.component';
 import { FilterTrialsPipe } from './trials/filter-trials.pipe';
-import { FilterCentersPipe } from './trials/filter-centers.pipe';
+import { FilterSitesPipe } from './trials/filter-sites.pipe';
 import { FilterOptionsPipe } from './administration/filter-options.pipe';
 import { TrialContainerComponent } from './trials/trial-container/trial-container.component';
 import { TrialSubjectsComponent } from './trials/trial-subjects/trial-subjects.component';
@@ -22,14 +22,14 @@ import { AdminUsersComponent } from './administration/admin-users/admin-users.co
 import { AdminOptionsComponent } from './administration/admin-options/admin-options.component';
 import { AdminActiveTrialsComponent } from './administration/admin-active-trials/admin-active-trials.component';
 import { AdminArchivedTrialsComponent } from './administration/admin-archived-trials/admin-archived-trials.component';
-import { CenterService } from './trials/center.service';
+import { SiteService } from './trials/site.service';
 import { SubjectService } from './trials/subject.service';
 import { TrialService } from './trials/trial.service';
 import { VisitDataService } from './trials/visit-data.service';
 import { UserService } from './administration/user.service';
 import { VisitDefinitionsService } from './trials/visit-definitions.service';
 import { VisitDefinitionsComponent } from './administration/visit-definitions/visit-definitions.component';
-import { EnrolledCentersComponent } from './administration/enrolled-centers/enrolled-centers.component';
+import { EnrolledSitesComponent } from './administration/enrolled-sites/enrolled-sites.component';
 import { TrialVisitsComponent } from './trials/trial-visits/trial-visits.component';
 import { SectionFormComponent } from './trials/section-form/section-form.component';
 import { DynamicFormQuestionComponent } from './trials/dynamic-form-question/dynamic-form-question.component';
@@ -55,7 +55,7 @@ require('clarity-ui/clarity-ui.min.css');
         TrialCardComponent,
         TrialSummaryComponent,
         FilterTrialsPipe,
-        FilterCentersPipe,
+        FilterSitesPipe,
         FilterOptionsPipe,
         TrialContainerComponent,
         TrialSubjectsComponent,
@@ -66,7 +66,7 @@ require('clarity-ui/clarity-ui.min.css');
         AdminActiveTrialsComponent,
         AdminArchivedTrialsComponent,
         VisitDefinitionsComponent,
-        EnrolledCentersComponent,
+        EnrolledSitesComponent,
         TrialVisitsComponent,
         SectionFormComponent,
         DynamicFormQuestionComponent,
@@ -85,7 +85,7 @@ require('clarity-ui/clarity-ui.min.css');
     providers: [
         AuthenticationService,
         AuthGuard,
-        CenterService,
+        SiteService,
         SubjectService,
         TrialService,
         UserService,

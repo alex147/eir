@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Center } from '../center';
-import { CenterService } from '../center.service';
+import { Site } from '../site';
+import { SiteService } from '../site.service';
 import { Subject } from '../subject';
 import { SubjectService } from '../subject.service';
 import { Gender } from '../gender';
@@ -15,25 +15,25 @@ import { VisitDefinitionsService } from '../visit-definitions.service';
 export class TrialSubjectsComponent implements OnInit {
 
     public trialId: string;
-    public centerId: string = "";
-    public centers: Center[];
+    public siteId: string = "";
+    public sites: Site[];
     public subjects: Subject[];
     public gender: any = Gender;
     public trialNumOfVisits: number = 0;
     public isModalOpen: boolean;
 
     constructor(private route: ActivatedRoute,
-        private centerService: CenterService,
+        private siteService: SiteService,
         private subjectService: SubjectService,
         private visitDefinitionsService: VisitDefinitionsService) {
     }
 
     ngOnInit () {
         this.trialId = this.route.snapshot.parent.params["id"];
-        this.centerService.getCentersByTrialId(this.trialId)
+        this.siteService.getSitesByTrialId(this.trialId)
             .subscribe((data) => {
-                this.centers = data;
-                this.centerId = this.centers[0].id;
+                this.sites = data;
+                this.siteId = this.sites[0].id;
                 this.fetchSubjects();
             });
         this.visitDefinitionsService.getNumOfVisitsByTrialId(this.trialId)
@@ -44,7 +44,7 @@ export class TrialSubjectsComponent implements OnInit {
 
     fetchSubjects () {
         this.subjectService
-            .getSubjectsByTrialIdAndCenterId(this.trialId, this.centerId)
+            .getSubjectsByTrialIdAndSiteId(this.trialId, this.siteId)
             .subscribe(data => this.subjects = data);
     }
 

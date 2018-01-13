@@ -1,36 +1,36 @@
-<h1>Enrolled Centers</h1>
+<h1>Enrolled Sites</h1>
 <clr-datagrid>
     <clr-dg-action-bar>
         <div class="btn-group">
             <button type="button" class="btn btn-sm btn-secondary"
-            (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add Center
+            (click)="onAdd()"><clr-icon shape="plus"></clr-icon> Add Site
             </button>
         </div>
     </clr-dg-action-bar>
 
-    <clr-dg-placeholder>We couldn't find any centers!</clr-dg-placeholder>
+    <clr-dg-placeholder>We couldn't find any sites!</clr-dg-placeholder>
 
     <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
     <clr-dg-column [clrDgField]="'country'">Country</clr-dg-column>
     <clr-dg-column [clrDgField]="'lead'">Lead Investigator</clr-dg-column>
     <clr-dg-column [clrDgField]="'contacts'">Contacts</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let center of centers" [clrDgItem]="center">
+    <clr-dg-row *clrDgItems="let site of sites" [clrDgItem]="site">
         <clr-dg-action-overflow>
-            <button class="action-item" (click)="onEdit(center)">
+            <button class="action-item" (click)="onEdit(site)">
                 Edit
             </button>
-            <button class="action-item" (click)="onDelete(center)">
+            <button class="action-item" (click)="onDelete(site)">
                 Delete
             </button>
         </clr-dg-action-overflow>
 
-        <clr-dg-cell>{{center.name}}</clr-dg-cell>
-        <clr-dg-cell>{{center.country}}</clr-dg-cell>
-        <clr-dg-cell>{{center.lead}}</clr-dg-cell>
-        <clr-dg-cell>{{center.contacts}}</clr-dg-cell>
+        <clr-dg-cell>{{site.name}}</clr-dg-cell>
+        <clr-dg-cell>{{site.country}}</clr-dg-cell>
+        <clr-dg-cell>{{site.lead}}</clr-dg-cell>
+        <clr-dg-cell>{{site.contacts}}</clr-dg-cell>
     </clr-dg-row>
-    <clr-dg-footer>{{centers.length}} centers</clr-dg-footer>
+    <clr-dg-footer>{{sites.length}} sites</clr-dg-footer>
 </clr-datagrid>
 
 <clr-modal [(clrModalOpen)]="isModalOpen">

@@ -17,8 +17,8 @@ export class AdminOptionsComponent implements OnInit {
         new AdminOption("Archived Trials", "archive")
     ];
 
-    public centerOptions: AdminOption[] = [
-        new AdminOption("Enrolled Centers", "centers"),
+    public siteOptions: AdminOption[] = [
+        new AdminOption("Enrolled Sites", "sites"),
     ];
 
     public visitOptions: AdminOption[] = [

@@ -5,6 +5,6 @@ export class User {
         public password: string,
         public fullName: string,
         public role: Role,
-        public centers: string[],
+        public sites: string[],
         public trials: string[]) { }
 }

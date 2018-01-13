@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Center } from '../center';
-import { CenterService } from '../center.service';
+import { Site } from '../site';
+import { SiteService } from '../site.service';
 import { VisitData } from '../visit-data';
 import { VisitDataService } from '../visit-data.service';
 import { SectionStatus } from '../section-status';
@@ -14,24 +14,24 @@ import { SectionStatus } from '../section-status';
 export class TrialVisitsComponent implements OnInit {
 
     private trialId: string;
-    public selectedCenterId: string = "";
+    public selectedSiteId: string = "";
     public selectedSubjectEntry: VisitData;
-    public centers: Center[];
+    public sites: Site[];
     public visitData: VisitData[];
 
     constructor(private route: ActivatedRoute,
-        private centerService: CenterService,
+        private siteService: SiteService,
         private visitDataService: VisitDataService) { }
 
     ngOnInit () {
         this.trialId = this.route.snapshot.parent.params["id"];
         let subjectIdQueryParam: string = this.route.snapshot.queryParams['id']
             || "";
-        this.centerService.getCentersByTrialId(this.trialId)
+        this.siteService.getSitesByTrialId(this.trialId)
             .subscribe((data) => {
-                this.centers = data;
-                this.selectedCenterId =
-                    this.extractCenterIdFromSubjectId(subjectIdQueryParam);
+                this.sites = data;
+                this.selectedSiteId =
+                    this.extractSiteIdFromSubjectId(subjectIdQueryParam);
                 this.fetchVisitData();
                 this.selectedSubjectEntry =
                     this.findSubjectWithId(subjectIdQueryParam);
@@ -40,7 +40,7 @@ export class TrialVisitsComponent implements OnInit {
 
     fetchVisitData () {
         this.visitDataService
-            .getVisitDataByCenterId(this.selectedCenterId)
+            .getVisitDataBySiteId(this.selectedSiteId)
             .subscribe((data) => {
                 this.visitData = data;
             });
@@ -70,18 +70,18 @@ export class TrialVisitsComponent implements OnInit {
         return "badge-warning";
     }
 
-    extractCenterIdFromSubjectId (subjectId: string): string {
+    extractSiteIdFromSubjectId (subjectId: string): string {
         let hyphenIdx = subjectId.lastIndexOf("-");
         if (hyphenIdx > 0) {
-            let centerId = subjectId.substring(0, hyphenIdx);
-            let matching: Array<Center> = this.centers
-                .filter(entry => entry.id === centerId);
+            let siteId = subjectId.substring(0, hyphenIdx);
+            let matching: Array<Site> = this.sites
+                .filter(entry => entry.id === siteId);
             if (matching.length) {
                 return matching[0].id;
             }
         }
 
-        return this.centers[0].id;
+        return this.sites[0].id;
     }
 
     findSubjectWithId (subjectId: string): VisitData {

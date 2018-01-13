@@ -1,21 +1,21 @@
-<div class="spinner-container" *ngIf="!centers">
+<div class="spinner-container" *ngIf="!sites">
     <span class="spinner">
         Loading...
     </span>
 </div>
-<form *ngIf="centers">
+<form *ngIf="sites">
     <section class="form-block">
         <div class="form-group row">
             <div class="col-sm-12 col-md-6 col-lg-4 row">
                 <div class="col-md-4 col-lg-4">
-                    <label for="selects_1"><b>Center ID</b></label>
+                    <label for="selects_1"><b>Site ID</b></label>
                 </div>
                 <div class="col-md-8 col-lg-6">
                     <div class="select">
-                        <select id="selects_1" [(ngModel)]="selectedCenterId" (change)="fetchVisitData()" name="center">
-                        <option *ngFor="let center of centers"
-                            [ngValue]="center.id">
-                            {{center.id}}
+                        <select id="selects_1" [(ngModel)]="selectedSiteId" (change)="fetchVisitData()" name="site">
+                        <option *ngFor="let site of sites"
+                            [ngValue]="site.id">
+                            {{site.id}}
                         </option>
                     </select>
                     </div>

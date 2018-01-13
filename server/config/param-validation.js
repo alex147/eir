@@ -8,7 +8,7 @@ export default {
             password: Joi.string().required(),
             fullName: Joi.string().required(),
             role: Joi.string().required(),
-            centers: Joi.array().required(),
+            sites: Joi.array().required(),
             trials: Joi.array().required()
         }
     },
@@ -20,7 +20,7 @@ export default {
             password: Joi.string().required(),
             fullName: Joi.string().required(),
             role: Joi.string().required(),
-            centers: Joi.array().required(),
+            sites: Joi.array().required(),
             trials: Joi.array().required()
         },
         params: {
@@ -34,7 +34,7 @@ export default {
             id: Joi.string().required(),
             name: Joi.string().required(),
             description: Joi.string().required(),
-            centers: Joi.array().required(),
+            sites: Joi.array().required(),
             numOfVisits: Joi.number().required()
         }
     },
@@ -45,7 +45,7 @@ export default {
             id: Joi.string().required(),
             name: Joi.string().required(),
             description: Joi.string().required(),
-            centers: Joi.array().required(),
+            sites: Joi.array().required(),
             numOfVisits: Joi.number().required()
         },
         params: {

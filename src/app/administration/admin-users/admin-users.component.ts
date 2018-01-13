@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { CenterService } from '../../trials/center.service';
+import { SiteService } from '../../trials/site.service';
 import { TrialService } from '../../trials/trial.service';
 import { Role } from '../role';
-import { Center } from '../../trials/center';
+import { Site } from '../../trials/site';
 import { Trial } from '../../trials/trial';
 
 @Component({
@@ -15,7 +15,7 @@ import { Trial } from '../../trials/trial';
 export class AdminUsersComponent implements OnInit {
 
     public users: User[] = [];
-    public centers: Center[] = [];
+    public sites: Site[] = [];
     public trials: Trial[] = [];
     public roles: any[] = [];
     public role: any = Role;
@@ -24,7 +24,7 @@ export class AdminUsersComponent implements OnInit {
     public isUpdateModalOpen: boolean;
     public isDeleteModalOpen: boolean;
 
-    constructor(private userService: UserService, private centerService: CenterService, private trialService: TrialService) { }
+    constructor(private userService: UserService, private siteService: SiteService, private trialService: TrialService) { }
 
     ngOnInit () {
         this.selectedUser = new User("", "", "", Role.Investigator, [], []);
@@ -32,8 +32,8 @@ export class AdminUsersComponent implements OnInit {
             .filter((v: any) => !/\d/.test(v));
         this.userService.getUsers()
             .subscribe(data => this.users = data);
-        this.centerService.getAllCenters()
-            .subscribe(data => this.centers = data);
+        this.siteService.getAllSites()
+            .subscribe(data => this.sites = data);
         this.trialService.getActiveTrials()
             .subscribe(data => this.trials = data);
     }

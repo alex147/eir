@@ -22,7 +22,7 @@ const TrialSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    centers: {
+    sites: {
         type: [String]
     },
     numOfVisits: {

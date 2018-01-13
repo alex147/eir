@@ -22,8 +22,8 @@ export class SubjectService {
 
     constructor() { }
 
-    getSubjectsByTrialIdAndCenterId (trialId: string, centerId: string): Observable<Subject[]> {
-        return Observable.of(this.subjects[centerId]);
+    getSubjectsByTrialIdAndSiteId (trialId: string, siteId: string): Observable<Subject[]> {
+        return Observable.of(this.subjects[siteId]);
     }
 
 }

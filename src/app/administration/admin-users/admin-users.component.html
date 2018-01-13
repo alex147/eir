@@ -12,7 +12,7 @@
     <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>
     <clr-dg-column [clrDgField]="'fullName'">Full Name</clr-dg-column>
     <clr-dg-column [clrDgField]="'role'">Role</clr-dg-column>
-    <clr-dg-column [clrDgField]="'centers'">Centers</clr-dg-column>
+    <clr-dg-column [clrDgField]="'sites'">Sites</clr-dg-column>
     <clr-dg-column [clrDgField]="'trials'">Trials</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
@@ -28,7 +28,7 @@
         <clr-dg-cell>{{user.username}}</clr-dg-cell>
         <clr-dg-cell>{{user.fullName}}</clr-dg-cell>
         <clr-dg-cell>{{user.role}}</clr-dg-cell>
-        <clr-dg-cell>{{user.centers}}</clr-dg-cell>
+        <clr-dg-cell>{{user.sites}}</clr-dg-cell>
         <clr-dg-cell>{{user.trials}}</clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>{{users.length}} users</clr-dg-footer>
@@ -63,12 +63,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input_4">Centers</label>
+                    <label for="input_4">Sites</label>
                     <div class="select multiple">
-                        <select name="input_4" multiple [(ngModel)]="selectedUser.centers">
-                            <option *ngFor="let center of centers"
-                                [ngValue]="center.id">
-                                {{center.id}}
+                        <select name="input_4" multiple [(ngModel)]="selectedUser.sites">
+                            <option *ngFor="let site of sites"
+                                [ngValue]="site.id">
+                                {{site.id}}
                             </option>
                         </select>
                     </div>

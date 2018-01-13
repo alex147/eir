@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    centers: {
+    sites: {
         type: [String]
     },
     trials: {

@@ -28,9 +28,9 @@
     </section>
     <section class="nav-group collapsible">
         <input id="cat3" type="checkbox">
-        <label for="cat3">Centers</label>
+        <label for="cat3">Sites</label>
         <ul class="nav-list">
-            <li *ngFor='let option of centerOptions' class="nav-item">
+            <li *ngFor='let option of siteOptions' class="nav-item">
                 <a class="nav-link" href="#"
                     [routerLink]="['./', option.route]"
                     routerLinkActive="active">

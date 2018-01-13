@@ -26,7 +26,7 @@ function get (req, res) {
  * @property {string} req.body.id - The id of the trial.
  * @property {string} req.body.name - The name of the trial.
  * @property {string} req.body.description - The description of the trial.
- * @property {string[]} req.body.centers - The centers of the trial.
+ * @property {string[]} req.body.sites - The sites of the trial.
  * @property {number} req.body.numOfVisits - The number of visits for this trial.
  * @returns {Trial}
  */
@@ -36,7 +36,7 @@ function create (req, res, next) {
         id: req.body.id,
         name: req.body.name,
         description: req.body.description,
-        centers: req.body.centers,
+        sites: req.body.sites,
         numOfVisits: req.body.numOfVisits,
     });
 
@@ -50,7 +50,7 @@ function create (req, res, next) {
  * @property {string} req.body.id - The id of the trial.
  * @property {string} req.body.name - The name of the trial.
  * @property {string} req.body.description - The description of the trial.
- * @property {string[]} req.body.centers - The centers of the trial.
+ * @property {string[]} req.body.sites - The sites of the trial.
  * @property {number} req.body.numOfVisits - The number of visits for this trial.
  * @returns {Trial}
  */
@@ -59,7 +59,7 @@ function update (req, res, next) {
 
     trial.name = req.body.name;
     trial.description = req.body.description;
-    trial.centers = req.body.centers;
+    trial.sites = req.body.sites;
     trial.numOfVisits = req.body.numOfVisits;
 
     trial.save()

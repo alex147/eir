@@ -27,7 +27,7 @@ function get (req, res) {
  * @property {string} req.body.password - The password of user.
  * @property {string} req.body.fullName - The fullName of user.
  * @property {string} req.body.role - The role of user.
- * @property {string[]} req.body.centers - The centers of user.
+ * @property {string[]} req.body.sites - The sites of user.
  * @property {string[]} req.body.trials - The trials of user.
  * @returns {User}
  */
@@ -38,7 +38,7 @@ function create (req, res, next) {
         password: req.body.password,
         fullName: req.body.fullName,
         role: req.body.role,
-        centers: req.body.centers,
+        sites: req.body.sites,
         trials: req.body.trials,
     });
 
@@ -53,7 +53,7 @@ function create (req, res, next) {
  * @property {string} req.body.password - The password of user.
  * @property {string} req.body.fullName - The fullName of user.
  * @property {string} req.body.role - The role of user.
- * @property {string[]} req.body.centers - The centers of user.
+ * @property {string[]} req.body.sites - The sites of user.
  * @property {string[]} req.body.trials - The trials of user.
  * @returns {User}
  */
@@ -64,7 +64,7 @@ function update (req, res, next) {
     user.password = req.body.password;
     user.fullName = req.body.fullName;
     user.role = req.body.role;
-    user.centers = req.body.centers;
+    user.sites = req.body.sites;
     user.trials = req.body.trials;
 
     user.save()

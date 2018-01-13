@@ -13,7 +13,7 @@
     <clr-dg-column [clrDgField]="'id'">Trial ID</clr-dg-column>
     <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
     <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
-    <clr-dg-column [clrDgField]="'centers'">Centers</clr-dg-column>
+    <clr-dg-column [clrDgField]="'sites'">Sites</clr-dg-column>
     <clr-dg-column [clrDgField]="'numOfVisits'">Visits</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let trial of activeTrials" [clrDgItem]="trial">
@@ -29,7 +29,7 @@
         <clr-dg-cell>{{trial.id}}</clr-dg-cell>
         <clr-dg-cell>{{trial.name}}</clr-dg-cell>
         <clr-dg-cell>{{trial.description}}</clr-dg-cell>
-        <clr-dg-cell>{{trial.centers}}</clr-dg-cell>
+        <clr-dg-cell>{{trial.sites}}</clr-dg-cell>
         <clr-dg-cell>{{trial.numOfVisits}}</clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>{{activeTrials.length}} trials</clr-dg-footer>
@@ -53,12 +53,12 @@
                     <textarea rows="2" cols="15" name="input_3" [(ngModel)]="selectedTrial.description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="input_4">Centers</label>
+                    <label for="input_4">Sites</label>
                     <div class="select multiple">
-                        <select name="input_4" multiple [(ngModel)]="selectedTrial.centers">
-                            <option *ngFor="let center of centers"
-                                [ngValue]="center.id">
-                                {{center.id}}
+                        <select name="input_4" multiple [(ngModel)]="selectedTrial.sites">
+                            <option *ngFor="let site of sites"
+                                [ngValue]="site.id">
+                                {{site.id}}
                             </option>
                         </select>
                     </div>

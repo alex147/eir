@@ -5,13 +5,13 @@
     <clr-dg-column [clrDgField]="'id'">Trial ID</clr-dg-column>
     <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
     <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
-    <clr-dg-column [clrDgField]="'centers'">Centers</clr-dg-column>
+    <clr-dg-column [clrDgField]="'sites'">Sites</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let trial of archivedTrials" [clrDgItem]="trial">
         <clr-dg-cell >{{trial.id}}</clr-dg-cell>
         <clr-dg-cell>{{trial.name}}</clr-dg-cell>
         <clr-dg-cell>{{trial.description}}</clr-dg-cell>
-        <clr-dg-cell>{{trial.centers}}</clr-dg-cell>
+        <clr-dg-cell>{{trial.sites}}</clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>{{archivedTrials.length}} trials</clr-dg-footer>
 </clr-datagrid>
