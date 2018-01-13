@@ -27,7 +27,7 @@ export class AdminUsersComponent implements OnInit {
     constructor(private userService: UserService, private centerService: CenterService, private trialService: TrialService) { }
 
     ngOnInit () {
-        this.selectedUser = new User("", "", Role.Investigator, [], []);
+        this.selectedUser = new User("", "", "", Role.Investigator, [], []);
         this.roles = Object.keys(Role)
             .filter((v: any) => !/\d/.test(v));
         this.userService.getUsers()
@@ -39,20 +39,31 @@ export class AdminUsersComponent implements OnInit {
     }
 
     onAdd () {
+        this.selectedUser = new User("", "", "", Role.Investigator, [], []);
         this.isAddModalOpen = true;
     }
 
     onAddModalSubmitted () {
-        this.userService.addUser(this.selectedUser)
-            .subscribe(data => console.log(data));
+        if (this.users.indexOf(this.selectedUser) !== -1) {
+            this.userService.updateUser(this.selectedUser)
+                .subscribe(data => console.log(data));
+        } else {
+            this.userService.addUser(this.selectedUser)
+                .subscribe(data => console.log(data));
+        }
         this.onAddModalDismissed();
     }
 
     onAddModalDismissed () {
-        this.isAddModalOpen = false;
+        this.userService.getUsers()
+        .subscribe(data => {
+            this.users = data;
+            this.isAddModalOpen = false;
+        });
     }
 
     onEdit (user: User) {
+        this.selectedUser = user;
         this.isAddModalOpen = true;
     }
 
@@ -62,12 +73,17 @@ export class AdminUsersComponent implements OnInit {
     }
 
     onDeleteModalSubmitted () {
-        this.userService.removeUser(this.selectedUser.username);
+        this.userService.removeUser(this.selectedUser.username)
+            .subscribe(data => console.log("Deleted user", data));
         this.onDeleteModalDismissed();
     }
 
     onDeleteModalDismissed () {
-        this.isDeleteModalOpen = false;
+        this.userService.getUsers()
+        .subscribe(data => {
+            this.users = data;
+            this.isDeleteModalOpen = false;
+        });
     }
 
 }

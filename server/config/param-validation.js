@@ -5,37 +5,26 @@ export default {
   createUser: {
     body: {
       username: Joi.string().required(),
+      password: Joi.string().required(),
       fullName: Joi.string().required(),
       role: Joi.string().required(),
       centers: Joi.array().required(),
       trials: Joi.array().required()
     }
   },
-  // POST /api/posts
-  createPost: {
-    body: {
-      title: Joi.string().required(),
-    }
-  },
 
-  // UPDATE /api/users/:userId
+  // PUT /api/users/:userId
   updateUser: {
     body: {
-      username: Joi.string().required(),
-      mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
-    },
+        username: Joi.string().required(),
+        password: Joi.string().required(),
+        fullName: Joi.string().required(),
+        role: Joi.string().required(),
+        centers: Joi.array().required(),
+        trials: Joi.array().required()
+      },
     params: {
-      userId: Joi.string().hex().required()
-    }
-  },
-
-  // UPDATE /api/posts/:postId
-  updatePost: {
-    body: {
-      title: Joi.string().required(),
-    },
-    params: {
-      postId: Joi.string().hex().required()
+      userId: Joi.string().required()
     }
   },
 

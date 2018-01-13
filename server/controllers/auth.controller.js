@@ -2,12 +2,7 @@ import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status';
 import APIError from '../helpers/APIError';
 import config from '../config/config';
-
-// sample user, used for authentication
-const user = {
-  username: 'react',
-  password: 'express'
-};
+import User from '../models/user.model';
 
 /**
  * Returns jwt token if valid username and password is provided
@@ -16,19 +11,24 @@ const user = {
  * @param next
  * @returns {*}
  */
-function login(req, res, next) {
-  if (req.body.username === user.username && req.body.password === user.password) {
-    const token = jwt.sign({
-      username: user.username
-    }, config.jwtSecret);
-    return res.json({
-      token,
-      username: user.username
+function login (req, res, next) {
+    User.findOne({"username": req.body.username}, "username password", function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (req.body.username === user.username && req.body.password === user.password) {
+            const token = jwt.sign({
+                username: user.username
+            }, config.jwtSecret);
+            return res.json({
+                token,
+                username: user.username
+            });
+        } else {
+            const authErr = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
+            return next(authErr);
+        }
     });
-  }
-
-  const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
-  return next(err);
 }
 
 /**
@@ -37,12 +37,12 @@ function login(req, res, next) {
  * @param res
  * @returns {*}
  */
-function getRandomNumber(req, res) {
-  // req.user is assigned by jwt middleware if valid token is provided
-  return res.json({
-    user: req.user,
-    num: Math.random() * 100
-  });
+function getRandomNumber (req, res) {
+    // req.user is assigned by jwt middleware if valid token is provided
+    return res.json({
+        user: req.user,
+        num: Math.random() * 100
+    });
 }
 
 export default { login, getRandomNumber };

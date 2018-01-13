@@ -29,7 +29,7 @@
         "server": "npm run server:dev",
         "start:hmr": "npm run server:dev:hmr",
         "start": "concurrently \"npm run server:dev\" \"nodemon --watch server server-start.js\" ",
-        "start:prod": "set NODE_ENV=production && node server-start.js",
+        "start:prod": "set NODE_ENV=production && concurrently \"npm run watch\" \"node server-start.js\" ",
         "tslint": "tslint",
         "typedoc": "typedoc",
         "version": "npm run build",

@@ -1,4 +1,5 @@
 import User from '../models/user.model';
+import mongoose from 'mongoose';
 
 /**
  * Load user and append to req.
@@ -23,6 +24,7 @@ function get (req, res) {
 /**
  * Create new user
  * @property {string} req.body.username - The username of user.
+ * @property {string} req.body.password - The password of user.
  * @property {string} req.body.fullName - The fullName of user.
  * @property {string} req.body.role - The role of user.
  * @property {string} req.body.centers - The centers of user.
@@ -30,9 +32,10 @@ function get (req, res) {
  * @returns {User}
  */
 function create (req, res, next) {
-    console.log(req.body);
     const user = new User({
+        _id: req.body.username,
         username: req.body.username,
+        password: req.body.password,
         fullName: req.body.fullName,
         role: req.body.role,
         centers: req.body.centers,
@@ -47,13 +50,22 @@ function create (req, res, next) {
 /**
  * Update existing user
  * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
+ * @property {string} req.body.password - The password of user.
+ * @property {string} req.body.fullName - The fullName of user.
+ * @property {string} req.body.role - The role of user.
+ * @property {string} req.body.centers - The centers of user.
+ * @property {string} req.body.trials - The trials of user.
  * @returns {User}
  */
 function update (req, res, next) {
     const user = req.user;
+
     user.username = req.body.username;
-    user.mobileNumber = req.body.mobileNumber;
+    user.password = req.body.password;
+    user.fullName = req.body.fullName;
+    user.role = req.body.role;
+    user.centers = req.body.centers;
+    user.trials = req.body.trials;
 
     user.save()
         .then(savedUser => res.json(savedUser))

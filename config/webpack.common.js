@@ -404,7 +404,7 @@ module.exports = function (options) {
          *
          * @default undefined
          */
-        resourceOverride: helpers.root('config/resource-override.js')
+        // resourceOverride: helpers.root('config/resource-override.js')
       }),
 
       /**

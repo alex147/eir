@@ -27,7 +27,7 @@
 
         <clr-dg-cell>{{user.username}}</clr-dg-cell>
         <clr-dg-cell>{{user.fullName}}</clr-dg-cell>
-        <clr-dg-cell>{{role[user.role]}}</clr-dg-cell>
+        <clr-dg-cell>{{user.role}}</clr-dg-cell>
         <clr-dg-cell>{{user.centers}}</clr-dg-cell>
         <clr-dg-cell>{{user.trials}}</clr-dg-cell>
     </clr-dg-row>
@@ -37,20 +37,24 @@
 <clr-modal [(clrModalOpen)]="isAddModalOpen" class="modal-lg">
     <h3 class="modal-title">Add User</h3>
     <div class="modal-body">
-        <form #addUserForm="ngForm" (ngSubmit)="onAddModalSubmitted()">
+        <form #addUserForm="ngForm">
             <section class="form-block">
                 <div class="form-group">
                     <label for="input_1">Username</label>
-                    <input type="text" id="input_1">
+                    <input type="text" name="input_1" [(ngModel)]="selectedUser.username">
+                </div>
+                <div class="form-group">
+                    <label for="input_6">Password</label>
+                    <input type="password" name="input_6" [(ngModel)]="selectedUser.password">
                 </div>
                 <div class="form-group">
                     <label for="input_2">Full Name</label>
-                    <input type="text" id="input_2">
+                    <input type="text" name="input_2" [(ngModel)]="selectedUser.fullName">
                 </div>
                 <div class="form-group">
                     <label for="input_3">Role</label>
                     <div class="select">
-                        <select id="input_3">
+                        <select name="input_3" [(ngModel)]="selectedUser.role">
                             <option *ngFor="let r of roles"
                                 [ngValue]="r">
                                 {{r}}
@@ -61,7 +65,7 @@
                 <div class="form-group">
                     <label for="input_4">Centers</label>
                     <div class="select multiple">
-                        <select id="input_4" multiple>
+                        <select name="input_4" multiple [(ngModel)]="selectedUser.centers">
                             <option *ngFor="let center of centers"
                                 [ngValue]="center.id">
                                 {{center.id}}
@@ -72,7 +76,7 @@
                 <div class="form-group">
                     <label for="input_5">Trials</label>
                     <div class="select multiple">
-                        <select id="input_5" multiple>
+                        <select name="input_5" multiple [(ngModel)]="selectedUser.trials">
                             <option *ngFor="let trial of trials"
                                 [ngValue]="trial.id">
                                 {{trial.id}}
@@ -84,7 +88,7 @@
                     <button type="button" class="btn btn-outline" (click)="onAddModalDismissed()">
                         Cancel
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" (click)="onAddModalSubmitted()">
                         Ok
                     </button>
                 </div>
