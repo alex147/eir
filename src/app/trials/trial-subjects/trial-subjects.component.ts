@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Site } from '../site';
-import { SiteService } from '../site.service';
+import { TrialService } from '../trial.service';
 import { Subject } from '../subject';
 import { SubjectService } from '../subject.service';
 import { Gender } from '../gender';
@@ -16,24 +15,24 @@ export class TrialSubjectsComponent implements OnInit {
 
     public trialId: string;
     public siteId: string = "";
-    public sites: Site[];
+    public sites: string[];
     public subjects: Subject[];
     public gender: any = Gender;
     public trialNumOfVisits: number = 0;
     public isModalOpen: boolean;
 
     constructor(private route: ActivatedRoute,
-        private siteService: SiteService,
+        private trialService: TrialService,
         private subjectService: SubjectService,
         private visitDefinitionsService: VisitDefinitionsService) {
     }
 
     ngOnInit () {
         this.trialId = this.route.snapshot.parent.params["id"];
-        this.siteService.getSitesByTrialId(this.trialId)
+        this.trialService.getSitesByTrialId(this.trialId)
             .subscribe((data) => {
                 this.sites = data;
-                this.siteId = this.sites[0].id;
+                this.siteId = this.sites[0];
                 this.fetchSubjects();
             });
         this.visitDefinitionsService.getNumOfVisitsByTrialId(this.trialId)

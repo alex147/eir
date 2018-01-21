@@ -53,6 +53,31 @@ export default {
         }
     },
 
+    // POST /api/sites
+    createSite: {
+        body: {
+            id: Joi.string().required(),
+            name: Joi.string().required(),
+            country: Joi.string().required(),
+            lead: Joi.string().required(),
+            contacts: Joi.string().required()
+        }
+    },
+
+    // PUT /api/sites/:siteId
+    updateSite: {
+        body: {
+            id: Joi.string().required(),
+            name: Joi.string().required(),
+            country: Joi.string().required(),
+            lead: Joi.string().required(),
+            contacts: Joi.string().required()
+        },
+        params: {
+            siteId: Joi.string().required()
+        }
+    },
+
     // POST /api/auth/login
     login: {
         body: {

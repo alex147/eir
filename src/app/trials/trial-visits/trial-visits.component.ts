@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Site } from '../site';
-import { SiteService } from '../site.service';
+import { TrialService } from '../trial.service';
 import { VisitData } from '../visit-data';
 import { VisitDataService } from '../visit-data.service';
 import { SectionStatus } from '../section-status';
@@ -16,18 +15,18 @@ export class TrialVisitsComponent implements OnInit {
     private trialId: string;
     public selectedSiteId: string = "";
     public selectedSubjectEntry: VisitData;
-    public sites: Site[];
+    public sites: string[];
     public visitData: VisitData[];
 
     constructor(private route: ActivatedRoute,
-        private siteService: SiteService,
+        private trialService: TrialService,
         private visitDataService: VisitDataService) { }
 
     ngOnInit () {
         this.trialId = this.route.snapshot.parent.params["id"];
         let subjectIdQueryParam: string = this.route.snapshot.queryParams['id']
             || "";
-        this.siteService.getSitesByTrialId(this.trialId)
+        this.trialService.getSitesByTrialId(this.trialId)
             .subscribe((data) => {
                 this.sites = data;
                 this.selectedSiteId =
@@ -74,14 +73,13 @@ export class TrialVisitsComponent implements OnInit {
         let hyphenIdx = subjectId.lastIndexOf("-");
         if (hyphenIdx > 0) {
             let siteId = subjectId.substring(0, hyphenIdx);
-            let matching: Array<Site> = this.sites
-                .filter(entry => entry.id === siteId);
-            if (matching.length) {
-                return matching[0].id;
+            let idx: number = this.sites.indexOf(siteId);
+            if (idx !== -1) {
+                return this.sites[idx];
             }
         }
 
-        return this.sites[0].id;
+        return this.sites[0];
     }
 
     findSubjectWithId (subjectId: string): VisitData {

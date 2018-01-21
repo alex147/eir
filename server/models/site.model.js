@@ -4,9 +4,9 @@ import httpStatus from 'http-status';
 import APIError from '../helpers/APIError';
 
 /**
- * Trial Schema
+ * Site Schema
  */
-const TrialSchema = new mongoose.Schema({
+const SiteSchema = new mongoose.Schema({
     _id: String,
     id: {
         type: String,
@@ -18,16 +18,16 @@ const TrialSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: {
+    country: {
         type: String,
         required: true
     },
-    sites: {
-        type: [String]
-    },
-    numOfVisits: {
-        type: Number,
+    lead: {
+        type: String,
         required: true
+    },
+    contacts: {
+        type: String
     }
 }, { _id: false });
 
@@ -41,35 +41,35 @@ const TrialSchema = new mongoose.Schema({
 /**
  * Methods
  */
-TrialSchema.method({
+SiteSchema.method({
 });
 
 /**
  * Statics
  */
-TrialSchema.statics = {
+SiteSchema.statics = {
     /**
-     * Get trial
-     * @param {String} id - The id of the trial.
-     * @returns {Promise<Trial, APIError>}
+     * Get site
+     * @param {String} id - The id of the site.
+     * @returns {Promise<Site, APIError>}
      */
     get (id) {
         return this.findOne({ "id": id })
             .exec()
-            .then((trial) => {
-                if (trial) {
-                    return trial;
+            .then((site) => {
+                if (site) {
+                    return site;
                 }
-                const err = new APIError('No such trial exists!', httpStatus.NOT_FOUND);
+                const err = new APIError('No such site exists!', httpStatus.NOT_FOUND);
                 return Promise.reject(err);
             });
     },
 
     /**
-     * List trials in ascending order by 'id'.
-     * @param {number} skip - Number of trials to be skipped.
-     * @param {number} limit - Limit number of trials to be returned.
-     * @returns {Promise<Trial[]>}
+     * List sites in ascending order by 'id'.
+     * @param {number} skip - Number of sites to be skipped.
+     * @param {number} limit - Limit number of sites to be returned.
+     * @returns {Promise<Site[]>}
      */
     list ({ skip = 0, limit = 50 } = {}) {
         return this.find()
@@ -81,6 +81,6 @@ TrialSchema.statics = {
 };
 
 /**
- * @typedef Trial
+ * @typedef Site
  */
-export default mongoose.model('Trial', TrialSchema);
+export default mongoose.model('Site', SiteSchema);

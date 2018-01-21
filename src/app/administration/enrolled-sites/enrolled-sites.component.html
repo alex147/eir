@@ -10,6 +10,7 @@
 
     <clr-dg-placeholder>We couldn't find any sites!</clr-dg-placeholder>
 
+    <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
     <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
     <clr-dg-column [clrDgField]="'country'">Country</clr-dg-column>
     <clr-dg-column [clrDgField]="'lead'">Lead Investigator</clr-dg-column>
@@ -25,6 +26,7 @@
             </button>
         </clr-dg-action-overflow>
 
+        <clr-dg-cell>{{site.id}}</clr-dg-cell>
         <clr-dg-cell>{{site.name}}</clr-dg-cell>
         <clr-dg-cell>{{site.country}}</clr-dg-cell>
         <clr-dg-cell>{{site.lead}}</clr-dg-cell>
@@ -33,17 +35,51 @@
     <clr-dg-footer>{{sites.length}} sites</clr-dg-footer>
 </clr-datagrid>
 
-<clr-modal [(clrModalOpen)]="isModalOpen">
-  <h3 class="modal-title">I have a nice title</h3>
-  <div class="modal-body">
-    <p>But not much to say...</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="isModalOpen = false">
-        Cancel
-    </button>
-    <button type="button" class="btn btn-primary" (click)="onModalSubmitted()">
-        Ok
-    </button>
-  </div>
+<clr-modal [(clrModalOpen)]="isAddModalOpen" class="modal-lg">
+    <h3 class="modal-title">Add Site</h3>
+    <div class="modal-body">
+        <form #addSiteForm="ngForm" class="compact">
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="input_1">Site ID</label>
+                    <input type="text" name="input_1" [(ngModel)]="selectedSite.id">
+                </div>
+                <div class="form-group">
+                    <label for="input_2">Name</label>
+                    <input type="text" name="input_2" [(ngModel)]="selectedSite.name">
+                </div>
+                <div class="form-group">
+                    <label for="input_3">Country</label>
+                    <input type="text" name="input_3" [(ngModel)]="selectedSite.country">
+                </div>
+                <div class="form-group">
+                    <label for="input_4">Lead Investigator</label>
+                    <input type="text" name="input_4" [(ngModel)]="selectedSite.lead">
+                </div>
+                <div class="form-group">
+                    <label for="input_5">Contacts</label>
+                    <textarea rows="2" cols="15" name="input_5" [(ngModel)]="selectedSite.contacts"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" (click)="onAddModalDismissed()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary" (click)="onAddModalSubmitted()">
+                        Ok
+                    </button>
+                </div>
+            </section>
+        </form>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="isDeleteModalOpen">
+    <h3 class="modal-title">Delete Site</h3>
+    <div class="modal-body">
+        <p>Are you sure you want to permanently delete site {{selectedSite.id}}?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onDeleteModalDismissed()">No</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteModalSubmitted()">Yes</button>
+    </div>
 </clr-modal>

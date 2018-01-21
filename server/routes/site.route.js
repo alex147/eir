@@ -1,28 +1,28 @@
 import express from 'express';
 import validate from 'express-validation';
 import paramValidation from '../config/param-validation';
-import postCtrl from '../controllers/post.controller';
+import siteCtrl from '../controllers/site.controller';
 
 const router = express.Router();
 
 router.route('/')
-  /** GET /api/posts - Get list of posts */
-  .get(postCtrl.list)
+  /** GET /api/sites - Get list of sites */
+  .get(siteCtrl.list)
 
-  /** POST /api/posts - Create new post */
-  .post(validate(paramValidation.createPost), postCtrl.create);
+  /** POST /api/sites - Create new site */
+  .post(validate(paramValidation.createSite), siteCtrl.create);
 
-router.route('/:postId')
-  /** GET /api/post/:postId - Get post */
-  .get(postCtrl.get)
+router.route('/:siteId')
+  /** GET /api/sites/:siteId - Get site */
+  .get(siteCtrl.get)
 
-  /** PUT /api/posts/:postId - Update post */
-  .put(validate(paramValidation.updatePost), postCtrl.update)
+  /** PUT /api/sites/:siteId - Update site */
+  .put(validate(paramValidation.updateSite), siteCtrl.update)
 
-  /** DELETE /api/posts/:postId - Delete post */
-  .delete(postCtrl.remove);
+  /** DELETE /api/sites/:siteId - Delete site */
+  .delete(siteCtrl.remove);
 
-/** Load post when API with postId route parameter is hit */
-router.param('postId', postCtrl.load);
+/** Load site when API with siteId route parameter is hit */
+router.param('siteId', siteCtrl.load);
 
 export default router;

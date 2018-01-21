@@ -14,8 +14,8 @@
                     <div class="select">
                         <select id="selects_1" [(ngModel)]="selectedSiteId" (change)="fetchVisitData()" name="site">
                         <option *ngFor="let site of sites"
-                            [ngValue]="site.id">
-                            {{site.id}}
+                            [ngValue]="site">
+                            {{site}}
                         </option>
                     </select>
                     </div>

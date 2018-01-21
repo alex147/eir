@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TrialService } from "../trials/trial.service";
+import { Trial } from "../trials/trial";
 
 @Component({
     styleUrls: ['./home.component.scss'],
@@ -8,7 +9,7 @@ import { TrialService } from "../trials/trial.service";
 export class HomeComponent implements OnInit {
 
     public filterString: string;
-    public myTrials;
+    public myTrials: Trial[] = [];
 
     constructor(private trialService: TrialService) { }
 

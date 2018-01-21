@@ -69,7 +69,7 @@ UserSchema.statics = {
     },
 
     /**
-     * List users in descending order of 'createdAt' timestamp.
+     * List users in ascending order by 'id'.
      * @param {number} skip - Number of users to be skipped.
      * @param {number} limit - Limit number of users to be returned.
      * @returns {Promise<User[]>}

@@ -22,6 +22,10 @@ router.route('/:trialId')
   /** DELETE /api/trials/:trialId - Delete trial */
   .delete(trialCtrl.remove);
 
+router.route('/sites/:trialId')
+  /** GET /api/trials/sites/:trialId - Get all sites for a trial */
+  .get(trialCtrl.getSites)
+
 /** Load trial when API with trialId route parameter is hit */
 router.param('trialId', trialCtrl.load);
 
