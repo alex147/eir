@@ -18,7 +18,6 @@ export class AdminUsersComponent implements OnInit {
     public sites: Site[] = [];
     public trials: Trial[] = [];
     public roles: any[] = [];
-    public role: any = Role;
     public selectedUser: User;
     public isAddModalOpen: boolean;
     public isUpdateModalOpen: boolean;

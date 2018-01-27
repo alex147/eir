@@ -78,6 +78,39 @@ export default {
         }
     },
 
+    // POST /api/subjects
+    createSubject: {
+        body: {
+            id: Joi.string().required(),
+            consentDate: Joi.date().required(),
+            gender: Joi.string().required(),
+            isActive: Joi.boolean().required(),
+            status: Joi.string().required(),
+            statusDate: Joi.date().required(),
+            trialId: Joi.string().required(),
+            siteId: Joi.string().required(),
+            completedVisits: Joi.number().required()
+        }
+    },
+
+    // PUT /api/subjects/:subjectId
+    updateSubject: {
+        body: {
+            id: Joi.string().required(),
+            consentDate: Joi.date().required(),
+            gender: Joi.string().required(),
+            isActive: Joi.boolean().required(),
+            status: Joi.string().required(),
+            statusDate: Joi.date().required(),
+            trialId: Joi.string().required(),
+            siteId: Joi.string().required(),
+            completedVisits: Joi.number().required()
+        },
+        params: {
+            subjectId: Joi.string().required()
+        }
+    },
+
     // POST /api/auth/login
     login: {
         body: {

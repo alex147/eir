@@ -65,7 +65,7 @@
             </a>
         </clr-dg-cell>
         <clr-dg-cell>{{subject.consentDate | date}}</clr-dg-cell>
-        <clr-dg-cell>{{gender[subject.gender]}}</clr-dg-cell>
+        <clr-dg-cell>{{subject.gender}}</clr-dg-cell>
         <clr-dg-cell>{{subject.isActive}}</clr-dg-cell>
         <clr-dg-cell>{{subject.status}}</clr-dg-cell>
         <clr-dg-cell>{{subject.statusDate | date}}</clr-dg-cell>
@@ -73,17 +73,72 @@
     <clr-dg-footer>{{subjects.length}} subjects</clr-dg-footer>
 </clr-datagrid>
 
-<clr-modal [(clrModalOpen)]="isModalOpen">
-    <h3 class="modal-title">I have a nice title</h3>
+<clr-modal [(clrModalOpen)]="isAddModalOpen" class="modal-lg">
+    <h3 class="modal-title">Add Subject</h3>
     <div class="modal-body">
-        <p>But not much to say...</p>
+        <form #addSubjectForm="ngForm" class="compact">
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="input_1">Subject ID</label>
+                    <input type="text" name="input_1" [(ngModel)]="selectedSubject.id">
+                </div>
+                <div class="form-group">
+                    <label for="input_2">Consent Date</label>
+                    <input type="date" name="input_2" [ngModel]="selectedSubject.consentDate | date: 'yyyy-MM-dd'" (ngModelChange)="selectedSubject.consentDate = $event">
+                </div>
+                <div class="form-group">
+                    <label for="input_3">Gender</label>
+                    <div class="select">
+                        <select name="input_3" [(ngModel)]="selectedSubject.gender">
+                            <option *ngFor="let g of genders"
+                                [ngValue]="g">
+                                {{g}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Active</label>
+                    <div class="radio-inline">
+                        <input type="radio" name="gridRadios1" id="checkrads_1" [(ngModel)]="selectedSubject.isActive" [value]="true" checked>
+                        <label for="checkrads_1">Yes</label>
+                    </div>
+                    <div class="radio-inline">
+                        <input type="radio" name="gridRadios2" id="checkrads_2" [(ngModel)]="selectedSubject.isActive" [value]="false">
+                        <label for="checkrads_2">No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input_5">Status</label>
+                    <div class="select">
+                        <select name="input_5" [(ngModel)]="selectedSubject.status">
+                            <option *ngFor="let s of statuses"
+                                [ngValue]="s">
+                                {{s}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" (click)="onAddModalDismissed()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary" (click)="onAddModalSubmitted()">
+                        Ok
+                    </button>
+                </div>
+            </section>
+        </form>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="isDeleteModalOpen">
+    <h3 class="modal-title">Delete Subject</h3>
+    <div class="modal-body">
+        <p>Are you sure you want to permanently delete subject {{selectedSubject.id}}?</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="isModalOpen = false">
-        Cancel
-    </button>
-        <button type="button" class="btn btn-primary" (click)="onModalSubmitted()">
-        Ok
-    </button>
+        <button type="button" class="btn btn-outline" (click)="onDeleteModalDismissed()">No</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteModalSubmitted()">Yes</button>
     </div>
 </clr-modal>

@@ -1,28 +1,28 @@
 import express from 'express';
 import validate from 'express-validation';
 import paramValidation from '../config/param-validation';
-import postCtrl from '../controllers/post.controller';
+import subjectCtrl from '../controllers/subject.controller';
 
 const router = express.Router();
 
 router.route('/')
-  /** GET /api/posts - Get list of posts */
-  .get(postCtrl.list)
+  /** GET /api/subjects?trialId=<>&siteId=<> - Get the list of subjects for the given trial ID and site ID */
+  .get(subjectCtrl.getByTrialAndSiteId)
 
-  /** POST /api/posts - Create new post */
-  .post(validate(paramValidation.createPost), postCtrl.create);
+  /** POST /api/subjects - Create new subject */
+  .post(validate(paramValidation.createSubject), subjectCtrl.create);
 
-router.route('/:postId')
-  /** GET /api/post/:postId - Get post */
-  .get(postCtrl.get)
+router.route('/:subjectId')
+  /** GET /api/subjects/:subjectId - Get subject */
+  .get(subjectCtrl.get)
 
-  /** PUT /api/posts/:postId - Update post */
-  .put(validate(paramValidation.updatePost), postCtrl.update)
+  /** PUT /api/subjects/:subjectId - Update subject */
+  .put(validate(paramValidation.updateSubject), subjectCtrl.update)
 
-  /** DELETE /api/posts/:postId - Delete post */
-  .delete(postCtrl.remove);
+  /** DELETE /api/subjects/:subjectId - Delete subject */
+  .delete(subjectCtrl.remove);
 
-/** Load post when API with postId route parameter is hit */
-router.param('postId', postCtrl.load);
+/** Load subject when API with subjectId route parameter is hit */
+router.param('subjectId', subjectCtrl.load);
 
 export default router;

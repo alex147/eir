@@ -1,29 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import { Subject } from './subject';
-import { Gender } from './gender';
 
 @Injectable()
 export class SubjectService {
 
-    public subjects: { [key: string]: Subject[]; } = {
-        'BGR001': [
-            new Subject("BGR001-001", new Date(), Gender.Male, true, 'Declared', new Date()),
-            new Subject("BGR001-002", new Date(), Gender.Female, false, 'Withdrawn', new Date()),
-            new Subject("BGR001-003", new Date(), Gender.Female, true, 'Declared', new Date())
-        ],
-        'BGR002': [
-            new Subject("BGR002-001", new Date(), Gender.Female, true, 'Declared', new Date()),
-            new Subject("BGR002-002", new Date(), Gender.Male, false, 'Withdrawn', new Date()),
-            new Subject("BGR002-003", new Date(), Gender.Female, false, 'Deceased', new Date())
-        ]
-    };
-
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     getSubjectsByTrialIdAndSiteId (trialId: string, siteId: string): Observable<Subject[]> {
-        return Observable.of(this.subjects[siteId]);
+        let queryParams: HttpParams = new HttpParams();
+        queryParams = queryParams.set('trialId', trialId);
+        queryParams = queryParams.set('siteId', siteId);
+
+        return this.http.get<Array<Subject>>('/api/subjects', {params: queryParams});
+    }
+
+    addSubject (subject: Subject): Observable<Subject> {
+        return this.http.post<Subject>('/api/subjects/', subject)
+            .map((data: any) => console.log(data))
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    updateSubject (subject: Subject): Observable<Subject> {
+        return this.http.put<Subject>('/api/subjects/' + subject.id, subject)
+            .map((data: any) => console.log(data))
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    removeSubject (id: string): Observable<Subject> {
+        return this.http.delete<Subject>('/api/subjects/' + id)
+            .map((data: any) => console.log(data))
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
 }
