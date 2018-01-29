@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { Subject } from './subject';
 
 @Injectable()
@@ -19,21 +17,15 @@ export class SubjectService {
     }
 
     addSubject (subject: Subject): Observable<Subject> {
-        return this.http.post<Subject>('/api/subjects/', subject)
-            .map((data: any) => console.log(data))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.post<Subject>('/api/subjects/', subject);
     }
 
     updateSubject (subject: Subject): Observable<Subject> {
-        return this.http.put<Subject>('/api/subjects/' + subject.id, subject)
-            .map((data: any) => console.log(data))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.put<Subject>('/api/subjects/' + subject.id, subject);
     }
 
     removeSubject (id: string): Observable<Subject> {
-        return this.http.delete<Subject>('/api/subjects/' + id)
-            .map((data: any) => console.log(data))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        return this.http.delete<Subject>('/api/subjects/' + id);
     }
 
 }

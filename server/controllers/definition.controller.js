@@ -1,38 +1,160 @@
-import Post from '../models/post.model';
+import TrialDefinition from '../models/trial-definition.model';
+import SectionDefinition from '../models/section-definition.model';
+import mongoose from 'mongoose';
 
-
-function load(params) {
-  return Post.get(params.id);
+/**
+ * Load definition and append to req.
+ */
+function load (req, res, next, trialId) {
+    TrialDefinition.get(trialId)
+        .then((definition) => {
+            req.definition = definition; // eslint-disable-line no-param-reassign
+            return next();
+        })
+        .catch(e => next(e));
 }
 
-function get(req, res) {
-  return res.json(req.post);
+/**
+ * Get definition
+ * @returns {TrialDefinition}
+ */
+function get (req, res) {
+    return res.json(req.definition);
 }
 
-function create(params) {
-  const post = new Post({
-    title: params.data.title,
-    content: params.data.content
-  });
-  return post.save();
+/**
+ * Delete definition.
+ * @returns {SectionDefinition}
+ */
+function getSection (req, res) {
+    const definition = req.definition;
+    const visitId = req.query.visitId - 1;
+    const sectionId = req.query.sectionId;
+
+    definition.populate({
+        path: 'visitDefinitions',
+        populate: {
+            path: 'sections',
+            match: { id: { $eq: sectionId } },
+            options: { limit: 1 }
+        }
+    }).exec(function (err, def) {
+        res.json(def.visitDefinitions[visitId].sections[0]);
+    });
 }
 
-function update(params) {
-  return load(params).then(post => {
-    const tmp = post;
-    post.title = params.data.title;
-    post.content = params.data.content;
-    return post.save()
-  });
+/**
+ * Create new definition
+ * @property {string} req.body.id - The id of the section.
+ * @property {string} req.body.name - The name of the section.
+ * @property {string} req.body.description - The description of the section.
+ * @property {Question[]} req.body.questions - The questions for this section.
+ * @returns {SectionDefinition}
+ */
+function create (req, res, next) {
+    const definition = req.definition;
+    const visitId = req.query.visitId - 1;
+    const sectionId = req.query.sectionId;
+
+    const section = new SectionDefinition({
+        _id: req.body.id,
+        id: req.body.id,
+        name: req.body.name,
+        description: req.body.description,
+        questions: req.body.questions,
+    });
+
+    definition.populate({
+        path: 'visitDefinitions',
+        populate: {
+            path: 'sections',
+            match: { id: { $eq: sectionId } },
+            options: { limit: 1 }
+        }
+    }).exec(function (err, def) {
+        def.visitDefinitions[visitId].sections.push(section);
+        res.json(section);
+    });
+
+    definition.save()
+        .then(savedDefinition => console.log("Added a section in", savedDefinition.id))
+        .catch(e => next(e));
 }
 
-function list(params) {
-  const { limit = 50, skip = 0 } = params;
-  return Post.list({ limit, skip })
+/**
+ * Update existing definition
+ * @property {string} req.body.id - The id of the section.
+ * @property {string} req.body.name - The name of the section.
+ * @property {string} req.body.description - The description of the section.
+ * @property {Question[]} req.body.questions - The questions for this section.
+ * @returns {SectionDefinition}
+ */
+function update (req, res, next) {
+    const definition = req.definition;
+    const visitId = req.query.visitId - 1;
+    const sectionId = req.query.sectionId;
+    const section = {};
+
+    definition.populate({
+        path: 'visitDefinitions',
+        populate: {
+            path: 'sections',
+            match: { id: { $eq: sectionId } },
+            options: { limit: 1 }
+        }
+    }).exec(function (err, def) {
+        var section = def.visitDefinitions[visitId].sections[0];
+        section.id = req.body.id
+        section.name = req.body.name
+        section.description = req.body.description
+        section.questions = req.body.questions
+        def.visitDefinitions[visitId].sections[0] = section;
+        res.json(section);
+    });
+
+    definition.save()
+        .then(savedDefinition => console.log("Updated a section in", savedDefinition.id))
+        .catch(e => next(e));
 }
 
-function remove(params) {
-  return load(params).then(post => post.remove());
+/**
+ * Get definition list.
+ * @property {number} req.query.skip - Number of definitions to be skipped.
+ * @property {number} req.query.limit - Limit number of definitions to be returned.
+ * @returns {TrialDefinition[]}
+ */
+function list (req, res, next) {
+    const { limit = 50, skip = 0 } = req.query;
+    TrialDefinition.list({ limit, skip })
+        .then(definitions => res.json(definitions))
+        .catch(e => next(e));
 }
 
-export default { load, get, create, update, list, remove };
+/**
+ * Delete definition.
+ * @returns {SectionDefinition}
+ */
+function remove (req, res, next) {
+    const definition = req.definition;
+    const visitId = req.query.visitId - 1;
+    const sectionId = req.query.sectionId;
+
+    definition.populate({
+        path: 'visitDefinitions',
+        populate: {
+            path: 'sections',
+            match: { id: { $eq: sectionId } },
+            options: { limit: 1 }
+        }
+    }).exec(function (err, def) {
+        def.visitDefinitions[visitId].sections[0].remove()
+            .then(deletedSection => res.json(deletedSection))
+            .catch(e => next(e));
+    });
+
+    definition.save()
+        .then(savedDefinition => console.log("Removed a section from", savedDefinition.id))
+        .catch(e => next(e));
+}
+
+export default { load, get, getSection, create, update, list, remove };

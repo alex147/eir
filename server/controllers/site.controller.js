@@ -25,7 +25,7 @@ function get (req, res) {
  * Create new site
  * @property {string} req.body.id - The id of the site.
  * @property {string} req.body.name - The name of the site.
- * @property {string} req.body.country - The description of the site.
+ * @property {string} req.body.country - The country of the site.
  * @property {string} req.body.lead - The lead investigator of the site.
  * @property {string} req.body.contacts - The contacts of the site.
  * @returns {Site}
@@ -49,7 +49,7 @@ function create (req, res, next) {
  * Update existing site
  * @property {string} req.body.id - The id of the site.
  * @property {string} req.body.name - The name of the site.
- * @property {string} req.body.country - The description of the site.
+ * @property {string} req.body.country - The country of the site.
  * @property {string} req.body.lead - The lead investigator of the site.
  * @property {string} req.body.contacts - The contacts of the site.
  * @returns {Site}

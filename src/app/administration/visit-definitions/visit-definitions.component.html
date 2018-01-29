@@ -44,7 +44,6 @@
     Loading...
 </span>
 <div *ngIf="definitions">
-    <p>{{definitions[visitId-1].description}}</p>
     <clr-datagrid>
         <clr-dg-action-bar>
             <div class="btn-group">
@@ -63,9 +62,6 @@
             <clr-dg-action-overflow>
                 <button class="action-item" (click)="onEdit(section)">
                     Edit
-                </button>
-                <button class="action-item" (click)="onSave(section)">
-                    Save
                 </button>
                 <button class="action-item" (click)="onDelete(section)">
                     Delete
@@ -87,3 +83,46 @@
         <clr-dg-footer>{{definitions[visitId-1].sections.length}} sections</clr-dg-footer>
     </clr-datagrid>
 </div>
+
+<clr-modal [(clrModalOpen)]="isAddModalOpen" class="modal-lg">
+    <h3 class="modal-title">Add Section</h3>
+    <div class="modal-body">
+        <form #addSectionForm="ngForm" class="compact">
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="input_1">Name</label>
+                    <input type="text" name="input_1" [(ngModel)]="selectedSection.name">
+                </div>
+                <div class="form-group">
+                    <label for="input_2">Description</label>
+                    <textarea rows="2" cols="15" name="input_2" [(ngModel)]="selectedSection.description"></textarea>
+                </div>
+            </section>
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="input_1">Name</label>
+                    <input type="text" name="input_1" [(ngModel)]="selectedSection.name">
+                </div>
+                <div class="form-group">
+                    <label for="input_2">Description</label>
+                    <textarea rows="2" cols="15" name="input_2" [(ngModel)]="selectedSection.description"></textarea>
+                </div>
+            </section>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" (click)="onAddModalDismissed()">Cancel</button>
+                <button type="submit" class="btn btn-primary" (click)="onAddModalSubmitted()">Ok</button>
+            </div>
+        </form>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="isDeleteModalOpen">
+    <h3 class="modal-title">Delete Section</h3>
+    <div class="modal-body">
+        <p>Are you sure you want to permanently delete section {{selectedSection.name}}?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onDeleteModalDismissed()">No</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteModalSubmitted()">Yes</button>
+    </div>
+</clr-modal>

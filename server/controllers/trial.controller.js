@@ -1,4 +1,6 @@
 import Trial from '../models/trial.model';
+import TrialDefinition from '../models/trial-definition.model';
+import VisitDefinition from '../models/visit-definition.model';
 import mongoose from 'mongoose';
 
 /**
@@ -45,8 +47,32 @@ function create (req, res, next) {
         name: req.body.name,
         description: req.body.description,
         sites: req.body.sites,
-        numOfVisits: req.body.numOfVisits,
+        numOfVisits: req.body.numOfVisits
     });
+
+    const trialDefinition = new TrialDefinition({
+        _id: req.body.id,
+        id: req.body.id,
+        name: req.body.name,
+        visitDefinitions: []
+    });
+
+    for (var i = 0; i < req.body.numOfVisits; i++) {
+        const visitDefinition = new VisitDefinition({
+            _id: i,
+            sections: []
+        });
+
+        visitDefinition.save()
+            .then(savedVisit => console.log("Created a visit definition", savedVisit))
+            .catch(e => next(e));
+
+        trialDefinition.visitDefinitions.push(visitDefinition)
+    }
+
+    trialDefinition.save()
+        .then(savedDefinition => console.log("Created trial definition for ID", trial.id))
+        .catch(e => next(e));
 
     trial.save()
         .then(savedTrial => res.json(savedTrial))
@@ -65,10 +91,35 @@ function create (req, res, next) {
 function update (req, res, next) {
     const trial = req.trial;
 
+    const numOfVisitsDiff = req.body.numOfVisits - trial.numOfVisits;
+
     trial.name = req.body.name;
     trial.description = req.body.description;
     trial.sites = req.body.sites;
     trial.numOfVisits = req.body.numOfVisits;
+
+    if (numOfVisitsDiff > 0) {
+        TrialDefinition.findOne({ 'id': trial.id })
+            .populate('visitDefinitions')
+            .exec(function (err, definition) {
+                for (var i = 0; i < numOfVisitsDiff; i++) {
+                    const visitDefinition = new VisitDefinition({
+                        _id: trial.numOfVisits - i - 1,
+                        sections: []
+                    });
+
+                    visitDefinition.save()
+                        .then(savedVisit => console.log("Created a visit definition", savedVisit))
+                        .catch(e => next(e));
+
+                    definition.visitDefinitions.push(visitDefinition);
+                }
+
+                definition.save()
+                    .then(savedDefinition => console.log("Created trial definition for ID", trial.id))
+                    .catch(e => next(e));
+            });
+    }
 
     trial.save()
         .then(savedTrial => res.json(savedTrial))
@@ -94,6 +145,12 @@ function list (req, res, next) {
  */
 function remove (req, res, next) {
     const trial = req.trial;
+
+    TrialDefinition.findOne({ 'id': trial.id })
+        .remove()
+        .then(deletedDefinition => console.log("Deleted trial definition for ID", trial.id))
+        .catch(e => next(e));
+
     trial.remove()
         .then(deletedTrial => res.json(deletedTrial))
         .catch(e => next(e));

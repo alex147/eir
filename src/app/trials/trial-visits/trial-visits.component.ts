@@ -26,9 +26,9 @@ export class TrialVisitsComponent implements OnInit {
         this.trialId = this.route.snapshot.parent.params["id"];
         let subjectIdQueryParam: string = this.route.snapshot.queryParams['id']
             || "";
-        this.trialService.getSitesByTrialId(this.trialId)
+        this.trialService.getTrial(this.trialId)
             .subscribe((data) => {
-                this.sites = data;
+                this.sites = data.sites;
                 this.selectedSiteId =
                     this.extractSiteIdFromSubjectId(subjectIdQueryParam);
                 this.fetchVisitData();

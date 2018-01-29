@@ -4,6 +4,7 @@ import authRoutes from './auth.route';
 import trialRoutes from './trial.route';
 import siteRoutes from './site.route';
 import subjectRoutes from './subject.route';
+import definitionRoutes from './definition.route';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -23,6 +24,9 @@ router.use('/sites', siteRoutes);
 
 // mount subject routes at /subjects
 router.use('/subjects', subjectRoutes);
+
+// mount definition routes at /definitions
+router.use('/definitions', definitionRoutes);
 
 // mount auth routes at /auth
 router.use('/auth', authRoutes);

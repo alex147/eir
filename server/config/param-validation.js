@@ -111,6 +111,32 @@ export default {
         }
     },
 
+    // POST /api/definitions/:trialId
+    createSection: {
+        body: {
+            id: Joi.string().required(),
+            name: Joi.string().required(),
+            description: Joi.string().required(),
+            questions: Joi.array().required()
+        },
+        params: {
+            trialId: Joi.string().required()
+        }
+    },
+
+    // PUT /api/definitions/:trialId
+    updateSection: {
+        body: {
+            id: Joi.string().required(),
+            name: Joi.string().required(),
+            description: Joi.string().required(),
+            questions: Joi.array().required()
+        },
+        params: {
+            trialId: Joi.string().required()
+        }
+    },
+
     // POST /api/auth/login
     login: {
         body: {

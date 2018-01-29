@@ -1,6 +1,6 @@
 import { VisitDefinition } from './visit-definition';
 
 export class TrialDefinition {
-    constructor(public trialId: string,
+    constructor(public id: string,
         public visitDefinitions: VisitDefinition[] = []) { }
 }

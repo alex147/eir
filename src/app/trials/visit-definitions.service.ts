@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { TrialDefinition } from './trial-definition';
@@ -28,9 +29,9 @@ export class VisitDefinitionsService {
     ];
 
     private visits: VisitDefinition[] = [
-        new VisitDefinition("First Visit", this.sections),
-        new VisitDefinition("Second Visit", this.sections),
-        new VisitDefinition("Third Visit", this.sections)
+        new VisitDefinition(this.sections),
+        new VisitDefinition( this.sections),
+        new VisitDefinition( this.sections)
     ];
     private definitions: TrialDefinition[] = [
         new TrialDefinition("ABC1", this.visits),
@@ -40,27 +41,51 @@ export class VisitDefinitionsService {
         new TrialDefinition("ABC5", this.visits)
     ];
 
-    constructor() {
-    }
+    constructor(private http: HttpClient) { }
 
     getTrialDefinitionsById (trialId: string):
         Observable<TrialDefinition> {
-        return Observable.of(this.definitions
-            .filter(definition => definition.trialId === trialId)[0]);
-    }
-
-    getNumOfVisitsByTrialId (trialId: string): Observable<number> {
-        return Observable.of(this.definitions
-            .filter(definition => definition.trialId === trialId)[0].visitDefinitions.length);
+        return this.http.get<TrialDefinition>('/api/definitions/' + trialId);
     }
 
     getSection (trialId: string, visitId: number, sectionId: string):
         Observable<SectionDefinition> {
-        let matchedTrial: TrialDefinition = this.definitions
-            .filter(definition => definition.trialId === trialId)[0];
-        let matchedSections: SectionDefinition[] = matchedTrial.visitDefinitions[visitId - 1].sections;
-        return Observable.of(matchedSections
-            .filter(section => section.id === sectionId)[0]);
+        let queryParams: HttpParams = new HttpParams();
+        queryParams = queryParams.set('visitId', visitId.toString());
+        queryParams = queryParams.set('sectionId', sectionId);
+
+        return this.http.get<SectionDefinition>('/api/definitions/' + trialId + '/section', {
+            params: queryParams
+        });
+    }
+
+    addSection (section: SectionDefinition, trialId: string, visitId: number): Observable<SectionDefinition> {
+        let queryParams: HttpParams = new HttpParams();
+        queryParams = queryParams.set('visitId', visitId.toString());
+
+        return this.http.post<SectionDefinition>('/api/definitions/' + trialId, section, {
+            params: queryParams
+        });
+    }
+
+    updateSection (section: SectionDefinition, trialId: string, visitId: number): Observable<SectionDefinition> {
+        let queryParams: HttpParams = new HttpParams();
+        queryParams = queryParams.set('visitId', visitId.toString());
+        queryParams = queryParams.set('sectionId', section.id);
+
+        return this.http.put<SectionDefinition>('/api/definitions/' + trialId, {
+            params: queryParams
+        });
+    }
+
+    removeSection (sectionId: string, trialId: string, visitId: number): Observable<SectionDefinition> {
+        let queryParams: HttpParams = new HttpParams();
+        queryParams = queryParams.set('visitId', visitId.toString());
+        queryParams = queryParams.set('sectionId', sectionId);
+
+        return this.http.delete<SectionDefinition>('/api/definitions/' + trialId, {
+            params: queryParams
+        });
     }
 
 }

@@ -38,15 +38,12 @@ export class TrialSubjectsComponent implements OnInit {
         this.statuses = Object.keys(SubjectStatus)
             .filter((v: any) => !/\d/.test(v));
         this.trialId = this.route.snapshot.parent.params["id"];
-        this.trialService.getSitesByTrialId(this.trialId)
+        this.trialService.getTrial(this.trialId)
             .subscribe((data) => {
-                this.sites = data;
+                this.sites = data.sites;
                 this.siteId = this.sites[0];
+                this.trialNumOfVisits = data.numOfVisits;
                 this.fetchSubjects();
-            });
-        this.visitDefinitionsService.getNumOfVisitsByTrialId(this.trialId)
-            .subscribe((data) => {
-                this.trialNumOfVisits = data;
             });
         this.selectedSubject = new Subject("", new Date(),
             Gender.Female, true, SubjectStatus.Declared,

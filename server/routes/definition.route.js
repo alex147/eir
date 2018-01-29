@@ -1,28 +1,28 @@
 import express from 'express';
 import validate from 'express-validation';
 import paramValidation from '../config/param-validation';
-import postCtrl from '../controllers/post.controller';
+import definitionCtrl from '../controllers/definition.controller';
 
 const router = express.Router();
 
-router.route('/')
-  /** GET /api/posts - Get list of posts */
-  .get(postCtrl.list)
+router.route('/:trialId')
+    /** GET /api/definitions/:trialId - Get visit definition */
+    .get(definitionCtrl.get)
 
-  /** POST /api/posts - Create new post */
-  .post(validate(paramValidation.createPost), postCtrl.create);
+    /** POST /api/definitions/:trialId?visitId=<>&sectionId=<> - Create new section within the given trial and visit */
+    .post(validate(paramValidation.createSection), definitionCtrl.create)
 
-router.route('/:postId')
-  /** GET /api/post/:postId - Get post */
-  .get(postCtrl.get)
+    /** PUT /api/definitions/:trialId?visitId=<>&sectionId=<> - Update a section within the given trial and visit */
+    .put(validate(paramValidation.updateSection), definitionCtrl.update)
 
-  /** PUT /api/posts/:postId - Update post */
-  .put(validate(paramValidation.updatePost), postCtrl.update)
+    /** DELETE /api/definitions/:trialId?visitId=<>&sectionId=<> - Delete section within the given trial and visit */
+    .delete(definitionCtrl.remove);
 
-  /** DELETE /api/posts/:postId - Delete post */
-  .delete(postCtrl.remove);
+router.route('/:trialId/section')
+    /** GET /api/definitions/:trialId/section?visitId=<>&sectionId=<> - Get the section with the given ID for the given trial ID and visit ID */
+    .get(definitionCtrl.getSection)
 
-/** Load post when API with postId route parameter is hit */
-router.param('postId', postCtrl.load);
+/** Load definition when API with trialId route parameter is hit */
+router.param('trialId', definitionCtrl.load);
 
 export default router;
