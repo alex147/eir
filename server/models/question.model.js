@@ -20,10 +20,6 @@ const QuestionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    order: {
-        type: Number,
-        required: true
-    },
     isRequired: {
         type: Boolean
     },
@@ -34,7 +30,7 @@ const QuestionSchema = new mongoose.Schema({
         type: String
     },
     options: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'QuestionOption' }]
+        type: [String]
     }
 }, { _id: false });
 

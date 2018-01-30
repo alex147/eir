@@ -39,16 +39,16 @@
 
         <div class="select" *ngSwitchCase="qType['Select']">
             <select [id]="question.id" [formControlName]="question.id" [required]="question.isRequired">
-                <option *ngFor="let opt of question.options" [value]="opt.key">
-                    {{opt.value}}
+                <option *ngFor="let opt of question.options" [value]="opt">
+                    {{opt}}
                 </option>
             </select>
         </div>
 
         <div class="select" *ngSwitchCase="qType['Multi']">
             <select [id]="question.id" [formControlName]="question.id" multiple [required]="question.isRequired">
-                <option *ngFor="let opt of question.options" [value]="opt.key">
-                    {{opt.value}}
+                <option *ngFor="let opt of question.options" [value]="opt">
+                    {{opt}}
                 </option>
             </select>
         </div>

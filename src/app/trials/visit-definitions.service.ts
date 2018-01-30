@@ -12,9 +12,9 @@ import { SectionDefinition } from './section-definition';
 export class VisitDefinitionsService {
 
     private questions: Question[] = [
-        new Question("weight", "Weight", QuestionType.PDecimal, 1, true, "Measured on an empty stomach."),
-        new Question("height", "Height", QuestionType.PDecimal, 2, true, "Measured with the shoes taken off."),
-        new Question("age", "Age", QuestionType.PNumber, 3, true, "Age at start of trial.")
+        new Question("weight", "Weight", QuestionType.PDecimal, true, "Measured on an empty stomach."),
+        new Question("height", "Height", QuestionType.PDecimal, true, "Measured with the shoes taken off."),
+        new Question("age", "Age", QuestionType.PNumber, true, "Age at start of trial.")
     ];
     private sections: SectionDefinition[] = [
         new SectionDefinition("vitals", "Vital Signs", `

@@ -18,6 +18,7 @@ import { EnrolledSitesComponent } from './administration/enrolled-sites/enrolled
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ContainerComponent } from './container/container.component';
+import { SectionQuestionsComponent } from './administration/section-questions/section-questions.component';
 
 export const ROUTES: Routes = [
     { path: '', canActivate: [ AuthGuard ], children: [
@@ -32,6 +33,7 @@ export const ROUTES: Routes = [
                     { path: 'trials', component: AdminActiveTrialsComponent },
                     { path: 'archive', component: AdminArchivedTrialsComponent },
                     { path: 'visits', component: VisitDefinitionsComponent },
+                    { path: 'questions', component: SectionQuestionsComponent },
                     { path: 'sites', component: EnrolledSitesComponent }
                 ]
             },

@@ -1,0 +1,55 @@
+<h1>Section definition</h1>
+<form #addSectionForm="ngForm" class="compact">
+    <section class="form-block">
+        <div class="form-group">
+            <label for="input_1">Name</label>
+            <input type="text" name="input_1" [(ngModel)]="section.name">
+        </div>
+        <div class="form-group">
+            <label for="input_2">Description</label>
+            <textarea rows="2" cols="15" name="input_2" [(ngModel)]="section.description"></textarea>
+        </div>
+    </section>
+    <section class="form-block" *ngFor="let question of section.questions">
+        <div class="form-group">
+            <label [for]="'input_q1' + question.id">Label</label>
+            <input type="text" [name]="'input_q1' + question.id" [(ngModel)]="question.label" required>
+        </div>
+        <div class="form-group">
+            <label [for]="'input_q2' + question.id">Question Type</label>
+            <div class="select">
+                <select [name]="'input_q2' + question.id" [(ngModel)]="question.type" required>
+                    <option *ngFor="let t of types"
+                        [ngValue]="t">
+                        {{t}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Required</label>
+            <div class="radio-inline">
+                <input type="radio" [name]="'input_rad1' + question.id" [(ngModel)]="question.isRequired" [value]="true" checked required>
+                <label [for]="'input_rad1' + question.id">Yes</label>
+            </div>
+            <div class="radio-inline">
+                <input type="radio" [name]="'input_rad2' + question.id" [(ngModel)]="question.isRequired" [value]="false" required>
+                <label [for]="'input_rad2' + question.id">No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label [for]="'input_q3' + question.id">Notes</label>
+            <textarea rows="2" cols="15" [name]="'input_q3' + question.id" [(ngModel)]="question.notes"></textarea>
+        </div>
+        <div class="form-group">
+            <label [for]="'input_q4' + question.id">Default Value</label>
+            <input type="text" [name]="'input_q4' + question.id" [(ngModel)]="question.defaultValue" required>
+        </div>
+        <div class="form-group" *ngIf="question.type === qType['Select'] || question.type === qType['Multi']">
+            <label [for]="'input_q5' + question.id">Options (Space separated)</label>
+            <textarea rows="2" cols="15" [name]="'input_q5' + question.id" [(ngModel)]="question.label" required></textarea>
+        </div>
+    </section>
+    <button type="button" class="btn btn-outline" (click)="onFormDismissed()">Cancel</button>
+    <button type="submit" [disabled]="addSectionForm.form.invalid" class="btn btn-primary" (click)="onFormSubmitted()">Save</button>
+</form>

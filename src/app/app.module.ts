@@ -37,6 +37,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './login/authentication.service';
 import { ContainerComponent } from './container/container.component';
+import { SectionQuestionsComponent } from './administration/section-questions/section-questions.component';
 
 import 'mutationobserver-shim';
 import '@webcomponents/custom-elements';
@@ -71,7 +72,8 @@ require('clarity-ui/clarity-ui.min.css');
         SectionFormComponent,
         DynamicFormQuestionComponent,
         LoginComponent,
-        ContainerComponent
+        ContainerComponent,
+        SectionQuestionsComponent
     ],
     imports: [
         BrowserAnimationsModule,
