@@ -59,7 +59,6 @@ function create (req, res, next) {
 
     for (var i = 0; i < req.body.numOfVisits; i++) {
         const visitDefinition = new VisitDefinition({
-            _id: i,
             sections: []
         });
 

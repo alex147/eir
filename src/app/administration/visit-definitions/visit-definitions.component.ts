@@ -18,8 +18,6 @@ export class VisitDefinitionsComponent implements OnInit {
     public trials: Trial[];
     public definitions: VisitDefinition[];
     public selectedSection: SectionDefinition;
-    public isAddModalOpen: boolean;
-    public isUpdateModalOpen: boolean;
     public isDeleteModalOpen: boolean;
 
     constructor(private trialService: TrialService,
@@ -45,36 +43,6 @@ export class VisitDefinitionsComponent implements OnInit {
                     this.definitions = data.visitDefinitions;
                 }
             });
-    }
-
-    onAdd () {
-        this.selectedSection = new SectionDefinition("", "", ""); this.isAddModalOpen = true;
-    }
-
-    onAddModalSubmitted () {
-        if (this.definitions[this.visitId - 1].sections.indexOf(this.selectedSection) !== -1) {
-            this.visitDefinitionsService.updateSection(this.selectedSection, this.selectedTrial.id, this.visitId)
-                .subscribe(data => console.log(data));
-        } else {
-            this.visitDefinitionsService.addSection(this.selectedSection, this.selectedTrial.id, this.visitId)
-                .subscribe(data => console.log(data));
-        }
-        this.onAddModalDismissed();
-    }
-
-    onAddModalDismissed () {
-        this.visitDefinitionsService.getTrialDefinitionsById(this.selectedTrial.id)
-            .subscribe((data) => {
-                if (data) {
-                    this.definitions = data.visitDefinitions;
-                }
-                this.isAddModalOpen = false;
-            });
-    }
-
-    onEdit (section: SectionDefinition) {
-        this.selectedSection = section;
-        this.isAddModalOpen = true;
     }
 
     onDelete (section: SectionDefinition) {

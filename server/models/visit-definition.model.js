@@ -5,11 +5,10 @@ import mongoose from 'mongoose';
  */
 
 const VisitDefinitionSchema = new mongoose.Schema({
-    _id: String,
     sections: {
         type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SectionDefinition' }]
     }
-}, { _id: false });
+});
 
 /**
  * @typedef VisitDefinition

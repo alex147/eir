@@ -47,8 +47,10 @@
     <clr-datagrid>
         <clr-dg-action-bar>
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-secondary" (click)="onAdd()">
-                    <a href="#" [routerLink]="['../questions']" [queryParams]="{}" routerLinkActive="active">
+                <button type="button" class="btn btn-sm btn-secondary">
+                    <a href="#" [routerLink]="['../questions']"
+                    [queryParams]="{trialId: selectedTrial.id, visitId: visitId}"
+                    routerLinkActive="active">
                         <clr-icon shape="plus"></clr-icon> Add Section
                     </a>
                 </button>
@@ -63,8 +65,10 @@
 
         <clr-dg-row *clrDgItems="let section of definitions[visitId-1].sections" [clrDgItem]="section">
             <clr-dg-action-overflow>
-                <button class="action-item" (click)="onEdit(section)">
-                    Edit
+                <button class="action-item">
+                    <a href="#" [routerLink]="['../questions']"
+                    [queryParams]="{trialId: selectedTrial.id, visitId: visitId, sectionId: selectedSection.id}"
+                    routerLinkActive="active">Edit</a>
                 </button>
                 <button class="action-item" (click)="onDelete(section)">
                     Delete

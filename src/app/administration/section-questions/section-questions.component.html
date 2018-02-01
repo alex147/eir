@@ -43,7 +43,7 @@
         </div>
         <div class="form-group">
             <label [for]="'input_q4' + question.id">Default Value</label>
-            <input type="text" [name]="'input_q4' + question.id" [(ngModel)]="question.defaultValue" required>
+            <input type="text" [name]="'input_q4' + question.id" [(ngModel)]="question.defaultValue">
         </div>
         <div class="form-group" *ngIf="question.type === qType['Select'] || question.type === qType['Multi']">
             <label [for]="'input_q5' + question.id">Options (Space separated)</label>

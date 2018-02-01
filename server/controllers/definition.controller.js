@@ -6,12 +6,18 @@ import mongoose from 'mongoose';
  * Load definition and append to req.
  */
 function load (req, res, next, trialId) {
-    TrialDefinition.get(trialId)
-        .then((definition) => {
+    TrialDefinition.findOne({ 'id': trialId })
+        .populate({
+            path: 'visitDefinitions',
+            populate: {
+                path: 'sections'
+            }
+        })
+        .exec(function (err, definition) {
+            console.log(definition);
             req.definition = definition; // eslint-disable-line no-param-reassign
             return next();
-        })
-        .catch(e => next(e));
+        });
 }
 
 /**
@@ -31,16 +37,15 @@ function getSection (req, res) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    definition.populate({
-        path: 'visitDefinitions',
-        populate: {
-            path: 'sections',
-            match: { id: { $eq: sectionId } },
-            options: { limit: 1 }
-        }
-    }).exec(function (err, def) {
-        res.json(def.visitDefinitions[visitId].sections[0]);
-    });
+    TrialDefinition.findOne({ 'id': definition.id })
+        .populate({
+            path: 'visitDefinitions',
+            populate: {
+                path: 'sections'
+            }
+        }).exec(function (err, def) {
+            res.json(def.visitDefinitions[visitId].sections[0]);
+        });
 }
 
 /**
@@ -64,21 +69,22 @@ function create (req, res, next) {
         questions: req.body.questions,
     });
 
-    definition.populate({
-        path: 'visitDefinitions',
-        populate: {
-            path: 'sections',
-            match: { id: { $eq: sectionId } },
-            options: { limit: 1 }
-        }
-    }).exec(function (err, def) {
-        def.visitDefinitions[visitId].sections.push(section);
-        res.json(section);
-    });
-
-    definition.save()
-        .then(savedDefinition => console.log("Added a section in", savedDefinition.id))
-        .catch(e => next(e));
+    TrialDefinition.findOne({ 'id': definition.id })
+        .populate({
+            path: 'visitDefinitions',
+            populate: {
+                path: 'sections'
+            }
+        }).exec(function (err, def) {
+            def.visitDefinitions[visitId].sections.push(section);
+            // def.visitDefinitions[visitId].sections.save(function (){});
+            def.visitDefinitions[visitId].save(function () { });
+            // def.save(function (){});
+            def.save()
+                .then(savedDefinition => console.log("Added a section in", savedDefinition.id))
+                .catch(e => next(e));
+            res.json(section);
+        });
 }
 
 /**
@@ -95,22 +101,21 @@ function update (req, res, next) {
     const sectionId = req.query.sectionId;
     const section = {};
 
-    definition.populate({
-        path: 'visitDefinitions',
-        populate: {
-            path: 'sections',
-            match: { id: { $eq: sectionId } },
-            options: { limit: 1 }
-        }
-    }).exec(function (err, def) {
-        var section = def.visitDefinitions[visitId].sections[0];
-        section.id = req.body.id
-        section.name = req.body.name
-        section.description = req.body.description
-        section.questions = req.body.questions
-        def.visitDefinitions[visitId].sections[0] = section;
-        res.json(section);
-    });
+    TrialDefinition.findOne({ 'id': definition.id })
+        .populate({
+            path: 'visitDefinitions',
+            populate: {
+                path: 'sections'
+            }
+        }).exec(function (err, def) {
+            var section = def.visitDefinitions[visitId].sections[0];
+            section.id = req.body.id
+            section.name = req.body.name
+            section.description = req.body.description
+            section.questions = req.body.questions
+            def.visitDefinitions[visitId].sections[0] = section;
+            res.json(section);
+        });
 
     definition.save()
         .then(savedDefinition => console.log("Updated a section in", savedDefinition.id))
@@ -139,18 +144,17 @@ function remove (req, res, next) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    definition.populate({
-        path: 'visitDefinitions',
-        populate: {
-            path: 'sections',
-            match: { id: { $eq: sectionId } },
-            options: { limit: 1 }
-        }
-    }).exec(function (err, def) {
-        def.visitDefinitions[visitId].sections[0].remove()
-            .then(deletedSection => res.json(deletedSection))
-            .catch(e => next(e));
-    });
+    TrialDefinition.findOne({ 'id': definition.id })
+        .populate({
+            path: 'visitDefinitions',
+            populate: {
+                path: 'sections'
+            }
+        }).exec(function (err, def) {
+            def.visitDefinitions[visitId].sections[0].remove()
+                .then(deletedSection => res.json(deletedSection))
+                .catch(e => next(e));
+        });
 
     definition.save()
         .then(savedDefinition => console.log("Removed a section from", savedDefinition.id))
