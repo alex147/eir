@@ -137,6 +137,19 @@ export default {
         }
     },
 
+    // PUT /api/data/:subjectId
+        updateSectionData: {
+            body: {
+                id: Joi.string().required(),
+                name: Joi.string().required(),
+                status: Joi.string().required(),
+                metricData: Joi.array().required()
+            },
+            params: {
+                subjectId: Joi.string().required()
+            }
+        },
+
     // POST /api/auth/login
     login: {
         body: {

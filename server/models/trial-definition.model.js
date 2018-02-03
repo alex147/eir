@@ -16,7 +16,8 @@ const TrialDefinitionSchema = new mongoose.Schema({
         trim: true
     },
     visitDefinitions: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'VisitDefinition' }]
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'VisitDefinition' }],
+        required: true
     }
 }, { _id: false });
 

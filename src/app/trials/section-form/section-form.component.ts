@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { VisitDefinitionsService } from '../visit-definitions.service';
+import { VisitDataService } from '../visit-data.service';
 import { SectionDefinition } from '../section-definition';
+import { SectionData } from '../section-data';
 import { Question } from '../question';
 
 @Component({
@@ -13,20 +15,33 @@ import { Question } from '../question';
 export class SectionFormComponent implements OnInit {
 
     public section: SectionDefinition;
+    public sectionData: SectionData;
     public form: FormGroup;
+    public trialId: string;
+    public visitId: number;
+    public sectionId: string;
+    public subjectId: string;
 
     constructor(private route: ActivatedRoute,
-        private visitDefinitionsService: VisitDefinitionsService) { }
+        private router: Router,
+        private visitDefinitionsService: VisitDefinitionsService,
+        private visitDataService: VisitDataService) { }
 
     ngOnInit () {
-        let trialId: string = this.route.snapshot.parent.params['id'];
-        let visitId: number = this.route.snapshot.queryParams['visit'];
-        let sectionId: string = this.route.snapshot.queryParams['section'];
+        this.trialId = this.route.snapshot.parent.params['id'];
+        this.visitId = this.route.snapshot.queryParams['visit'];
+        this.sectionId = this.route.snapshot.queryParams['section'];
+        this.subjectId = this.route.snapshot.queryParams['subject'];
 
-        this.visitDefinitionsService.getSection(trialId, visitId, sectionId)
+        this.visitDefinitionsService.getSection(this.trialId, this.visitId, this.sectionId)
             .subscribe((data) => {
                 this.section = data;
                 this.form = this.createFormGroup(this.section.questions);
+            });
+
+        this.visitDataService.getSectionData(this.subjectId, this.visitId, this.sectionId)
+            .subscribe((data) => {
+                this.sectionData = data;
             });
     }
 
@@ -40,10 +55,20 @@ export class SectionFormComponent implements OnInit {
         return new FormGroup(group);
     }
 
-    onSubmit () {
-        // 1. Persist new section state
-        // 2. Navigate back to previous view.
-        // JSON.stringify(this.form.value);
+    onFormSubmitted () {
+        this.visitDataService.saveSectionData(this.subjectId, this.visitId, this.sectionId, this.sectionData)
+            .subscribe((data) => {
+
+            });
+        this.router.navigate(
+            ['/trial/' + this.trialId + '/visits?id=' + this.subjectId]);
     }
+
+    onFormDismissed () {
+        this.router.navigate(
+            ['/trial/' + this.trialId + '/visits?id=' + this.subjectId]);
+    }
+
+    // JSON.stringify(this.form.value);
 
 }

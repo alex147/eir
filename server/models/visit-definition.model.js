@@ -6,7 +6,8 @@ import mongoose from 'mongoose';
 
 const VisitDefinitionSchema = new mongoose.Schema({
     sections: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SectionDefinition' }]
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SectionDefinition' }],
+        required: true
     }
 });
 

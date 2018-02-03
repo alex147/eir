@@ -20,7 +20,8 @@ const SectionDefinitionSchema = new mongoose.Schema({
         type: String
     },
     questions: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }]
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+        required: true
     }
 }, { _id: false });
 

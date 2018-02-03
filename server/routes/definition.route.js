@@ -20,7 +20,7 @@ router.route('/:trialId')
 
 router.route('/:trialId/section')
     /** GET /api/definitions/:trialId/section?visitId=<>&sectionId=<> - Get the section with the given ID for the given trial ID and visit ID */
-    .get(definitionCtrl.getSection)
+    .get(definitionCtrl.getSection);
 
 /** Load definition when API with trialId route parameter is hit */
 router.param('trialId', definitionCtrl.load);

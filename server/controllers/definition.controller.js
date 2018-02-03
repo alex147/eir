@@ -29,7 +29,7 @@ function get (req, res) {
 }
 
 /**
- * Delete definition.
+ * Get section definition.
  * @returns {SectionDefinition}
  */
 function getSection (req, res) {

@@ -30,8 +30,8 @@ export class VisitDefinitionsService {
 
     private visits: VisitDefinition[] = [
         new VisitDefinition(this.sections),
-        new VisitDefinition( this.sections),
-        new VisitDefinition( this.sections)
+        new VisitDefinition(this.sections),
+        new VisitDefinition(this.sections)
     ];
     private definitions: TrialDefinition[] = [
         new TrialDefinition("ABC1", this.visits),
@@ -73,7 +73,7 @@ export class VisitDefinitionsService {
         queryParams = queryParams.set('visitId', visitId.toString());
         queryParams = queryParams.set('sectionId', section.id);
 
-        return this.http.put<SectionDefinition>('/api/definitions/' + trialId, {
+        return this.http.put<SectionDefinition>('/api/definitions/' + trialId, section, {
             params: queryParams
         });
     }
