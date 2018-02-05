@@ -31,7 +31,7 @@ function getSection (req, res) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    res.json(def.visitDefinitions[visitId].sections.id(sectionId));
+    res.json(definition.visitDefinitions[visitId].sections.id(sectionId));
 }
 
 /**
@@ -74,7 +74,7 @@ function update (req, res, next) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    var section = def.visitDefinitions[visitId].sections.id(sectionId);
+    var section = definition.visitDefinitions[visitId].sections.id(sectionId);
     section.id = req.body.id
     section.name = req.body.name
     section.description = req.body.description
