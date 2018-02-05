@@ -9,7 +9,7 @@ router.route('/:trialId')
     /** GET /api/definitions/:trialId - Get visit definition */
     .get(definitionCtrl.get)
 
-    /** POST /api/definitions/:trialId?visitId=<>&sectionId=<> - Create new section within the given trial and visit */
+    /** POST /api/definitions/:trialId?visitId=<> - Create new section within the given trial and visit */
     .post(validate(paramValidation.createSection), definitionCtrl.create)
 
     /** PUT /api/definitions/:trialId?visitId=<>&sectionId=<> - Update a section within the given trial and visit */

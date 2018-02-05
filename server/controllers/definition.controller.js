@@ -6,18 +6,12 @@ import mongoose from 'mongoose';
  * Load definition and append to req.
  */
 function load (req, res, next, trialId) {
-    TrialDefinition.findOne({ 'id': trialId })
-        .populate({
-            path: 'visitDefinitions',
-            populate: {
-                path: 'sections'
-            }
-        })
-        .exec(function (err, definition) {
-            console.log(definition);
+    TrialDefinition.get(trialId)
+        .then((definition) => {
             req.definition = definition; // eslint-disable-line no-param-reassign
             return next();
-        });
+        })
+        .catch(e => next(e));
 }
 
 /**
@@ -37,15 +31,7 @@ function getSection (req, res) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    TrialDefinition.findOne({ 'id': definition.id })
-        .populate({
-            path: 'visitDefinitions',
-            populate: {
-                path: 'sections'
-            }
-        }).exec(function (err, def) {
-            res.json(def.visitDefinitions[visitId].sections[0]);
-        });
+    res.json(def.visitDefinitions[visitId].sections.id(sectionId));
 }
 
 /**
@@ -59,7 +45,6 @@ function getSection (req, res) {
 function create (req, res, next) {
     const definition = req.definition;
     const visitId = req.query.visitId - 1;
-    const sectionId = req.query.sectionId;
 
     const section = new SectionDefinition({
         _id: req.body.id,
@@ -69,22 +54,11 @@ function create (req, res, next) {
         questions: req.body.questions,
     });
 
-    TrialDefinition.findOne({ 'id': definition.id })
-        .populate({
-            path: 'visitDefinitions',
-            populate: {
-                path: 'sections'
-            }
-        }).exec(function (err, def) {
-            def.visitDefinitions[visitId].sections.push(section);
-            // def.visitDefinitions[visitId].sections.save(function (){});
-            def.visitDefinitions[visitId].save(function () { });
-            // def.save(function (){});
-            def.save()
-                .then(savedDefinition => console.log("Added a section in", savedDefinition.id))
-                .catch(e => next(e));
-            res.json(section);
-        });
+    definition.visitDefinitions[visitId].sections.push(section);
+    definition.save()
+        .then(savedDefinition => console.log("Added a section in", savedDefinition.id))
+        .catch(e => next(e));
+    res.json(section);
 }
 
 /**
@@ -99,27 +73,19 @@ function update (req, res, next) {
     const definition = req.definition;
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
-    const section = {};
 
-    TrialDefinition.findOne({ 'id': definition.id })
-        .populate({
-            path: 'visitDefinitions',
-            populate: {
-                path: 'sections'
-            }
-        }).exec(function (err, def) {
-            var section = def.visitDefinitions[visitId].sections[0];
-            section.id = req.body.id
-            section.name = req.body.name
-            section.description = req.body.description
-            section.questions = req.body.questions
-            def.visitDefinitions[visitId].sections[0] = section;
-            res.json(section);
-        });
+    var section = def.visitDefinitions[visitId].sections.id(sectionId);
+    section.id = req.body.id
+    section.name = req.body.name
+    section.description = req.body.description
+    section.questions = req.body.questions
+
 
     definition.save()
         .then(savedDefinition => console.log("Updated a section in", savedDefinition.id))
         .catch(e => next(e));
+
+    res.json(section);
 }
 
 /**
@@ -144,17 +110,10 @@ function remove (req, res, next) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    TrialDefinition.findOne({ 'id': definition.id })
-        .populate({
-            path: 'visitDefinitions',
-            populate: {
-                path: 'sections'
-            }
-        }).exec(function (err, def) {
-            def.visitDefinitions[visitId].sections[0].remove()
-                .then(deletedSection => res.json(deletedSection))
-                .catch(e => next(e));
-        });
+    definition.visitDefinitions[visitId].sections
+        .id(sectionId).remove()
+        .then(deletedSection => res.json(deletedSection))
+        .catch(e => next(e));
 
     definition.save()
         .then(savedDefinition => console.log("Removed a section from", savedDefinition.id))

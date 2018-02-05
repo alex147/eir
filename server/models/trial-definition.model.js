@@ -2,10 +2,13 @@ import Promise from 'bluebird';
 import mongoose from 'mongoose';
 import httpStatus from 'http-status';
 import APIError from '../helpers/APIError';
+require('./visit-definition.model');
 
 /**
  * TrialDefinition Schema
  */
+
+var VisitDefinition = mongoose.model('VisitDefinition').schema;
 
 const TrialDefinitionSchema = new mongoose.Schema({
     _id: String,
@@ -15,10 +18,7 @@ const TrialDefinitionSchema = new mongoose.Schema({
         uppercase: true,
         trim: true
     },
-    visitDefinitions: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'VisitDefinition' }],
-        required: true
-    }
+    visitDefinitions: [VisitDefinition]
 }, { _id: false });
 
 /**
@@ -45,20 +45,14 @@ TrialDefinitionSchema.statics = {
      */
     get (id) {
         return this.findOne({ "id": id })
-            .populate({
-                path: 'visitDefinitions',
-                populate: {
-                    path: 'sections'
-                }
-            })
-            .exec()
-            .then((definition) => {
-                if (definition) {
-                    return definition;
-                }
-                const err = new APIError('No such definition exists!', httpStatus.NOT_FOUND);
-                return Promise.reject(err);
-            });
+        .exec()
+        .then((definition) => {
+            if (definition) {
+                return definition;
+            }
+            const err = new APIError('No such definition exists!', httpStatus.NOT_FOUND);
+            return Promise.reject(err);
+        });
     },
 
     /**

@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
+require('./question.model');
 
 /**
  * SectionDefinition Schema
  */
+
+var Question = mongoose.model('Question').schema;
 
 const SectionDefinitionSchema = new mongoose.Schema({
     _id: String,
@@ -19,10 +22,7 @@ const SectionDefinitionSchema = new mongoose.Schema({
     description: {
         type: String
     },
-    questions: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
-        required: true
-    }
+    questions: [Question]
 }, { _id: false });
 
 /**

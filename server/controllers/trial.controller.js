@@ -61,11 +61,6 @@ function create (req, res, next) {
         const visitDefinition = new VisitDefinition({
             sections: []
         });
-
-        visitDefinition.save()
-            .then(savedVisit => console.log("Created a visit definition", savedVisit))
-            .catch(e => next(e));
-
         trialDefinition.visitDefinitions.push(visitDefinition)
     }
 
@@ -98,26 +93,19 @@ function update (req, res, next) {
     trial.numOfVisits = req.body.numOfVisits;
 
     if (numOfVisitsDiff > 0) {
-        TrialDefinition.findOne({ 'id': trial.id })
-            .populate('visitDefinitions')
-            .exec(function (err, definition) {
+        TrialDefinition.get(trial.id)
+            .then((definition) => {
                 for (var i = 0; i < numOfVisitsDiff; i++) {
                     const visitDefinition = new VisitDefinition({
-                        _id: trial.numOfVisits - i - 1,
                         sections: []
                     });
-
-                    visitDefinition.save()
-                        .then(savedVisit => console.log("Created a visit definition", savedVisit))
-                        .catch(e => next(e));
-
                     definition.visitDefinitions.push(visitDefinition);
                 }
 
                 definition.save()
                     .then(savedDefinition => console.log("Created trial definition for ID", trial.id))
                     .catch(e => next(e));
-            });
+            }).catch(e => next(e));
     }
 
     trial.save()

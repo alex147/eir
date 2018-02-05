@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
+require('./section-definition.model');
 
 /**
  * VisitDefinition Schema
  */
 
+var SectionDefinition = mongoose.model('SectionDefinition').schema;
+
 const VisitDefinitionSchema = new mongoose.Schema({
-    sections: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SectionDefinition' }],
-        required: true
-    }
+    sections: [SectionDefinition]
 });
 
 /**
