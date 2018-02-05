@@ -12,7 +12,6 @@ const VisitDataSchema = new mongoose.Schema({
     subjectId: {
         type: String,
         required: true,
-        lowercase: true,
         trim: true
     },
     visits: [VisitInstance]

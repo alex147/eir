@@ -50,8 +50,8 @@
         <clr-dg-cell>{{visit.id}}</clr-dg-cell>
         <clr-dg-cell>{{visit.description}}</clr-dg-cell>
         <clr-dg-cell>
-            <span class="badge" [ngClass]="getVisitBadgeClass(visit.getCompletedSectionCount(), visit.getTotalSectionCount())">
-                {{visit.getCompletedSectionCount()}}/{{visit.getTotalSectionCount()}}
+            <span class="badge" [ngClass]="getVisitBadgeClass(getCompletedSectionCount(visit), getTotalSectionCount(visit))">
+                {{getCompletedSectionCount(visit)}}/{{getTotalSectionCount(visit)}}
             </span>
         </clr-dg-cell>
 

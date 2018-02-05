@@ -1,4 +1,8 @@
 import Subject from '../models/subject.model';
+import VisitData from '../models/visit-data.model';
+import VisitInstance from '../models/visit-instance.model';
+import SectionData from '../models/section-data.model';
+import TrialDefinition from '../models/trial-definition.model';
 import mongoose from 'mongoose';
 
 /**
@@ -35,6 +39,42 @@ function get (req, res) {
  * @returns {Subject}
  */
 function create (req, res, next) {
+    var visitData = new VisitData({
+        _id: req.body.id,
+        subjectId: req.body.id,
+        visits: []
+    });
+
+    TrialDefinition.get(req.body.trialId)
+        .then((definition) => {
+            definition.visitDefinitions.forEach(function (visit, i) {
+                var instance = new VisitInstance({
+                    id: i + 1,
+                    description: "Visit #" + (i + 1),
+                    capturedData: []
+                });
+
+                visit.sections.forEach(function (section) {
+                    var sectionData = new SectionData({
+                        id: section.id,
+                        name: section.name,
+                        status: "Not Started",
+                        metricData: []
+                    });
+
+                    instance.capturedData.push(sectionData);
+                });
+
+                visitData.visits.push(instance);
+            });
+
+
+            visitData.save()
+                .then(savedData => console.log("Created empty visit data for subject", req.body.id))
+                .catch(e => next(e));
+        })
+        .catch(e => next(e));
+
     const subject = new Subject({
         _id: req.body.id,
         id: req.body.id,
@@ -115,6 +155,12 @@ function getByTrialAndSiteId (req, res, next) {
  */
 function remove (req, res, next) {
     const subject = req.subject;
+
+    VisitData.findOne({ 'subjectId': subject.id })
+        .remove()
+        .then(deletedData => console.log("Deleted visit data for ID", subject.id))
+        .catch(e => next(e));
+
     subject.remove()
         .then(deletedSubject => res.json(deletedSubject))
         .catch(e => next(e));

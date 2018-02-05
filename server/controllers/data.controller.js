@@ -24,9 +24,9 @@ function getDataBySiteId (req, res) {
     VisitData.find({ 'subjectId': new RegExp(siteId, 'i') },
         function (err, entries) {
             if (err) {
-                response.send(err);
+                res.send(err);
             }
-            response.json(entries);
+            res.json(entries);
         });
 }
 

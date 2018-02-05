@@ -5,11 +5,9 @@ import mongoose from 'mongoose';
  */
 
 const SectionDataSchema = new mongoose.Schema({
-    _id: String,
     id: {
         type: String,
         required: true,
-        lowercase: true,
         trim: true
     },
     name: {
@@ -21,10 +19,9 @@ const SectionDataSchema = new mongoose.Schema({
         required: true
     },
     metricData: {
-        type: Array,
-        required: true
+        type: Array
     }
-}, { _id: false });
+});
 
 /**
  * @typedef SectionData

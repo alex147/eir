@@ -8,18 +8,15 @@ require('./section-data.model');
 var SectionData = mongoose.model('SectionData').schema;
 
 const VisitInstanceSchema = new mongoose.Schema({
-    _id: String,
     id: {
-        type: String,
-        required: true,
-        lowercase: true,
-        trim: true
+        type: Number,
+        required: true
     },
     description: {
         type: String
     },
     capturedData: [SectionData]
-}, { _id: false });
+});
 
 /**
  * @typedef VisitInstance

@@ -30,7 +30,7 @@ router.use('/subjects', subjectRoutes);
 router.use('/definitions', definitionRoutes);
 
 // mount data routes at /data
-router.use('/data', definitionRoutes);
+router.use('/data', dataRoutes);
 
 // mount auth routes at /auth
 router.use('/auth', authRoutes);
