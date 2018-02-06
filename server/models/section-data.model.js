@@ -19,7 +19,7 @@ const SectionDataSchema = new mongoose.Schema({
         required: true
     },
     metricData: {
-        type: Array
+        type: Object
     }
 });
 

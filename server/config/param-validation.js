@@ -143,7 +143,7 @@ export default {
                 id: Joi.string().required(),
                 name: Joi.string().required(),
                 status: Joi.string().required(),
-                metricData: Joi.array().required()
+                metricData: Joi.object().required()
             },
             params: {
                 subjectId: Joi.string().required()

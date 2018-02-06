@@ -39,7 +39,10 @@ function getSectionData (req, res) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    var result = visitData.visits[visitId].capturedData.id(sectionId);
+    var result = visitData.visits[visitId].capturedData.find(
+        function (element) {
+            return element.id === sectionId;
+        });
     res.json(result);
 }
 
@@ -56,12 +59,16 @@ function update (req, res, next) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    var sectionData = visitData.visits[visitId].capturedData.id(sectionId);
+    var sectionData = visitData.visits[visitId].capturedData.find(
+        function (element) {
+            return element.id === sectionId;
+        });
+
     sectionData.metricData = req.body.metricData;
     sectionData.status = req.body.status;
 
-    sectionData.save()
-        .then(savedData => console.log("Updated a data for", savedData.id))
+    visitData.save()
+        .then(savedData => console.log("Updated data for", visitData.subjectId))
         .catch(e => next(e));
 }
 

@@ -31,7 +31,12 @@ function getSection (req, res) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    res.json(definition.visitDefinitions[visitId].sections.id(sectionId));
+    var result = definition.visitDefinitions[visitId].sections.find(
+        function (element) {
+            return element.id === sectionId;
+        });
+
+    res.json(result);
 }
 
 /**
@@ -74,12 +79,15 @@ function update (req, res, next) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    var section = definition.visitDefinitions[visitId].sections.id(sectionId);
+    var section = definition.visitDefinitions[visitId].sections.find(
+        function (element) {
+            return element.id === sectionId;
+        });
+
     section.id = req.body.id
     section.name = req.body.name
     section.description = req.body.description
     section.questions = req.body.questions
-
 
     definition.save()
         .then(savedDefinition => console.log("Updated a section in", savedDefinition.id))
@@ -110,8 +118,13 @@ function remove (req, res, next) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    definition.visitDefinitions[visitId].sections
-        .id(sectionId).remove()
+    var idxToRemove = definition.visitDefinitions[visitId].sections.findIndex(
+        function (element) {
+            return element.id === sectionId;
+        });
+
+    definition.visitDefinitions[visitId].sections[idxToRemove]
+        .remove()
         .then(deletedSection => res.json(deletedSection))
         .catch(e => next(e));
 

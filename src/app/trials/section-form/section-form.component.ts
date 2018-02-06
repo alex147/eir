@@ -5,6 +5,7 @@ import { VisitDefinitionsService } from '../visit-definitions.service';
 import { VisitDataService } from '../visit-data.service';
 import { SectionDefinition } from '../section-definition';
 import { SectionData } from '../section-data';
+import { SectionStatus } from '../section-status';
 import { Question } from '../question';
 
 @Component({
@@ -41,7 +42,11 @@ export class SectionFormComponent implements OnInit {
 
         this.visitDataService.getSectionData(this.subjectId, this.visitId, this.sectionId)
             .subscribe((data) => {
-                this.sectionData = data;
+                if (!data) {
+                    this.sectionData = new SectionData(this.section.id, this.section.name, SectionStatus.Completed, {});
+                } else {
+                    this.sectionData = data;
+                }
             });
     }
 
@@ -56,19 +61,20 @@ export class SectionFormComponent implements OnInit {
     }
 
     onFormSubmitted () {
+        this.sectionData.metricData = this.form.value;
         this.visitDataService.saveSectionData(this.subjectId, this.visitId, this.sectionId, this.sectionData)
             .subscribe((data) => {
 
             });
         this.router.navigate(
-            ['/trial/' + this.trialId + '/visits?id=' + this.subjectId]);
+            ['/trials/' + this.trialId + '/visits'],
+            { queryParams: { id: this.subjectId } });
     }
 
     onFormDismissed () {
         this.router.navigate(
-            ['/trial/' + this.trialId + '/visits?id=' + this.subjectId]);
+            ['/trials/' + this.trialId + '/visits'],
+            { queryParams: { id: this.subjectId } });
     }
-
-    // JSON.stringify(this.form.value);
 
 }
