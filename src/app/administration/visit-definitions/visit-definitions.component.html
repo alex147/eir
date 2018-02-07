@@ -67,7 +67,7 @@
             <clr-dg-action-overflow>
                 <button class="action-item">
                     <a href="#" [routerLink]="['../questions']"
-                    [queryParams]="{trialId: selectedTrial.id, visitId: visitId, sectionId: selectedSection.id}"
+                    [queryParams]="{trialId: selectedTrial.id, visitId: visitId, sectionId: section.id}"
                     routerLinkActive="active">Edit</a>
                 </button>
                 <button class="action-item" (click)="onDelete(section)">
