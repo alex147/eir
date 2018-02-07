@@ -2,15 +2,36 @@
 <form #addSectionForm="ngForm" class="compact">
     <section class="form-block">
         <div class="form-group">
+            <label for="input_0">ID</label>
+            <input type="text" name="input_0" [(ngModel)]="section.id" required>
+        </div>
+        <div class="form-group">
             <label for="input_1">Name</label>
-            <input type="text" name="input_1" [(ngModel)]="section.name">
+            <input type="text" name="input_1" [(ngModel)]="section.name" required>
         </div>
         <div class="form-group">
             <label for="input_2">Description</label>
             <textarea rows="2" cols="15" name="input_2" [(ngModel)]="section.description"></textarea>
         </div>
     </section>
-    <section class="form-block" *ngFor="let question of section.questions">
+    <button class="btn btn-primary btn-icon alone" *ngIf="!section.questions.length" (click)="addQuestion(0)">
+        <clr-icon shape="plus"></clr-icon>
+        Add question
+    </button>
+    <section class="form-block question" *ngFor="let question of section.questions; let i = index">
+        <button class="btn btn-danger btn-icon question-action" (click)="deleteQuestion(i)">
+            <clr-icon shape="trash">
+            </clr-icon>
+            Delete
+        </button>
+        <button class="btn btn-primary btn-icon question-action" (click)="addQuestion(i)">
+            <clr-icon shape="plus"></clr-icon>
+            Add
+        </button>
+        <div class="form-group">
+            <label [for]="'input_q0' + question.id">Question Name</label>
+            <input type="text" [name]="'input_q0' + question.id" [(ngModel)]="question.id" required>
+        </div>
         <div class="form-group">
             <label [for]="'input_q1' + question.id">Label</label>
             <input type="text" [name]="'input_q1' + question.id" [(ngModel)]="question.label" required>

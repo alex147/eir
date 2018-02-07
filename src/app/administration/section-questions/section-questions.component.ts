@@ -17,16 +17,7 @@ export class SectionQuestionsComponent implements OnInit {
     public trialId: string;
     public visitId: number;
     public sectionId: string;
-
-    private questions: Question[] = [
-        new Question("weight", "Weight", QuestionType.PDecimal, true, "Measured on an empty stomach."),
-        new Question("height", "Height", QuestionType.PDecimal, true, "Measured with the shoes taken off."),
-        new Question("age", "Age", QuestionType.PNumber, true, "Age at start of trial.")
-    ];
-    public section: SectionDefinition = new SectionDefinition("vitals",
-        "Vital Signs",
-        `This section aims at capturing the Vital Signs for the subject in question.`,
-        this.questions);
+    private section: SectionDefinition;
 
     constructor(private route: ActivatedRoute,
         private router: Router,
@@ -39,6 +30,16 @@ export class SectionQuestionsComponent implements OnInit {
         this.trialId = this.route.snapshot.queryParams['trialId'];
         this.visitId = this.route.snapshot.queryParams['visitId'];
         this.sectionId = this.route.snapshot.queryParams['sectionId'];
+
+        this.section = new SectionDefinition("", "", "");
+
+        if (this.sectionId) {
+            this.visitDefinitionsService
+                .getSection(this.trialId, this.visitId, this.sectionId)
+                .subscribe((data) => {
+                    this.section = data;
+                });
+        }
     }
 
     onFormSubmitted () {
@@ -54,6 +55,15 @@ export class SectionQuestionsComponent implements OnInit {
 
     onFormDismissed () {
         this.router.navigate(['/admin/visits']);
+    }
+
+    addQuestion (idx: number) {
+        const newQuestion: Question = new Question("", "", QuestionType.Decimal);
+        this.section.questions.splice(idx, 0, newQuestion);
+    }
+
+    deleteQuestion (idx: number) {
+        this.section.questions.splice(idx, 1);
     }
 
 }
