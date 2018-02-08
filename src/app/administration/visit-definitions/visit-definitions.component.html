@@ -47,13 +47,11 @@
     <clr-datagrid>
         <clr-dg-action-bar>
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-secondary">
-                    <a href="#" [routerLink]="['../questions']"
-                    [queryParams]="{trialId: selectedTrial.id, visitId: visitId}"
-                    routerLinkActive="active">
-                        <clr-icon shape="plus"></clr-icon> Add Section
-                    </a>
-                </button>
+                <a href="#" [routerLink]="['../questions']" [queryParams]="{trialId: selectedTrial.id, visitId: visitId}" routerLinkActive="active">
+                    <button type="button" class="btn btn-sm btn-secondary">
+                            <clr-icon shape="plus"></clr-icon> Add Section
+                    </button>
+                </a>
             </div>
         </clr-dg-action-bar>
 
@@ -65,11 +63,12 @@
 
         <clr-dg-row *clrDgItems="let section of definitions[visitId-1].sections" [clrDgItem]="section">
             <clr-dg-action-overflow>
-                <button class="action-item">
-                    <a href="#" [routerLink]="['../questions']"
-                    [queryParams]="{trialId: selectedTrial.id, visitId: visitId, sectionId: section.id}"
-                    routerLinkActive="active">Edit</a>
-                </button>
+                <a href="#" [routerLink]="['../questions']" [queryParams]="{trialId: selectedTrial.id, visitId: visitId, sectionId: section.id}"
+                    routerLinkActive="active">
+                    <button class="action-item">
+                            Edit
+                    </button>
+                </a>
                 <button class="action-item" (click)="onDelete(section)">
                     Delete
                 </button>
