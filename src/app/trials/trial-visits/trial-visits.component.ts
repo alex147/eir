@@ -3,8 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { TrialService } from '../trial.service';
 import { VisitData } from '../visit-data';
 import { VisitDataService } from '../visit-data.service';
+import { VisitDefinitionsService } from '../visit-definitions.service';
 import { VisitInstance } from '../visit-instance';
+import { SectionData } from '../section-data';
 import { SectionStatus } from '../section-status';
+import { TrialDefinition } from '../trial-definition';
 
 @Component({
     selector: 'trial-visits',
@@ -19,15 +22,24 @@ export class TrialVisitsComponent implements OnInit {
     public selectedSubjectEntry: VisitData;
     public sites: string[];
     public visitData: VisitData[];
+    public trialDefinition: TrialDefinition;
 
     constructor(private route: ActivatedRoute,
         private trialService: TrialService,
-        private visitDataService: VisitDataService) { }
+        private visitDataService: VisitDataService,
+        private visitDefinitionsService: VisitDefinitionsService) { }
 
     ngOnInit () {
         this.trialId = this.route.snapshot.parent.params["id"];
         this.subjectId = this.route.snapshot.queryParams['id']
             || "";
+
+        this.visitDefinitionsService
+            .getTrialDefinitionsById(this.trialId)
+            .subscribe((data) => {
+                this.trialDefinition = data;
+            });
+
         this.trialService.getTrial(this.trialId)
             .subscribe((data) => {
                 this.sites = data.sites;
@@ -47,8 +59,17 @@ export class TrialVisitsComponent implements OnInit {
             });
     }
 
-    getSectionIconClass (status: SectionStatus): string {
-        switch (status) {
+    getSectionIconClass (data: SectionData[], sectionId: string): string {
+        const section = data.find(
+            function (element) {
+                return element.id === sectionId;
+            });
+
+        if (!section) {
+            return "is-error";
+        }
+
+        switch (section.status) {
             case SectionStatus.NotStarted:
                 return "is-error";
             case SectionStatus.InProgress:

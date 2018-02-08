@@ -43,7 +43,7 @@ export class SectionFormComponent implements OnInit {
         this.visitDataService.getSectionData(this.subjectId, this.visitId, this.sectionId)
             .subscribe((data) => {
                 if (!data) {
-                    this.sectionData = new SectionData(this.section.id, this.section.name, SectionStatus.Completed, {});
+                    this.sectionData = new SectionData(this.section.id, this.section.name, SectionStatus.InProgress, {});
                 } else {
                     this.sectionData = data;
                 }
@@ -62,6 +62,7 @@ export class SectionFormComponent implements OnInit {
 
     onFormSubmitted () {
         this.sectionData.metricData = this.form.value;
+        this.sectionData.status = SectionStatus.Completed;
         this.visitDataService.saveSectionData(this.subjectId, this.visitId, this.sectionId, this.sectionData)
             .subscribe((data) => {
 

@@ -57,10 +57,10 @@
 
         <clr-dg-row-detail *clrIfExpanded>
             <div>
-                <div *ngFor="let section of visit.capturedData">
+                <div *ngFor="let section of trialDefinition.visitDefinitions[visit.id - 1].sections">
                     <a href="#" [routerLink]="['../sections']" [queryParams]="{visit: visit.id, section: section.id, subject: selectedSubjectEntry.subjectId}"
                         routerLinkActive="active" class="nav-link nav-text">
-                        <clr-icon shape="clipboard" [ngClass]="getSectionIconClass(section.status)"></clr-icon>
+                        <clr-icon shape="clipboard" [ngClass]="getSectionIconClass(visit.capturedData, section.id)"></clr-icon>
                         {{section.name}}
                     </a>
                 </div>
