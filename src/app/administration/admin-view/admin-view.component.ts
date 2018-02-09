@@ -7,20 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminViewComponent implements OnInit {
 
-    public isNavCollapsed: boolean;
-    public iconDir: string;
-
-    constructor() {
-        this.isNavCollapsed = false;
-        this.iconDir = 'left';
-    }
+    constructor() { }
 
     ngOnInit () {
-    }
-
-    toggleNavCollapsedState () {
-        this.isNavCollapsed = !this.isNavCollapsed;
-        this.iconDir = this.iconDir === 'left' ? 'right' : 'left';
     }
 
 }

@@ -1,8 +1,5 @@
 <div class="content-container">
-    <button (click)="toggleNavCollapsedState()">
-        <clr-icon shape="caret" [dir]="iconDir"></clr-icon>
-    </button>
-    <nav [hidden]="isNavCollapsed" class="sidenav" admin-options [clr-nav-level]="2"></nav>
+    <nav class="sidenav" admin-options [clr-nav-level]="2"></nav>
     <div class="content-area">
         <router-outlet></router-outlet>
     </div>

@@ -15,12 +15,12 @@
             <a href="#" [routerLink]="['/admin']" routerLinkActive="active" class="nav-link nav-icon">
                 <clr-icon shape="cog"></clr-icon>
             </a>
-            <clr-dropdown clrMenuPosition="bottom-right">
-                <button class="nav-icon" clrDropdownToggle>
-                <clr-icon shape="user"></clr-icon>
-                <clr-icon shape="caret down"></clr-icon>
-            </button>
-                <clr-dropdown-menu>
+            <clr-dropdown>
+                <button class="nav-icon" clrDropdownTrigger>
+                    <clr-icon shape="user"></clr-icon>
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                     <a href="#" [routerLink]="['/about']" routerLinkActive="active" clrDropdownItem>About</a>
                     <a href="#" [routerLink]="['/preferences']" routerLinkActive="active" clrDropdownItem>Preferences</a>
                     <a href="#" (click)="logout()" clrDropdownItem>Log out</a>
