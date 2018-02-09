@@ -29,17 +29,17 @@
             Add
         </button>
         <div class="form-group">
-            <label [for]="'input_q0' + question.id">Question Name</label>
-            <input type="text" [name]="'input_q0' + question.id" [(ngModel)]="question.id" required>
+            <label [for]="'input_q0' + i">Question Name</label>
+            <input type="text" [name]="'input_q0' + i" [(ngModel)]="question.id" required>
         </div>
         <div class="form-group">
-            <label [for]="'input_q1' + question.id">Label</label>
-            <input type="text" [name]="'input_q1' + question.id" [(ngModel)]="question.label" required>
+            <label [for]="'input_q1' + i">Label</label>
+            <input type="text" [name]="'input_q1' + i" [(ngModel)]="question.label" required>
         </div>
         <div class="form-group">
-            <label [for]="'input_q2' + question.id">Question Type</label>
+            <label [for]="'input_q2' + i">Question Type</label>
             <div class="select">
-                <select [name]="'input_q2' + question.id" [(ngModel)]="question.type" required>
+                <select [name]="'input_q2' + i" [(ngModel)]="question.type" required>
                     <option *ngFor="let t of types"
                         [ngValue]="t">
                         {{t}}
@@ -50,25 +50,27 @@
         <div class="form-group">
             <label>Required</label>
             <div class="radio-inline">
-                <input type="radio" [name]="'input_rad1' + question.id" [(ngModel)]="question.isRequired" [value]="true" checked required>
-                <label [for]="'input_rad1' + question.id">Yes</label>
+                <input type="radio" [name]="'input_rad' + i"
+                [id]="'input_rad1' + i" [(ngModel)]="question.isRequired" [value]="true" required>
+                <label [for]="'input_rad1' + i">Yes</label>
             </div>
             <div class="radio-inline">
-                <input type="radio" [name]="'input_rad2' + question.id" [(ngModel)]="question.isRequired" [value]="false" required>
-                <label [for]="'input_rad2' + question.id">No</label>
+                <input type="radio" [name]="'input_rad' + i"
+                [id]="'input_rad2' + i" [(ngModel)]="question.isRequired" [value]="false" required>
+                <label [for]="'input_rad2' + i">No</label>
             </div>
         </div>
         <div class="form-group">
-            <label [for]="'input_q3' + question.id">Notes</label>
-            <textarea rows="2" cols="15" [name]="'input_q3' + question.id" [(ngModel)]="question.notes"></textarea>
+            <label [for]="'input_q3' + i">Notes</label>
+            <textarea rows="2" cols="15" [name]="'input_q3' + i" [(ngModel)]="question.notes"></textarea>
         </div>
         <div class="form-group">
-            <label [for]="'input_q4' + question.id">Default Value</label>
-            <input type="text" [name]="'input_q4' + question.id" [(ngModel)]="question.defaultValue">
+            <label [for]="'input_q4' + i">Default Value</label>
+            <input type="text" [name]="'input_q4' + i" [(ngModel)]="question.defaultValue">
         </div>
         <div class="form-group" *ngIf="question.type === qType['Select'] || question.type === qType['Multi']">
-            <label [for]="'input_q5' + question.id">Options (Space separated)</label>
-            <textarea rows="2" cols="15" [name]="'input_q5' + question.id" [(ngModel)]="question.label" required></textarea>
+            <label [for]="'input_q5' + i">Options (Space separated)</label>
+            <textarea rows="2" cols="15" [name]="'input_q5' + i" [(ngModel)]="question.label" required></textarea>
         </div>
     </section>
     <button type="button" class="btn btn-outline" (click)="onFormDismissed()">Cancel</button>
