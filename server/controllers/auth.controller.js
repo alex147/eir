@@ -12,23 +12,24 @@ import User from '../models/user.model';
  * @returns {*}
  */
 function login (req, res, next) {
-    User.findOne({"username": req.body.username}, "username password", function (err, user) {
-        if (err) {
-            return next(err);
-        }
-        if (req.body.username === user.username && req.body.password === user.password) {
-            const token = jwt.sign({
-                username: user.username
-            }, config.jwtSecret);
-            return res.json({
-                token,
-                username: user.username
-            });
-        } else {
-            const authErr = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
-            return next(authErr);
-        }
-    });
+    User.findOne({ "username": req.body.username })
+        .exec()
+        .then((user) => {
+            if (user &&
+                req.body.username === user.username &&
+                req.body.password === user.password) {
+                const token = jwt.sign({
+                    username: user.username
+                }, config.jwtSecret);
+                return res.json({
+                    token,
+                    username: user.username
+                });
+            } else {
+                const authErr = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
+                return next(authErr);
+            }
+        });
 }
 
 /**
