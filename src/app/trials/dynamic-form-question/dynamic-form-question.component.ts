@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Question } from '../question';
-import { QuestionType } from '../question-type';
 
 @Component({
     selector: 'df-question',
@@ -12,7 +11,6 @@ export class DynamicFormQuestionComponent implements OnInit {
 
     @Input() question: Question;
     @Input() form: FormGroup;
-    public qType: any = QuestionType;
     public openState: boolean = false;
 
     constructor() { }

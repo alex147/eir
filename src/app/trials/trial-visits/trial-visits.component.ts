@@ -5,9 +5,9 @@ import { VisitData } from '../visit-data';
 import { VisitDataService } from '../visit-data.service';
 import { VisitDefinitionsService } from '../visit-definitions.service';
 import { VisitInstance } from '../visit-instance';
-import { SectionData } from '../section-data';
 import { SectionStatus } from '../section-status';
 import { TrialDefinition } from '../trial-definition';
+import { VisitDefinition } from '../visit-definition';
 
 @Component({
     selector: 'trial-visits',
@@ -51,7 +51,7 @@ export class TrialVisitsComponent implements OnInit {
 
     fetchVisitData () {
         this.visitDataService
-            .getVisitDataBySiteId(this.selectedSiteId)
+            .getVisitDataBySiteId(this.selectedSiteId, this.trialId)
             .subscribe((data) => {
                 this.visitData = data;
                 this.selectedSubjectEntry =
@@ -59,8 +59,12 @@ export class TrialVisitsComponent implements OnInit {
             });
     }
 
-    getSectionIconClass (data: SectionData[], sectionId: string): string {
-        const section = data.find(
+    getSectionIconClass (instance: VisitInstance, sectionId: string): string {
+        if (!instance) {
+            return "is-error";
+        }
+
+        const section = instance.capturedData.find(
             function (element) {
                 return element.id === sectionId;
             });
@@ -77,7 +81,7 @@ export class TrialVisitsComponent implements OnInit {
             case SectionStatus.Completed:
                 return "is-success";
             default:
-                return "";
+                return "is-error";
         }
     }
 
@@ -118,11 +122,15 @@ export class TrialVisitsComponent implements OnInit {
         }
     }
 
-    getTotalSectionCount (instance: VisitInstance): number {
-        return instance.capturedData.length;
+    getTotalSectionCount (visit: VisitDefinition): number {
+        return visit.sections.length;
     }
 
     getCompletedSectionCount (instance: VisitInstance): number {
+        if (!instance) {
+            return 0;
+        }
+
         let completedCount: number = 0;
         for (let section of instance.capturedData) {
             if (section.status === SectionStatus.Completed) {

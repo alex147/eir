@@ -9,6 +9,11 @@ var VisitInstance = mongoose.model('VisitInstance').schema;
 
 const VisitDataSchema = new mongoose.Schema({
     _id: String,
+    trialId: {
+        type: String,
+        required: true,
+        trim: true
+    },
     subjectId: {
         type: String,
         required: true,

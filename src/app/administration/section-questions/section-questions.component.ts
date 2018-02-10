@@ -57,9 +57,9 @@ export class SectionQuestionsComponent implements OnInit {
         this.router.navigate(['/admin/visits']);
     }
 
-    addQuestion (idx: number) {
+    addQuestion () {
         const newQuestion: Question = new Question("", "", QuestionType.Decimal);
-        this.section.questions.splice(idx, 0, newQuestion);
+        this.section.questions.push(newQuestion);
     }
 
     deleteQuestion (idx: number) {

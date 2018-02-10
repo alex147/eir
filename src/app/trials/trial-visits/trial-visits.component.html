@@ -46,21 +46,21 @@
     <clr-dg-column [clrDgField]="'description'">Visit Description</clr-dg-column>
     <clr-dg-column>Sections Completed</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let visit of selectedSubjectEntry.visits" [clrDgItem]="visit">
-        <clr-dg-cell>{{visit.id}}</clr-dg-cell>
-        <clr-dg-cell>{{visit.description}}</clr-dg-cell>
+    <clr-dg-row *clrDgItems="let visit of trialDefinition.visitDefinitions; let i = index" [clrDgItem]="visit">
+        <clr-dg-cell>{{i + 1}}</clr-dg-cell>
+        <clr-dg-cell>Visit #{{i + 1}}</clr-dg-cell>
         <clr-dg-cell>
-            <span class="badge" [ngClass]="getVisitBadgeClass(getCompletedSectionCount(visit), getTotalSectionCount(visit))">
-                {{getCompletedSectionCount(visit)}}/{{getTotalSectionCount(visit)}}
+            <span class="badge" [ngClass]="getVisitBadgeClass(getCompletedSectionCount(selectedSubjectEntry.visits[i]), getTotalSectionCount(visit))">
+                {{getCompletedSectionCount(selectedSubjectEntry.visits[i])}}/{{getTotalSectionCount(visit)}}
             </span>
         </clr-dg-cell>
 
         <clr-dg-row-detail *clrIfExpanded>
             <div>
-                <div *ngFor="let section of trialDefinition.visitDefinitions[visit.id - 1].sections">
-                    <a href="#" [routerLink]="['../sections']" [queryParams]="{visit: visit.id, section: section.id, subject: selectedSubjectEntry.subjectId}"
+                <div *ngFor="let section of visit.sections">
+                    <a href="#" [routerLink]="['../sections']" [queryParams]="{visit: i+1, section: section.id, subject: selectedSubjectEntry.subjectId}"
                         routerLinkActive="active" class="nav-link nav-text">
-                        <clr-icon shape="clipboard" [ngClass]="getSectionIconClass(visit.capturedData, section.id)"></clr-icon>
+                        <clr-icon shape="clipboard" [ngClass]="getSectionIconClass(selectedSubjectEntry.visits[i], section.id)"></clr-icon>
                         {{section.name}}
                     </a>
                 </div>

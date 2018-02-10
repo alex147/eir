@@ -6,7 +6,7 @@ import dataCtrl from '../controllers/data.controller';
 const router = express.Router();
 
 router.route('/')
-    /** GET /api/data?siteId=<> - Get site data */
+    /** GET /api/data?trialId=<>&siteId=<> - Get site data */
     .get(dataCtrl.getDataBySiteId)
 
 router.route('/:subjectId')

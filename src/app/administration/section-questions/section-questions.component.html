@@ -14,7 +14,7 @@
             <textarea rows="2" cols="15" name="input_2" [(ngModel)]="section.description"></textarea>
         </div>
     </section>
-    <button class="btn btn-primary btn-icon alone" *ngIf="!section.questions.length" (click)="addQuestion(0)">
+    <button class="btn btn-primary btn-icon alone" *ngIf="!section.questions.length" (click)="addQuestion()">
         <clr-icon shape="plus"></clr-icon>
         Add question
     </button>
@@ -24,7 +24,7 @@
             </clr-icon>
             Delete
         </button>
-        <button class="btn btn-primary btn-icon question-action" (click)="addQuestion(i)">
+        <button class="btn btn-primary btn-icon question-action" (click)="addQuestion()">
             <clr-icon shape="plus"></clr-icon>
             Add
         </button>

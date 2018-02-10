@@ -41,6 +41,7 @@ function get (req, res) {
 function create (req, res, next) {
     var visitData = new VisitData({
         _id: req.body.id,
+        trialId: req.body.trialId,
         subjectId: req.body.id,
         visits: []
     });
@@ -49,8 +50,6 @@ function create (req, res, next) {
         .then((definition) => {
             definition.visitDefinitions.forEach(function (visit, i) {
                 var instance = new VisitInstance({
-                    id: i + 1,
-                    description: "Visit #" + (i + 1),
                     capturedData: []
                 });
 

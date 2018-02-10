@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import SectionData from '../models/section-data.model';
 import VisitData from '../models/visit-data.model';
+import VisitInstance from '../models/visit-instance.model';
 
 /**
  * Load data and append to req.
@@ -20,8 +21,12 @@ function load (req, res, next, subjectId) {
  */
 function getDataBySiteId (req, res) {
     const siteId = req.query.siteId;
+    const trialId = req.query.trialId;
 
-    VisitData.find({ 'subjectId': new RegExp(siteId, 'i') },
+    VisitData.find({
+        'subjectId': new RegExp(siteId, 'i'),
+        'trialId': trialId
+    },
         function (err, entries) {
             if (err) {
                 res.send(err);
@@ -38,6 +43,11 @@ function getSectionData (req, res) {
     const visitData = req.visitData;
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
+
+    if (!visitData.visits[visitId]) {
+        res.json();
+        return;
+    }
 
     var result = visitData.visits[visitId].capturedData.find(
         function (element) {
@@ -59,13 +69,29 @@ function update (req, res, next) {
     const visitId = req.query.visitId - 1;
     const sectionId = req.query.sectionId;
 
-    var sectionData = visitData.visits[visitId].capturedData.find(
-        function (element) {
-            return element.id === sectionId;
+    if (!visitData.visits[visitId]) {
+        var instance = new VisitInstance({
+            capturedData: []
         });
 
-    sectionData.metricData = req.body.metricData;
-    sectionData.status = req.body.status;
+        var sectionData = new SectionData({
+            id: req.body.id,
+            name: req.body.name,
+            status: req.body.status,
+            metricData: req.body.metricData
+        });
+
+        instance.capturedData.push(sectionData);
+        visitData.visits.push(instance);
+    } else {
+        var sectionData = visitData.visits[visitId].capturedData.find(
+            function (element) {
+                return element.id === sectionId;
+            });
+
+        sectionData.metricData = req.body.metricData;
+        sectionData.status = req.body.status;
+    }
 
     visitData.save()
         .then(savedData => console.log("Updated data for", visitData.subjectId))
