@@ -23,7 +23,7 @@ if (config.env === 'development') {
   app.use(logger('dev'));
 }
 
-// parse body params and attache them to req.body
+// parse body params and attach them to req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
