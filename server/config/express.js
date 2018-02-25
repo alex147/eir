@@ -18,6 +18,7 @@ import appRoot from 'app-root-path';
 
 
 const app = express();
+app.set('trust proxy', true);
 
 if (config.env === 'development') {
   app.use(logger('dev'));
