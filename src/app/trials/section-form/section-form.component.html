@@ -1,14 +1,17 @@
-<div class="spinner-container" *ngIf="!section">
+<div class="spinner-container" *ngIf="!section || !sectionData">
     <span class="spinner">
         Loading...
     </span>
 </div>
-<div *ngIf="section">
+<div *ngIf="section && sectionData">
     <h1>{{section.name}}</h1>
     <p>{{section.description}}</p>
     <form #enterDataForm="ngForm" [formGroup]="form">
         <section class="form-block">
-            <df-question *ngFor="let question of section.questions" [question]="question" [form]="form"></df-question>
+            <df-question *ngFor="let question of section.questions"
+                [question]="question" [form]="form"
+                [value]="sectionData.metricData[question.id]">
+            </df-question>
         </section>
         <button type="button" class="btn btn-outline" (click)="onFormDismissed()">Cancel</button>
         <button type="submit" [disabled]="enterDataForm.form.invalid" class="btn btn-primary" (click)="onFormSubmitted()">Save</button>

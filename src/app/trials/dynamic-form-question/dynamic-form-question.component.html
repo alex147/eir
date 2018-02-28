@@ -9,36 +9,55 @@
 
     <div [ngSwitch]="question.type">
 
-        <input *ngSwitchCase="'Text'" [formControlName]="question.id" [id]="question.id" type="text" [required]="question.isRequired">
+        <input *ngSwitchCase="'Text'" [formControlName]="question.id"
+        [id]="question.id" type="text" [required]="question.isRequired"
+        [value]="value">
 
-        <textarea *ngSwitchCase="'FText'" [formControlName]="question.id" [id]="question.id" cols="50" rows="3" [required]="question.isRequired"></textarea>
+        <textarea *ngSwitchCase="'FText'" [formControlName]="question.id"
+        [id]="question.id" cols="50" rows="3" [required]="question.isRequired"
+        [value]="value"></textarea>
 
-        <input *ngSwitchCase="'Number'" [formControlName]="question.id" [id]="question.id" type="number" [required]="question.isRequired">
+        <input *ngSwitchCase="'Number'" [formControlName]="question.id"
+        [id]="question.id" type="number" [required]="question.isRequired"
+        [value]="value">
 
-        <input *ngSwitchCase="'PNumber'" [formControlName]="question.id" [id]="question.id" type="number" min="0" [required]="question.isRequired">
+        <input *ngSwitchCase="'PNumber'" [formControlName]="question.id"
+        [id]="question.id" type="number" min="0" [value]="value"
+        [required]="question.isRequired">
 
-        <input *ngSwitchCase="'Decimal'" [formControlName]="question.id" [id]="question.id" type="number" [step]="0.01" [required]="question.isRequired">
+        <input *ngSwitchCase="'Decimal'" [formControlName]="question.id"
+        [id]="question.id" type="number" [step]="0.01" [value]="value"
+        [required]="question.isRequired">
 
-        <input *ngSwitchCase="'PDecimal'" [formControlName]="question.id" [id]="question.id" type="number" [step]="0.01" min="0"
-            [required]="question.isRequired">
+        <input *ngSwitchCase="'PDecimal'" [formControlName]="question.id"
+        [id]="question.id" type="number" [step]="0.01" min="0"
+        [required]="question.isRequired" [value]="value">
 
-        <input *ngSwitchCase="'Date'" [formControlName]="question.id" [id]="question.id" type="date" [required]="question.isRequired">
+        <input *ngSwitchCase="'Date'" [formControlName]="question.id"
+        [id]="question.id" type="date" [required]="question.isRequired"
+        [value]="value">
 
-        <input *ngSwitchCase="'File'" [formControlName]="question.id" [id]="question.id" type="file" [required]="question.isRequired">
+        <input *ngSwitchCase="'File'" [formControlName]="question.id"
+        [id]="question.id" type="file" [required]="question.isRequired"
+        [value]="value">
 
-        <input *ngSwitchCase="'Time'" [formControlName]="question.id" [id]="question.id" type="time" [required]="question.isRequired">
+        <input *ngSwitchCase="'Time'" [formControlName]="question.id"
+        [id]="question.id" type="time" [required]="question.isRequired"
+        [value]="value">
 
         <div *ngSwitchCase="'YesNo'" class="radio-inline">
-            <input type="radio" [name]="question.id" id="radio_1" checked="checked" [required]="question.isRequired">
+            <input type="radio" [name]="question.id" id="radio_1"
+            [required]="question.isRequired" [ngModel]="value">
             <label for="radio_1">Yes</label>
         </div>
         <div *ngSwitchCase="'YesNo'" class="radio-inline">
-            <input type="radio" [name]="question.id" id="radio_2" [required]="question.isRequired">
+            <input type="radio" [name]="question.id" id="radio_2"
+            [required]="question.isRequired" [ngModel]="value">
             <label for="radio_2">No</label>
         </div>
 
         <div class="select" *ngSwitchCase="'Select'">
-            <select [id]="question.id" [formControlName]="question.id" [required]="question.isRequired">
+            <select [id]="question.id" [formControlName]="question.id" [required]="question.isRequired" [value]="value">
                 <option *ngFor="let opt of question.options" [value]="opt">
                     {{opt}}
                 </option>
@@ -46,7 +65,7 @@
         </div>
 
         <div class="select" *ngSwitchCase="'Multi'">
-            <select [id]="question.id" [formControlName]="question.id" multiple [required]="question.isRequired">
+            <select [id]="question.id" [formControlName]="question.id" multiple [required]="question.isRequired" [value]="value">
                 <option *ngFor="let opt of question.options" [value]="opt">
                     {{opt}}
                 </option>

@@ -11,12 +11,12 @@ export class DynamicFormQuestionComponent implements OnInit {
 
     @Input() question: Question;
     @Input() form: FormGroup;
+    @Input() value: any;
     public openState: boolean = false;
 
     constructor() { }
 
-    ngOnInit () {
-    }
+    ngOnInit () { }
 
     isValid () {
         return this.form.controls[this.question.id].valid;

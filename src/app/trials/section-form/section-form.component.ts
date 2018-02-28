@@ -64,9 +64,7 @@ export class SectionFormComponent implements OnInit {
         this.sectionData.metricData = this.form.value;
         this.sectionData.status = SectionStatus.Completed;
         this.visitDataService.saveSectionData(this.subjectId, this.visitId, this.sectionId, this.sectionData)
-            .subscribe((data) => {
-
-            });
+            .subscribe((data) => { });
         this.router.navigate(
             ['/trials/' + this.trialId + '/visits'],
             { queryParams: { id: this.subjectId } });
