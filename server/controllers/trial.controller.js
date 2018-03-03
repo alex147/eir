@@ -24,14 +24,6 @@ function get (req, res) {
 }
 
 /**
- * Get all sites for a trial
- * @returns {string[]}
- */
-function getSites (req, res) {
-    return res.json(req.trial.sites);
-}
-
-/**
  * Create new trial
  * @property {string} req.body.id - The id of the trial.
  * @property {string} req.body.name - The name of the trial.
@@ -143,4 +135,4 @@ function remove (req, res, next) {
         .catch(e => next(e));
 }
 
-export default { load, get, getSites, create, update, list, remove };
+export default { load, get, create, update, list, remove };
